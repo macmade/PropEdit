@@ -48,7 +48,7 @@
     
     if( ( self = [ self init ] ) )
     {
-        if( [ [ NSFileManager defaultManager ] fileExistsAtPath: path isDirectory: &directory ] == NO )
+        if( [ [ NSFileManager defaultManager ] fileExistsAtPath: filePath isDirectory: &directory ] == NO )
         {
             return nil;
         }
