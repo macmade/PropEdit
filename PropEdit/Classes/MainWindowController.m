@@ -15,6 +15,9 @@
 
 #import "MainWindowController.h"
 #import "ApplicationController.h"
+#import "DSCLHelper.h"
+#import "User.h"
+#import "Group.h"
 
 @interface MainWindowController( Private )
 
@@ -86,13 +89,17 @@
 
 - ( void )awakeFromNib
 {
+    DSCLHelper * dscl;
+    
+    dscl = [ DSCLHelper new ];
+    
     [ path setURL: currentFile.url ];
     [ path setDoubleAction: @selector( openPath: ) ];
     [ browser setDelegate: self ];
     [ browser setSendsActionOnArrowKeys: YES ];
     [ browser setDoubleAction: @selector( openFile: ) ];
-    [ self getAvailableUsers ];
-    [ self getAvailableGroups ];
+    [ self getAvailableUsers: dscl ];
+    [ self getAvailableGroups: dscl ];
     [ self getFiles: currentFile.path ];
     [ [ self window ] setTitle: currentFile.displayName ];
     [ browser setPath: currentFile.path ];
@@ -119,6 +126,8 @@
     [ [ goNetworkMenu image ] setSize: NSMakeSize( 16, 16 ) ];
     [ [ goApplicationsMenu image ] setSize: NSMakeSize( 16, 16 ) ];
     [ [ goUtilitiesMenu image ] setSize: NSMakeSize( 16, 16 ) ];
+    
+    [ dscl release ];
 }
 
 - ( void )windowDidBecomeKey: ( NSNotification * )notification
@@ -145,76 +154,44 @@
     applyView.backgroundColor  = [ NSColor disabledFinderSidebarColor ];
 }
 
-- ( void )getAvailableUsers
+- ( void )getAvailableUsers: ( DSCLHelper * )helper
 {
-    NSFileHandle * fh;
-    NSString     * list;
-    NSString     * user;
-    NSString     * userName;
-    NSString     * uid;
-    NSArray      * users;
-    NSArray      * userInfos;
-    NSString     * itemTitle;
+    User     * userObject;
+    NSString * itemTitle;
     
     [ owner removeAllItems ];
     
-    fh    = [ app.execution execute: @"/usr/bin/dscl" arguments: [ NSArray arrayWithObjects: @"localhost", @"-list", @"/Local/Default/Users", @"uid", nil ] ];
-    list  = [ [ NSString alloc ] initWithData: [ fh readDataToEndOfFile ] encoding: NSUTF8StringEncoding ];
-    users = [ list componentsSeparatedByString: @"\n" ];
-    
-    for( user in users )
+    for( userObject in helper.users )
     {
-        if( [ user length ] > 0 )
-        {
-            userInfos = [ user componentsSeparatedByString: @" " ];
-            userName  = [ userInfos objectAtIndex: 0 ];
-            uid       = [ userInfos lastObject ];
-            itemTitle = [ NSString stringWithFormat: @"%@ (%@)", userName, uid ];
-            
-            [ owner addItemWithTitle: itemTitle ];
-            [ [ owner itemWithTitle: itemTitle ] setTag: [ uid intValue ] ];
-            [ [ owner itemWithTitle: itemTitle ] setImage: [ NSImage imageNamed: NSImageNameUser ] ];
-            [ [ [ owner itemWithTitle: itemTitle ] image ] setSize: NSMakeSize( 16, 16 ) ];
-        }
+        itemTitle = [ NSString stringWithFormat: @"%@ (%u)", userObject.name, userObject.uid ];
+        
+        [ owner addItemWithTitle: itemTitle ];
+        [ [ owner itemWithTitle: itemTitle ] setTag: userObject.uid ];
+        [ [ owner itemWithTitle: itemTitle ] setImage: [ NSImage imageNamed: NSImageNameUser ] ];
+        [ [ [ owner itemWithTitle: itemTitle ] image ] setSize: NSMakeSize( 16, 16 ) ];
     }
     
-    [ group selectItemWithTag: 0 ];
+    [ owner selectItemWithTag: 0 ];
 }
 
-- ( void )getAvailableGroups
+- ( void )getAvailableGroups: ( DSCLHelper * )helper
 {
-    NSFileHandle * fh;
-    NSString     * list;
-    NSString     * userGroup;
-    NSString     * userGroupName;
-    NSString     * gid;
-    NSArray      * userGroups;
-    NSArray      * userGroupInfos;
-    NSString     * itemTitle;
+    User     * groupObject;
+    NSString * itemTitle;
     
     [ group removeAllItems ];
     
-    fh         = [ app.execution execute: @"/usr/bin/dscl" arguments: [ NSArray arrayWithObjects: @"localhost", @"-list", @"/Local/Default/Groups", @"gid", nil ] ];
-    list       = [ [ NSString alloc ] initWithData: [ fh readDataToEndOfFile ] encoding: NSUTF8StringEncoding ];
-    userGroups = [ list componentsSeparatedByString: @"\n" ];
-    
-    for( userGroup in userGroups )
+    for( groupObject in helper.groups )
     {
-        if( [ userGroup length ] > 0 )
-        {
-            userGroupInfos = [ userGroup componentsSeparatedByString: @" " ];
-            userGroupName  = [ userGroupInfos objectAtIndex: 0 ];
-            gid            = [ userGroupInfos lastObject ];
-            itemTitle      = [ NSString stringWithFormat: @"%@ (%@)", userGroupName, gid ];
-            
-            [ group addItemWithTitle: itemTitle ];
-            [ [ group itemWithTitle: itemTitle ] setTag: [ gid intValue ] ];
-            [ [ group itemWithTitle: itemTitle ] setImage: [ NSImage imageNamed: NSImageNameUserGroup ] ];
-            [ [ [ group itemWithTitle: itemTitle ] image ] setSize: NSMakeSize( 16, 16 ) ];
-        }
+        itemTitle = [ NSString stringWithFormat: @"%@ (%u)", groupObject.name, groupObject.uid ];
+        
+        [ owner addItemWithTitle: itemTitle ];
+        [ [ owner itemWithTitle: itemTitle ] setTag: groupObject.uid ];
+        [ [ owner itemWithTitle: itemTitle ] setImage: [ NSImage imageNamed: NSImageNameUser ] ];
+        [ [ [ owner itemWithTitle: itemTitle ] image ] setSize: NSMakeSize( 16, 16 ) ];
     }
     
-    [ group selectItemWithTag: 80 ];
+    [ group selectItemWithTag: 0 ];
 }
 
 - ( void )enableControls

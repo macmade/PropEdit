@@ -12,6 +12,7 @@
  */
 
 @class ApplicationController;
+@class DSCLHelper;
 
 @interface MainWindowController: NSWindowController < NSBrowserDelegate, NSWindowDelegate >
 {
@@ -70,29 +71,29 @@
     id r2;
 }
 
-@property( nonatomic, retain ) IBOutlet NSBrowser     * browser;
-@property( nonatomic, retain ) IBOutlet NSImageView   * icon;
-@property( nonatomic, retain ) IBOutlet NSPathControl * path;
-@property( nonatomic, retain ) IBOutlet NSPopUpButton * owner;
-@property( nonatomic, retain ) IBOutlet NSPopUpButton * group;
-@property( nonatomic, retain ) IBOutlet NSButton      * userRead;
-@property( nonatomic, retain ) IBOutlet NSButton      * userWrite;
-@property( nonatomic, retain ) IBOutlet NSButton      * userExec;
-@property( nonatomic, retain ) IBOutlet NSButton      * groupRead;
-@property( nonatomic, retain ) IBOutlet NSButton      * groupWrite;
-@property( nonatomic, retain ) IBOutlet NSButton      * groupExec;
-@property( nonatomic, retain ) IBOutlet NSButton      * worldRead;
-@property( nonatomic, retain ) IBOutlet NSButton      * worldWrite;
-@property( nonatomic, retain ) IBOutlet NSButton      * worldExec;
-@property( nonatomic, retain ) IBOutlet NSButton      * setUID;
-@property( nonatomic, retain ) IBOutlet NSButton      * setGID;
-@property( nonatomic, retain ) IBOutlet NSButton      * sticky;
-@property( nonatomic, retain ) IBOutlet NSButton      * flagArchived;
-@property( nonatomic, retain ) IBOutlet NSButton      * flagHidden;
-@property( nonatomic, retain ) IBOutlet NSButton      * flagNoDump;
-@property( nonatomic, retain ) IBOutlet NSButton      * flagOpaque;
-@property( nonatomic, retain ) IBOutlet NSButton      * flagUserAppendOnly;
-@property( nonatomic, retain ) IBOutlet NSButton      * flagUserImmutable;
+@property( nonatomic, retain ) IBOutlet NSBrowser             * browser;
+@property( nonatomic, retain ) IBOutlet NSImageView           * icon;
+@property( nonatomic, retain ) IBOutlet NSPathControl         * path;
+@property( nonatomic, retain ) IBOutlet NSPopUpButton         * owner;
+@property( nonatomic, retain ) IBOutlet NSPopUpButton         * group;
+@property( nonatomic, retain ) IBOutlet NSButton              * userRead;
+@property( nonatomic, retain ) IBOutlet NSButton              * userWrite;
+@property( nonatomic, retain ) IBOutlet NSButton              * userExec;
+@property( nonatomic, retain ) IBOutlet NSButton              * groupRead;
+@property( nonatomic, retain ) IBOutlet NSButton              * groupWrite;
+@property( nonatomic, retain ) IBOutlet NSButton              * groupExec;
+@property( nonatomic, retain ) IBOutlet NSButton              * worldRead;
+@property( nonatomic, retain ) IBOutlet NSButton              * worldWrite;
+@property( nonatomic, retain ) IBOutlet NSButton              * worldExec;
+@property( nonatomic, retain ) IBOutlet NSButton              * setUID;
+@property( nonatomic, retain ) IBOutlet NSButton              * setGID;
+@property( nonatomic, retain ) IBOutlet NSButton              * sticky;
+@property( nonatomic, retain ) IBOutlet NSButton              * flagArchived;
+@property( nonatomic, retain ) IBOutlet NSButton              * flagHidden;
+@property( nonatomic, retain ) IBOutlet NSButton              * flagNoDump;
+@property( nonatomic, retain ) IBOutlet NSButton              * flagOpaque;
+@property( nonatomic, retain ) IBOutlet NSButton              * flagUserAppendOnly;
+@property( nonatomic, retain ) IBOutlet NSButton              * flagUserImmutable;
 @property( nonatomic, retain ) IBOutlet NSButton              * flagSystemAppendOnly;
 @property( nonatomic, retain ) IBOutlet NSButton              * flagSystemImmutable;
 @property( nonatomic, retain ) IBOutlet NLView                * leftView;
@@ -108,8 +109,8 @@
 @property( nonatomic, retain ) IBOutlet NSMenuItem            * goUtilitiesMenu;
 @property( nonatomic, retain ) IBOutlet ApplicationController * app;
 
-- ( void )getAvailableUsers;
-- ( void )getAvailableGroups;
+- ( void )getAvailableUsers: ( DSCLHelper * )helper;
+- ( void )getAvailableGroups: ( DSCLHelper * )helper;
 - ( void )enableControls;
 - ( void )getFileAttributes;
 - ( void )getFileInfos;
