@@ -1,4 +1,15 @@
+/*******************************************************************************
+ * Copyright (c) 2011, Jean-David Gadina <macmade@eosgarden.com>
+ * All rights reserved
+ ******************************************************************************/
+ 
 /* $Id$ */
+
+/*!
+ * file         PreferencesController.m
+ * @copyright   eosgarden 2011 - Jean-David Gadina <macmade@eosgarden.com>
+ * @abstract    ...
+ */
 
 #import "PreferencesController.h"
 #import "ApplicationController.h"
