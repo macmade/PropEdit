@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05499D6412E9E98500D7AFEF /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D6312E9E98500D7AFEF /* Group.m */; };
+		05499D6512E9EEA900D7AFEF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D5F12E9E8F200D7AFEF /* User.m */; };
 		0564E15612E8988F00035F08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0564E15512E8988F00035F08 /* Cocoa.framework */; };
 		0564E16012E8988F00035F08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0564E15E12E8988F00035F08 /* InfoPlist.strings */; };
 		0564E16312E8988F00035F08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0564E16212E8988F00035F08 /* main.m */; };
@@ -18,6 +20,7 @@
 		05C3AE5912E9D568000AEC46 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C3AE5612E9D4EA000AEC46 /* MainWindow.xib */; };
 		05C3AE6712E9D64C000AEC46 /* DarkGradient.tif in Resources */ = {isa = PBXBuildFile; fileRef = 05C3AE6612E9D64C000AEC46 /* DarkGradient.tif */; };
 		05C3AE7512E9D67F000AEC46 /* Application.icns in Resources */ = {isa = PBXBuildFile; fileRef = 05C3AE7412E9D67F000AEC46 /* Application.icns */; };
+		05C3AE9012E9E1E6000AEC46 /* DSCLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE8F12E9E1E6000AEC46 /* DSCLHelper.m */; };
 		05C88B7A12E9D075004E02C7 /* NL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C88B5512E9CF24004E02C7 /* NL.framework */; };
 		05C88B7B12E9D077004E02C7 /* NL.framework in Copy Private Frameworks */ = {isa = PBXBuildFile; fileRef = 05C88B5512E9CF24004E02C7 /* NL.framework */; };
 /* End PBXBuildFile section */
@@ -61,6 +64,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05499D5E12E9E88400D7AFEF /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		05499D5F12E9E8F200D7AFEF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		05499D6212E9E97E00D7AFEF /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		05499D6312E9E98500D7AFEF /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
 		0564E15112E8988F00035F08 /* PropEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0564E15512E8988F00035F08 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0564E15812E8988F00035F08 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -82,6 +89,8 @@
 		05C3AE5712E9D4EA000AEC46 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		05C3AE6612E9D64C000AEC46 /* DarkGradient.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = DarkGradient.tif; path = Images/DarkGradient.tif; sourceTree = "<group>"; };
 		05C3AE7412E9D67F000AEC46 /* Application.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Application.icns; path = ../Application.icns; sourceTree = "<group>"; };
+		05C3AE8E12E9E1A6000AEC46 /* DSCLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCLHelper.h; sourceTree = "<group>"; };
+		05C3AE8F12E9E1E6000AEC46 /* DSCLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCLHelper.m; sourceTree = "<group>"; };
 		05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NutShell.xcodeproj; path = "/Users/macmade/Documents/Brain/Mac Development/Frameworks/NutShell/trunk/NutShell.xcodeproj"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -173,8 +182,11 @@
 				05C3ADF712E9C57C000AEC46 /* include */,
 				05C3AE4E12E9D487000AEC46 /* AboutController.m */,
 				05C3AE4812E9D183000AEC46 /* ApplicationController.m */,
+				05C3AE8F12E9E1E6000AEC46 /* DSCLHelper.m */,
+				05499D6312E9E98500D7AFEF /* Group.m */,
 				05C3AE4F12E9D487000AEC46 /* MainWindowController.m */,
 				05C3AE5012E9D487000AEC46 /* PreferencesController.m */,
+				05499D5F12E9E8F200D7AFEF /* User.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -184,8 +196,11 @@
 			children = (
 				05C3AE4B12E9D466000AEC46 /* AboutController.h */,
 				05C3AE4A12E9D1B4000AEC46 /* ApplicationController.h */,
+				05C3AE8E12E9E1A6000AEC46 /* DSCLHelper.h */,
+				05499D6212E9E97E00D7AFEF /* Group.h */,
 				05C3AE4C12E9D46E000AEC46 /* MainWindowController.h */,
 				05C3AE4D12E9D46E000AEC46 /* PreferencesController.h */,
+				05499D5E12E9E88400D7AFEF /* User.h */,
 			);
 			path = include;
 			sourceTree = "<group>";
@@ -310,6 +325,9 @@
 				05C3AE5112E9D487000AEC46 /* AboutController.m in Sources */,
 				05C3AE5212E9D487000AEC46 /* MainWindowController.m in Sources */,
 				05C3AE5312E9D487000AEC46 /* PreferencesController.m in Sources */,
+				05C3AE9012E9E1E6000AEC46 /* DSCLHelper.m in Sources */,
+				05499D6412E9E98500D7AFEF /* Group.m in Sources */,
+				05499D6512E9EEA900D7AFEF /* User.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
