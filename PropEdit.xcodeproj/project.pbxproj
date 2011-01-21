@@ -68,6 +68,10 @@
 		05499D5F12E9E8F200D7AFEF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		05499D6212E9E97E00D7AFEF /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
 		05499D6312E9E98500D7AFEF /* Group.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		05499D6B12E9F7CC00D7AFEF /* __machine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __machine.h; sourceTree = "<group>"; };
+		05499D6D12E9F7CC00D7AFEF /* __arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __arm.h; sourceTree = "<group>"; };
+		05499D6E12E9F7CC00D7AFEF /* __i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __i386.h; sourceTree = "<group>"; };
+		05499D6F12E9F7CC00D7AFEF /* eos-skl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "eos-skl.h"; sourceTree = "<group>"; };
 		0564E15112E8988F00035F08 /* PropEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0564E15512E8988F00035F08 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0564E15812E8988F00035F08 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -107,6 +111,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05499D6812E9F7BF00D7AFEF /* include */ = {
+			isa = PBXGroup;
+			children = (
+				05499D6912E9F7CC00D7AFEF /* eos-skl */,
+			);
+			name = include;
+			sourceTree = "<group>";
+		};
+		05499D6912E9F7CC00D7AFEF /* eos-skl */ = {
+			isa = PBXGroup;
+			children = (
+				05499D6A12E9F7CC00D7AFEF /* __private */,
+				05499D6F12E9F7CC00D7AFEF /* eos-skl.h */,
+			);
+			name = "eos-skl";
+			path = "include/eos-skl";
+			sourceTree = "<group>";
+		};
+		05499D6A12E9F7CC00D7AFEF /* __private */ = {
+			isa = PBXGroup;
+			children = (
+				05499D6B12E9F7CC00D7AFEF /* __machine.h */,
+				05499D6C12E9F7CC00D7AFEF /* arch */,
+			);
+			path = __private;
+			sourceTree = "<group>";
+		};
+		05499D6C12E9F7CC00D7AFEF /* arch */ = {
+			isa = PBXGroup;
+			children = (
+				05499D6D12E9F7CC00D7AFEF /* __arm.h */,
+				05499D6E12E9F7CC00D7AFEF /* __i386.h */,
+			);
+			path = arch;
+			sourceTree = "<group>";
+		};
 		0564E14612E8988F00035F08 = {
 			isa = PBXGroup;
 			children = (
@@ -157,6 +197,7 @@
 		0564E15C12E8988F00035F08 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				05499D6812E9F7BF00D7AFEF /* include */,
 				0564E15D12E8988F00035F08 /* PropEdit-Info.plist */,
 				0564E15E12E8988F00035F08 /* InfoPlist.strings */,
 				0564E16112E8988F00035F08 /* PropEdit-Prefix.pch */,
