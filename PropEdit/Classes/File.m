@@ -29,7 +29,7 @@
 
 + ( id )fileWithPath: ( NSString * )filePath
 {
-    return [ [ [ self alloc ] initWithPath: path ] autorelease ];
+    return [ [ [ self alloc ] initWithPath: filePath ] autorelease ];
 }
 
 - ( id )init
@@ -42,9 +42,9 @@
 
 - ( id )initWithPath: ( NSString * )filePath
 {
-    NSDictionnary * attributes;
-    int             error;
-    struct stat     fileStat;
+    NSDictionary * attributes;
+    int            error;
+    struct stat    fileStat;
     
     if( ( self = [ self init ] ) )
     {
@@ -56,9 +56,9 @@
         path             = [ filePath copy ];
         name             = [ [ path lastPathComponent ] copy ];
         attributes       = [ [ NSFileManager defaultManager ] attributesOfItemAtPath: path error: NULL ];
-        posixPermissions = [ [ attribs objectForKey: @"NSFilePosixPermissions" ] unsignedLongValue ];
-        uid              = [ [ attribs objectForKey: @"NSFileOwnerAccountID" ] intValue ] ];
-        gid              = [ group selectItemWithTag: [ [ attribs objectForKey: @"NSFileGroupOwnerAccountID" ] intValue ] ];
+        posixPermissions = [ [ attributes objectForKey: @"NSFilePosixPermissions" ] unsignedLongValue ];
+        uid              = [ [ attributes objectForKey: @"NSFileOwnerAccountID" ] intValue ];
+        gid              = [ [ attributes objectForKey: @"NSFileGroupOwnerAccountID" ] intValue ];
     }
     
     error = stat( ( char * )[ path cStringUsingEncoding: NSUTF8StringEncoding ], &fileStat );
@@ -95,9 +95,9 @@
     return 0;
 }
 
-- ( OSStatus )changeFlags: ( NSArray * )flags recursive: ( BOOL )recursive
+- ( OSStatus )changeFlags: ( NSArray * )flagsArray recursive: ( BOOL )recursive
 {
-    ( void )flags;
+    ( void )flagsArray;
     ( void )recursive;
     
     return 0;

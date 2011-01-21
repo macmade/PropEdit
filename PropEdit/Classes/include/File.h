@@ -71,6 +71,6 @@
 - ( id )initWithPath: ( NSString * )path;
 - ( OSStatus )changeOwner: ( NSString * )owner group: ( NSString * )group recursive: ( BOOL )recursive;
 - ( OSStatus )changeMode: ( NSUInteger )mode recursive: ( BOOL )recursive;
-- ( OSStatus )changeFlags: ( NSArray * )flags recursive: ( BOOL )recursive;
+- ( OSStatus )changeFlags: ( NSArray * )flagsArray recursive: ( BOOL )recursive;
 
 @end
