@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		05499D6412E9E98500D7AFEF /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D6312E9E98500D7AFEF /* Group.m */; };
 		05499D6512E9EEA900D7AFEF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D5F12E9E8F200D7AFEF /* User.m */; };
+		05499D7C12EA0DAA00D7AFEF /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D7112E9FF9500D7AFEF /* File.m */; };
 		0564E15612E8988F00035F08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0564E15512E8988F00035F08 /* Cocoa.framework */; };
 		0564E16012E8988F00035F08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0564E15E12E8988F00035F08 /* InfoPlist.strings */; };
 		0564E16312E8988F00035F08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0564E16212E8988F00035F08 /* main.m */; };
@@ -373,6 +374,7 @@
 				05C3AE9012E9E1E6000AEC46 /* DSCLHelper.m in Sources */,
 				05499D6412E9E98500D7AFEF /* Group.m in Sources */,
 				05499D6512E9EEA900D7AFEF /* User.m in Sources */,
+				05499D7C12EA0DAA00D7AFEF /* File.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
