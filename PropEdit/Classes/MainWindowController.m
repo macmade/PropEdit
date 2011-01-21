@@ -18,14 +18,189 @@
 #import "DSCLHelper.h"
 #import "User.h"
 #import "Group.h"
+#import "File.h"
+
+/*******************************************************************************
+ * Private methods
+ ******************************************************************************/
+
+#pragma mark - Private methods -
 
 @interface MainWindowController( Private )
 
+- ( void )openFile: ( id )sender;
 - ( void )openPath: ( id )sender;
+- ( void )go: ( NSString * )pathTo;
+- ( void )apply;
+- ( OSStatus )chown;
+- ( OSStatus )chmod;
+- ( OSStatus )chflags;
+
+@end
+
+@implementation MainWindowController( Private )
+
+- ( void )openFile: ( id )sender
+{
+    ( void )sender;
+    
+    [ app.execution open: [ browser path ] ];
+}
+
+- ( void )openPath: ( id )sender
+{
+    NSPathComponentCell * cell;
+    NSString            * filePath;
+
+    cell     = [ sender clickedPathComponentCell ];
+    filePath = [ [ cell URL ] path ];
+
+    [ app.execution open: filePath ];
+}
+
+- ( void )go: ( NSString * )pathTo
+{
+    [ browser setPath: pathTo ];
+    [ self selectFile: nil ];
+}
+
+- ( void )apply
+{
+    OSStatus err;
+    
+    err = [ self chown ];
+    
+    if( err != 0 )
+    {
+        return;
+    }
+    
+    err = [ self chmod ];
+    
+    if( err != 0 )
+    {
+        return;
+    }
+    
+    err = [ self chflags ];
+    
+    if( err != 0 )
+    {
+        return;
+    }
+    
+    [ self hideApplyView: nil ];
+}
+
+- ( OSStatus )chown
+{
+    char     * args[ 4 ] = { NULL, NULL, NULL, NULL };
+    NSString * user;
+    NSString * userGroup;
+    NSString * chownArgs;
+    NSString * file;
+    
+    user      = [ [ owner selectedItem ] title ];
+    userGroup = [ [ group selectedItem ] title ];
+    chownArgs = [ NSString stringWithFormat: @"%@:%@", user, userGroup ];
+    file      = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
+    
+    if( recursive )
+    {
+        args[ 0 ] = "-R";
+        args[ 1 ] = ( char * )[ chownArgs cStringUsingEncoding: NSUTF8StringEncoding ];
+        args[ 2 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
+    }
+    else
+    {
+        args[ 0 ] = ( char * )[ chownArgs cStringUsingEncoding: NSUTF8StringEncoding ];
+        args[ 1 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
+    }
+    
+    return [ app.execution executeWithPrivileges: "/usr/sbin/chown" arguments: args io: NULL ];
+}
+
+- ( OSStatus )chmod
+{
+    int perms;
+    char octalPerms[ 5 ] = { 0, 0, 0, 0, 0 };
+    char     * args[ 4 ] = { NULL, NULL, NULL, NULL };
+    NSString * file;
+    
+    file   = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
+    perms  = 0;
+    perms |= [ setUID intValue ]     * 2048;
+    perms |= [ setGID intValue ]     * 1024;
+    perms |= [ sticky intValue ]     * 512;
+    perms |= [ userRead intValue ]   * 256;
+    perms |= [ userWrite intValue ]  * 128;
+    perms |= [ userExec intValue ]   * 64;
+    perms |= [ groupRead intValue ]  * 32;
+    perms |= [ groupWrite intValue ] * 16;
+    perms |= [ groupExec intValue ]  * 8;
+    perms |= [ worldRead intValue ]  * 4;
+    perms |= [ worldWrite intValue ] * 2;
+    perms |= [ worldExec intValue ]  * 1;
+    
+    sprintf( octalPerms, "%o", perms );
+    
+    if( recursive )
+    {
+        args[ 0 ] = "-R";
+        args[ 1 ] = octalPerms;
+        args[ 2 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
+    }
+    else
+    {
+        args[ 0 ] = octalPerms;
+        args[ 1 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
+    }
+    
+    return [ app.execution executeWithPrivileges: "/bin/chmod" arguments: args io: NULL ];
+}
+
+- ( OSStatus )chflags
+{
+    char           * args[ 4 ] = { NULL, NULL, NULL, NULL };
+    NSString       * file;
+    NSMutableArray * flags;
+    
+    file   = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
+    flags  = [ NSMutableArray arrayWithCapacity: 8 ];
+    
+    [ flags addObject: ( [ flagArchived intValue ]         == 1 ) ? @"arch"   : @"noarch" ];
+    [ flags addObject: ( [ flagHidden intValue ]           == 1 ) ? @"hidden" : @"nohidden" ];
+    [ flags addObject: ( [ flagNoDump intValue ]           == 1 ) ? @"nodump" : @"dump" ];
+    [ flags addObject: ( [ flagOpaque intValue ]           == 1 ) ? @"opaque" : @"noopaque" ];
+    [ flags addObject: ( [ flagSystemAppendOnly intValue ] == 1 ) ? @"sappnd" : @"nosappnd" ];
+    [ flags addObject: ( [ flagSystemImmutable intValue ]  == 1 ) ? @"schg"   : @"noschg" ];
+    [ flags addObject: ( [ flagUserAppendOnly intValue ]   == 1 ) ? @"uappnd" : @"nouappnd" ];
+    [ flags addObject: ( [ flagUserImmutable intValue ]    == 1 ) ? @"uchg"   : @"nouchg" ];
+    
+    if( recursive )
+    {
+        args[ 0 ] = "-R";
+        args[ 1 ] = ( char * )[ [ flags componentsJoinedByString: @"," ] cStringUsingEncoding: NSUTF8StringEncoding ];
+        args[ 2 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
+    }
+    else
+    {
+        args[ 0 ] = ( char * )[ [ flags componentsJoinedByString: @"," ] cStringUsingEncoding: NSUTF8StringEncoding ];
+        args[ 1 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
+    }
+    
+    return [ app.execution executeWithPrivileges: "/usr/bin/chflags" arguments: args io: NULL ];
+}
 
 @end
 
 @implementation MainWindowController
+
+/*******************************************************************************
+ * Properties
+ ******************************************************************************/
+
+#pragma mark - Properties -
 
 @synthesize browser;
 @synthesize icon;
@@ -65,6 +240,12 @@
 @synthesize goUtilitiesMenu;
 @synthesize app;
 
+/*******************************************************************************
+ * Initialization
+ ******************************************************************************/
+
+#pragma mark - Initialization -
+
 - ( id )init
 {
     if( ( self = [ super init ] ) )
@@ -91,44 +272,63 @@
 {
     DSCLHelper * dscl;
     
+    /* Creates the DSCL helper instance */
     dscl = [ DSCLHelper new ];
     
+    /* Path bar initialization */
     [ path setURL: currentFile.url ];
     [ path setDoubleAction: @selector( openPath: ) ];
+    
+    /* Browser initialization */
     [ browser setDelegate: self ];
     [ browser setSendsActionOnArrowKeys: YES ];
     [ browser setDoubleAction: @selector( openFile: ) ];
+    
+    /* Fills the users and groups select menus */
     [ self getAvailableUsers: dscl ];
     [ self getAvailableGroups: dscl ];
+    
+    /* Gets the subfiles */
     [ self getFiles: currentFile.path ];
+    
+    /* View initialization */
     [ [ self window ] setTitle: currentFile.displayName ];
     [ browser setPath: currentFile.path ];
     [ icon setImage: [ workspace iconForFile: currentFile.path ] ];
     
+    /* Stores path informations */
     displayPath      = [ [ NSString alloc ] initWithString: @"//" ];
     displayPathInfos = [ [ displayPath componentsSeparatedByString: @"/" ] retain ];
     
+    /* Displays the current file informations */
     [ self getFileInfos ];
     [ self getFileAttributes ];
     
+    /* Sets the window delegate */
     [ [ self window ] setDelegate: self ];
     
-    [ goComputerMenu setImage: [ NSImage imageNamed: NSImageNameComputer ] ];
-    [ goHomeMenu setImage: [ workspace iconForFile: [ NSString stringWithFormat: @"/Users/%@", NSUserName() ] ] ];
-    [ goDesktopMenu setImage: [ workspace iconForFile: [ NSString stringWithFormat: @"/Users/%@/Desktop", NSUserName() ] ] ];
-    [ goNetworkMenu setImage: [ NSImage imageNamed: NSImageNameNetwork ] ];
-    [ goApplicationsMenu setImage: [ workspace iconForFile: @"/Applications" ] ];
-    [ goUtilitiesMenu setImage: [ workspace iconForFile: @"/Applications/Utilities" ] ];
-    
-    [ [ goComputerMenu image ] setSize: NSMakeSize( 16, 16 ) ];
-    [ [ goHomeMenu image ] setSize: NSMakeSize( 16, 16 ) ];
-    [ [ goDesktopMenu image ] setSize: NSMakeSize( 16, 16 ) ];
-    [ [ goNetworkMenu image ] setSize: NSMakeSize( 16, 16 ) ];
+    /* Menu initialization */
+    [ goComputerMenu       setImage: [ NSImage imageNamed: NSImageNameComputer ] ];
+    [ goHomeMenu           setImage: [ workspace iconForFile: [ NSString stringWithFormat: @"/Users/%@", NSUserName() ] ] ];
+    [ goDesktopMenu        setImage: [ workspace iconForFile: [ NSString stringWithFormat: @"/Users/%@/Desktop", NSUserName() ] ] ];
+    [ goNetworkMenu        setImage: [ NSImage imageNamed: NSImageNameNetwork ] ];
+    [ goApplicationsMenu   setImage: [ workspace iconForFile: @"/Applications" ] ];
+    [ goUtilitiesMenu      setImage: [ workspace iconForFile: @"/Applications/Utilities" ] ];
+    [ [ goComputerMenu     image ] setSize: NSMakeSize( 16, 16 ) ];
+    [ [ goHomeMenu         image ] setSize: NSMakeSize( 16, 16 ) ];
+    [ [ goDesktopMenu      image ] setSize: NSMakeSize( 16, 16 ) ];
+    [ [ goNetworkMenu      image ] setSize: NSMakeSize( 16, 16 ) ];
     [ [ goApplicationsMenu image ] setSize: NSMakeSize( 16, 16 ) ];
-    [ [ goUtilitiesMenu image ] setSize: NSMakeSize( 16, 16 ) ];
+    [ [ goUtilitiesMenu    image ] setSize: NSMakeSize( 16, 16 ) ];
     
     [ dscl release ];
 }
+
+/*******************************************************************************
+ * Window management
+ ******************************************************************************/
+
+#pragma mark - Window management -
 
 - ( void )windowDidBecomeKey: ( NSNotification * )notification
 {
@@ -153,6 +353,12 @@
     bottomView.backgroundColor = [ NSColor disabledFinderSidebarColor ];
     applyView.backgroundColor  = [ NSColor disabledFinderSidebarColor ];
 }
+
+/*******************************************************************************
+ * Controls management
+ ******************************************************************************/
+
+#pragma mark - Controls management -
 
 - ( void )getAvailableUsers: ( DSCLHelper * )helper
 {
@@ -232,122 +438,220 @@
     [ flagUserImmutable setEnabled:    NO ];
 }
 
-- ( void )openFile: ( id )sender
+/*******************************************************************************
+ * Interface actions
+ ******************************************************************************/
+
+#pragma mark - Interface actions -
+
+- ( IBAction )goComputer: ( id )sender
 {
     ( void )sender;
     
-    [ app.execution open: [ browser path ] ];
+    [ self go: @"/" ];
 }
 
-- ( void )openPath: ( id )sender
+- ( IBAction )goHome: ( id )sender
 {
-    NSPathComponentCell * cell;
-    NSString            * filePath;
-
-    cell     = [ sender clickedPathComponentCell ];
-    filePath = [ [ cell URL ] path ];
-
-    [ app.execution open: filePath ];
+    ( void )sender;
+    
+    [ self go: [ NSString stringWithFormat: @"/Users/%@/", NSUserName() ] ];
 }
+
+- ( IBAction )goDesktop: ( id )sender
+{
+    ( void )sender;
+    
+    [ self go: [ NSString stringWithFormat: @"/Users/%@/Desktop/", NSUserName() ] ];
+}
+
+- ( IBAction )goNetwork: ( id )sender
+{
+    ( void )sender;
+    
+    [ self go: @"/Network/" ];
+}
+
+- ( IBAction )goApplications: ( id )sender
+{
+    ( void )sender;
+    
+    [ self go: @"/Applications/" ];
+}
+
+- ( IBAction )goUtilities: ( id )sender
+{
+    ( void )sender;
+    
+    [ self go: @"/Applications/Utilities/" ];
+}
+
+- ( IBAction )apply: ( id )sender
+{
+    ( void )sender;
+    
+    recursive = NO;
+    
+    [ self apply ];
+}
+
+- ( IBAction )applyRecursive: ( id )sender
+{
+    ( void )sender;
+    
+    recursive = YES;
+    
+    [ self apply ];
+}
+
+- ( IBAction )showApplyView: ( id )sender
+{
+    NSRect   applyFrame;
+    NSRect   browserFrame;
+    NSView * content;
+    
+    ( void )sender;
+    
+    content               = [ [ self window ] contentView ];
+    browserFrame          = [ browser frame ];
+    applyFrame            = [ applyView frame ];
+    applyFrame.size.width = [ browser frame ].size.width;
+    
+    if( hasApplyView == YES )
+    {
+        return;
+    }
+    
+    applyFrame.origin.x       = [ browser frame ].origin.x;
+    applyFrame.origin.y       = [ browser frame ].origin.y;
+    browserFrame.size.height -= 56;
+    browserFrame.origin.y    += 56;
+    [ browser setFrame: browserFrame ];
+    
+    [ applyView setAutoresizingMask: NSViewWidthSizable ];
+    [ applyView setFrame: applyFrame ];
+    [ content addSubview: applyView ];
+    
+    hasApplyView = YES;
+}
+
+- ( IBAction )hideApplyView: ( id )sender
+{
+    NSRect   browserFrame;
+    NSView * content;
+    
+    ( void )sender;
+    
+    content      = [ [ self window ] contentView ];
+    browserFrame = [ browser frame ];
+    
+    if( hasApplyView == NO )
+    {
+        return;
+    }
+    
+    browserFrame.size.height += 56;
+    browserFrame.origin.y    -= 56;
+    
+    [ [ applyView retain ] removeFromSuperview ];
+    [ browser setFrame: browserFrame ];
+    
+    hasApplyView = NO;
+}
+
+/*******************************************************************************
+ * File management
+ ******************************************************************************/
+
+#pragma mark - File management -
 
 - ( void )getFiles: ( NSString * )readPath
 {
-    BOOL isDir;
-    BOOL showDotFiles;
-    BOOL showHiddenFiles;
-    BOOL sortDirectories;
+    BOOL                    showDotFiles;
+    BOOL                    showHiddenFiles;
+    BOOL                    sortDirectories;
+    File                  * file;
+    File                  * subFile;
     NSDirectoryEnumerator * dir;
-    NSString              * file;
-    NSDictionary          * flags;
     NSMutableArray        * subFiles;
     NSMutableArray        * subFilesRegular;
+    NSString              * subFilePath;
     
     if( [ files objectForKey: readPath ] != nil )
     {
         return;
     }
     
-    subFiles        = [ NSMutableArray arrayWithCapacity: 50 ];
-    subFilesRegular = [ NSMutableArray arrayWithCapacity: 50 ];
+    file = [ File fileWithPath: readPath ];
     
-    [ files setObject: subFiles forKey: readPath ];
-    [ fileManager fileExistsAtPath: readPath isDirectory: &isDir ];
-    
-    if( isDir == NO )
+    if( file == nil )
     {
         return;
     }
     
+    if( file.isDirectory == NO )
+    {
+        return;
+    }
+    
+    subFiles        = [ NSMutableArray arrayWithCapacity: 50 ];
+    subFilesRegular = [ NSMutableArray arrayWithCapacity: 50 ];
     dir             = [ fileManager enumeratorAtPath: readPath ];
     showDotFiles    = [ app.preferences.values boolForKey: @"ShowDotFiles" ];
     showHiddenFiles = [ app.preferences.values boolForKey: @"ShowHiddenFiles" ];
     sortDirectories = [ app.preferences.values boolForKey: @"SortDirectories" ];
     
-    for( file in dir )
+    [ files setObject: subFiles forKey: readPath ];
+    
+    for( subFilePath in dir )
     {
         [ dir skipDescendents ];
         
-        if
-        (
-            [ readPath isEqualToString: @"/" ]
-         && ( [ file isEqualToString: @"net" ] || [ file isEqualToString: @"home" ] || [ file isEqualToString: @"dev" ] )
-        )
+        if( [ readPath isEqualToString: @"/" ] && ( [ subFilePath isEqualToString: @"net" ] || [ subFilePath isEqualToString: @"home" ] || [ subFilePath isEqualToString: @"dev" ] ) )
         {
             continue;
         }
         
-        if( showDotFiles == NO && [ [ file substringToIndex: 1 ] isEqualToString: @"." ] ) {
+        if( showDotFiles == NO && [ [ subFilePath substringToIndex: 1 ] isEqualToString: @"." ] ) {
             
             continue;
         }
         
-        if( showHiddenFiles == NO )
+        subFile = [ File fileWithPath: [ readPath stringByAppendingString: subFilePath ] ];
+        
+        if( showHiddenFiles == NO && subFile.hidden == YES )
         {
-            flags = [ fileManager flagsOfItemAtPath: [ readPath stringByAppendingString: file ] error: NULL ];
-            
-            if
-            (
-                ( flags == nil || [ [ flags objectForKey: NLFileFlagHidden ] boolValue ] == YES )
-             && ( [ readPath isEqualToString: @"/" ] == NO || [ file isEqualToString: @"Network" ] == NO )
-            )
-            {
-                continue;
-            }
+            continue;
         }
         
         if( sortDirectories == NO )
         {
-            [ subFiles addObject: file ];
+            [ subFiles addObject: subFile ];
+        }
+        else if( file.isDirectory == YES )
+        {
+            [ subFiles addObject: subFile ];
         }
         else
         {
-            [ fileManager fileExistsAtPath: [ readPath stringByAppendingString: file ] isDirectory: &isDir ];
-            
-            if( isDir == YES )
-            {
-                [ subFiles addObject: file ];
-            }
-            else
-            {
-                [ subFilesRegular addObject: file ];
-            }
+            [ subFilesRegular addObject: subFile ];
         }
     }
     
     if( sortDirectories == YES )
     {
-        for( file in subFilesRegular )
+        for( subFile in subFilesRegular )
         {
-            [ subFiles addObject: file ];
+            [ subFiles addObject: subFile ];
         }
     }
 }
 
 - ( void )getFileAttributes
 {
-    unsigned long posixPerms;
-    struct stat fileStat;
-    int err;
+    unsigned long   posixPerms;
+    struct stat     fileStat;
+    int             err;
     NSString      * filePath;
     NSDictionary  * attribs;
     
@@ -497,6 +801,12 @@
     
 }
 
+/*******************************************************************************
+ * NSBrowser delegate methods
+ ******************************************************************************/
+
+#pragma mark - NSBrowser delegate methods -
+
 - ( BOOL )browser: ( NSBrowser * )sender shouldTypeSelectForEvent: ( NSEvent * )event withCurrentSearchString:( NSString * )searchString
 {
     ( void )sender;
@@ -528,26 +838,25 @@
 
 - ( void )browser: ( NSBrowser * )sender willDisplayCell: ( NSBrowserCell * )cell atRow: ( NSInteger )row column: ( NSInteger )column
 {
-    BOOL isDir;
     NSString * fileKey;
-    NSString * file;
+    NSString * filePath;
     NSImage  * fileIcon;
+    File     * file;
     
     ( void )sender;
     
-    fileKey = [ [ [ displayPathInfos subarrayWithRange: NSMakeRange( 0, column + 1 ) ] componentsJoinedByString: @"/" ] stringByAppendingString: @"/" ];
-    file    = [ fileKey stringByAppendingString: [ [ files objectForKey: fileKey ] objectAtIndex: row ] ];
+    fileKey  = [ [ [ displayPathInfos subarrayWithRange: NSMakeRange( 0, column + 1 ) ] componentsJoinedByString: @"/" ] stringByAppendingString: @"/" ];
+    filePath = [ fileKey stringByAppendingString: [ [ [ files objectForKey: fileKey ] objectAtIndex: row ] name ] ];
+    file     = [ [ files objectForKey: fileKey ] objectAtIndex: row ];
     
-    [ cell setTitle: [ [ files objectForKey: fileKey ] objectAtIndex: row ] ];
+    [ cell setTitle: file.name ];
     
-    [ fileManager fileExistsAtPath: file isDirectory: &isDir ];
-    
-    if( isDir == NO )
+    if( file.isDirectory == NO )
     {
         [ cell setLeaf: YES ];
     }
     
-    fileIcon = [ workspace iconForFile: file ];
+    fileIcon = [ workspace iconForFile: filePath ];
     
     [ fileIcon setSize: NSMakeSize( 14, 14 ) ];
     [ cell setImage: fileIcon ];
@@ -569,255 +878,6 @@
     [ self getFileInfos ];
     [ [ self window ] setTitle: [ fileManager displayNameAtPath: [ browser path ] ] ];
     [ self enableControls ];
-}
-
-- ( OSStatus )chown
-{
-    char     * args[ 4 ] = { NULL, NULL, NULL, NULL };
-    NSString * user;
-    NSString * userGroup;
-    NSString * chownArgs;
-    NSString * file;
-    
-    user      = [ [ owner selectedItem ] title ];
-    userGroup = [ [ group selectedItem ] title ];
-    chownArgs = [ NSString stringWithFormat: @"%@:%@", user, userGroup ];
-    file      = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
-    
-    if( recursive )
-    {
-        args[ 0 ] = "-R";
-        args[ 1 ] = ( char * )[ chownArgs cStringUsingEncoding: NSUTF8StringEncoding ];
-        args[ 2 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
-    }
-    else
-    {
-        args[ 0 ] = ( char * )[ chownArgs cStringUsingEncoding: NSUTF8StringEncoding ];
-        args[ 1 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
-    }
-    
-    return [ app.execution executeWithPrivileges: "/usr/sbin/chown" arguments: args io: NULL ];
-}
-
-- ( OSStatus )chmod
-{
-    int perms;
-    char octalPerms[ 5 ] = { 0, 0, 0, 0, 0 };
-    char     * args[ 4 ] = { NULL, NULL, NULL, NULL };
-    NSString * file;
-    
-    file   = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
-    perms  = 0;
-    perms |= [ setUID intValue ]     * 2048;
-    perms |= [ setGID intValue ]     * 1024;
-    perms |= [ sticky intValue ]     * 512;
-    perms |= [ userRead intValue ]   * 256;
-    perms |= [ userWrite intValue ]  * 128;
-    perms |= [ userExec intValue ]   * 64;
-    perms |= [ groupRead intValue ]  * 32;
-    perms |= [ groupWrite intValue ] * 16;
-    perms |= [ groupExec intValue ]  * 8;
-    perms |= [ worldRead intValue ]  * 4;
-    perms |= [ worldWrite intValue ] * 2;
-    perms |= [ worldExec intValue ]  * 1;
-    
-    sprintf( octalPerms, "%o", perms );
-    
-    if( recursive )
-    {
-        args[ 0 ] = "-R";
-        args[ 1 ] = octalPerms;
-        args[ 2 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
-    }
-    else
-    {
-        args[ 0 ] = octalPerms;
-        args[ 1 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
-    }
-    
-    return [ app.execution executeWithPrivileges: "/bin/chmod" arguments: args io: NULL ];
-}
-
-- ( OSStatus )chflags
-{
-    char           * args[ 4 ] = { NULL, NULL, NULL, NULL };
-    NSString       * file;
-    NSMutableArray * flags;
-    
-    file   = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
-    flags  = [ NSMutableArray arrayWithCapacity: 8 ];
-    
-    [ flags addObject: ( [ flagArchived intValue ]         == 1 ) ? @"arch"   : @"noarch" ];
-    [ flags addObject: ( [ flagHidden intValue ]           == 1 ) ? @"hidden" : @"nohidden" ];
-    [ flags addObject: ( [ flagNoDump intValue ]           == 1 ) ? @"nodump" : @"dump" ];
-    [ flags addObject: ( [ flagOpaque intValue ]           == 1 ) ? @"opaque" : @"noopaque" ];
-    [ flags addObject: ( [ flagSystemAppendOnly intValue ] == 1 ) ? @"sappnd" : @"nosappnd" ];
-    [ flags addObject: ( [ flagSystemImmutable intValue ]  == 1 ) ? @"schg"   : @"noschg" ];
-    [ flags addObject: ( [ flagUserAppendOnly intValue ]   == 1 ) ? @"uappnd" : @"nouappnd" ];
-    [ flags addObject: ( [ flagUserImmutable intValue ]    == 1 ) ? @"uchg"   : @"nouchg" ];
-    
-    if( recursive )
-    {
-        args[ 0 ] = "-R";
-        args[ 1 ] = ( char * )[ [ flags componentsJoinedByString: @"," ] cStringUsingEncoding: NSUTF8StringEncoding ];
-        args[ 2 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
-    }
-    else
-    {
-        args[ 0 ] = ( char * )[ [ flags componentsJoinedByString: @"," ] cStringUsingEncoding: NSUTF8StringEncoding ];
-        args[ 1 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
-    }
-    
-    return [ app.execution executeWithPrivileges: "/usr/bin/chflags" arguments: args io: NULL ];
-}
-
-- ( void )apply
-{
-    OSStatus err;
-    
-    err = [ self chown ];
-    
-    if( err != 0 )
-    {
-        return;
-    }
-    
-    err = [ self chmod ];
-    
-    if( err != 0 )
-    {
-        return;
-    }
-    
-    err = [ self chflags ];
-    
-    if( err != 0 )
-    {
-        return;
-    }
-    
-    [ self hideApplyView: nil ];
-}
-
-- ( IBAction )apply: ( id )sender
-{
-    ( void )sender;
-    
-    recursive = NO;
-    
-    [ self apply ];
-}
-
-- ( IBAction )applyRecursive: ( id )sender
-{
-    ( void )sender;
-    
-    recursive = YES;
-    
-    [ self apply ];
-}
-
-- ( IBAction )showApplyView: ( id )sender
-{
-    NSRect   applyFrame;
-    NSRect   browserFrame;
-    NSView * content;
-    
-    ( void )sender;
-    
-    content               = [ [ self window ] contentView ];
-    browserFrame          = [ browser frame ];
-    applyFrame            = [ applyView frame ];
-    applyFrame.size.width = [ browser frame ].size.width;
-    
-    if( hasApplyView == YES )
-    {
-        return;
-    }
-    
-    applyFrame.origin.x       = [ browser frame ].origin.x;
-    applyFrame.origin.y       = [ browser frame ].origin.y;
-    browserFrame.size.height -= 56;
-    browserFrame.origin.y    += 56;
-    [ browser setFrame: browserFrame ];
-    
-    [ applyView setAutoresizingMask: NSViewWidthSizable ];
-    [ applyView setFrame: applyFrame ];
-    [ content addSubview: applyView ];
-    
-    hasApplyView = YES;
-}
-
-- ( IBAction )hideApplyView: ( id )sender
-{
-    NSRect   browserFrame;
-    NSView * content;
-    
-    ( void )sender;
-    
-    content      = [ [ self window ] contentView ];
-    browserFrame = [ browser frame ];
-    
-    if( hasApplyView == NO )
-    {
-        return;
-    }
-    
-    browserFrame.size.height += 56;
-    browserFrame.origin.y    -= 56;
-    
-    [ [ applyView retain ] removeFromSuperview ];
-    [ browser setFrame: browserFrame ];
-    
-    hasApplyView = NO;
-}
-
-- ( void )go: ( NSString * )pathTo
-{
-    [ browser setPath: pathTo ];
-    [ self selectFile: nil ];
-}
-
-- ( IBAction )goComputer: ( id )sender
-{
-    ( void )sender;
-    
-    [ self go: @"/" ];
-}
-
-- ( IBAction )goHome: ( id )sender
-{
-    ( void )sender;
-    
-    [ self go: [ NSString stringWithFormat: @"/Users/%@/", NSUserName() ] ];
-}
-
-- ( IBAction )goDesktop: ( id )sender
-{
-    ( void )sender;
-    
-    [ self go: [ NSString stringWithFormat: @"/Users/%@/Desktop/", NSUserName() ] ];
-}
-
-- ( IBAction )goNetwork: ( id )sender
-{
-    ( void )sender;
-    
-    [ self go: @"/Network/" ];
-}
-
-- ( IBAction )goApplications: ( id )sender
-{
-    ( void )sender;
-    
-    [ self go: @"/Applications/" ];
-}
-
-- ( IBAction )goUtilities: ( id )sender
-{
-    ( void )sender;
-    
-    [ self go: @"/Applications/Utilities/" ];
 }
 
 @end

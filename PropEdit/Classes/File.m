@@ -78,32 +78,6 @@
     [ super dealloc ];
 }
 
-- ( OSStatus )changeOwner: ( NSString * )owner group: ( NSString * )group recursive: ( BOOL )recursive
-{
-    ( void )owner;
-    ( void )group;
-    ( void )recursive;
-    
-    return 0;
-}
-
-- ( OSStatus )changeMode: ( NSUInteger )mode recursive: ( BOOL )recursive
-{
-    ( void )mode;
-    ( void )recursive;
-    
-    return 0;
-}
-
-- ( OSStatus )changeFlags: ( NSArray * )flagsArray recursive: ( BOOL )recursive
-{
-    ( void )flagsArray;
-    ( void )recursive;
-    
-    return 0;
-}
-
-
 - ( BOOL )userReadable
 {
     return ( posixPermissions & 0x100 ) ? YES : NO;
