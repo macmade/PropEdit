@@ -10,7 +10,6 @@
 		0564E15612E8988F00035F08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0564E15512E8988F00035F08 /* Cocoa.framework */; };
 		0564E16012E8988F00035F08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0564E15E12E8988F00035F08 /* InfoPlist.strings */; };
 		0564E16312E8988F00035F08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0564E16212E8988F00035F08 /* main.m */; };
-		05C3ADF612E9C563000AEC46 /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3ADF512E9C563000AEC46 /* ApplicationDelegate.m */; };
 		05C3AE4912E9D183000AEC46 /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE4812E9D183000AEC46 /* ApplicationController.m */; };
 		05C3AE5112E9D487000AEC46 /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE4E12E9D487000AEC46 /* AboutController.m */; };
 		05C3AE5212E9D487000AEC46 /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE4F12E9D487000AEC46 /* MainWindowController.m */; };
@@ -71,8 +70,6 @@
 		0564E15F12E8988F00035F08 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		0564E16112E8988F00035F08 /* PropEdit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PropEdit-Prefix.pch"; sourceTree = "<group>"; };
 		0564E16212E8988F00035F08 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		05C3ADF512E9C563000AEC46 /* ApplicationDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationDelegate.m; sourceTree = "<group>"; };
-		05C3ADF812E9C57C000AEC46 /* ApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationDelegate.h; sourceTree = "<group>"; };
 		05C3AE4812E9D183000AEC46 /* ApplicationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApplicationController.m; sourceTree = "<group>"; };
 		05C3AE4A12E9D1B4000AEC46 /* ApplicationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationController.h; sourceTree = "<group>"; };
 		05C3AE4B12E9D466000AEC46 /* AboutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutController.h; sourceTree = "<group>"; };
@@ -176,7 +173,6 @@
 				05C3ADF712E9C57C000AEC46 /* include */,
 				05C3AE4E12E9D487000AEC46 /* AboutController.m */,
 				05C3AE4812E9D183000AEC46 /* ApplicationController.m */,
-				05C3ADF512E9C563000AEC46 /* ApplicationDelegate.m */,
 				05C3AE4F12E9D487000AEC46 /* MainWindowController.m */,
 				05C3AE5012E9D487000AEC46 /* PreferencesController.m */,
 			);
@@ -188,7 +184,6 @@
 			children = (
 				05C3AE4B12E9D466000AEC46 /* AboutController.h */,
 				05C3AE4A12E9D1B4000AEC46 /* ApplicationController.h */,
-				05C3ADF812E9C57C000AEC46 /* ApplicationDelegate.h */,
 				05C3AE4C12E9D46E000AEC46 /* MainWindowController.h */,
 				05C3AE4D12E9D46E000AEC46 /* PreferencesController.h */,
 			);
@@ -311,7 +306,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0564E16312E8988F00035F08 /* main.m in Sources */,
-				05C3ADF612E9C563000AEC46 /* ApplicationDelegate.m in Sources */,
 				05C3AE4912E9D183000AEC46 /* ApplicationController.m in Sources */,
 				05C3AE5112E9D487000AEC46 /* AboutController.m in Sources */,
 				05C3AE5212E9D487000AEC46 /* MainWindowController.m in Sources */,
