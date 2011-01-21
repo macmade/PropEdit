@@ -115,6 +115,7 @@
 - ( void )getFileAttributes;
 - ( void )getFileInfos;
 - ( void )getFiles: ( NSString * )readPath;
+- ( void )reloadFiles;
 - ( IBAction )selectFile: ( id )sender;
 - ( IBAction )apply: ( id )sender;
 - ( IBAction )applyRecursive: ( id )sender;

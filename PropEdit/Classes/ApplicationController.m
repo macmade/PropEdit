@@ -14,6 +14,7 @@
 #import "ApplicationController.h"
 #import "AboutController.h"
 #import "PreferencesController.h"
+#import "MainWindowController.h"
 
 @interface ApplicationController( Private )
 
@@ -88,6 +89,8 @@
     ( void )sheet;
     ( void )returnCode;
     ( void )contextInfo;
+    
+    [ main reloadFiles ];
 }
 
 @end

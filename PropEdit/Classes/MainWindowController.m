@@ -565,6 +565,11 @@
 
 #pragma mark - File management -
 
+- ( void )reloadFiles
+{
+    
+}
+
 - ( void )getFiles: ( NSString * )readPath
 {
     BOOL                    showDotFiles;
