@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) __YEAR__, Jean-David Gadina <macmade@eosgarden.com>
+ * Copyright (c) 2011, Jean-David Gadina <macmade@eosgarden.com>
  * All rights reserved
  ******************************************************************************/
  
@@ -7,7 +7,7 @@
 
 /*!
  * @file        User.m
- * @copyright   eosgarden __YEAR__ - Jean-David Gadina <macmade@eosgarden.com>
+ * @copyright   eosgarden 2011 - Jean-David Gadina <macmade@eosgarden.com>
  * @abstract    ...
  */
 
