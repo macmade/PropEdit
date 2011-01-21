@@ -1,0 +1,17 @@
+/*******************************************************************************
+ * Copyright (c) 2011, Jean-David Gadina <macmade@eosgarden.com>
+ * All rights reserved
+ ******************************************************************************/
+ 
+/* $Id$ */
+
+/*!
+ * @header      PropEdit-Prefix.pch
+ * @copyright   eosgarden 2011 - Jean-David Gadina <macmade@eosgarden.com>
+ * @abstract    ...
+ */
+ 
+ #ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+    #import <NutShell/NutShell.h>
+#endif
