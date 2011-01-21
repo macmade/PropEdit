@@ -163,7 +163,7 @@
     
     for( userObject in helper.users )
     {
-        itemTitle = [ NSString stringWithFormat: @"%@ (%u)", userObject.name, userObject.uid ];
+        itemTitle = [ NSString stringWithFormat: @"%@ (%i)", userObject.name, userObject.uid ];
         
         [ owner addItemWithTitle: itemTitle ];
         [ [ owner itemWithTitle: itemTitle ] setTag: userObject.uid ];
@@ -176,19 +176,19 @@
 
 - ( void )getAvailableGroups: ( DSCLHelper * )helper
 {
-    User     * groupObject;
+    Group    * groupObject;
     NSString * itemTitle;
     
     [ group removeAllItems ];
     
     for( groupObject in helper.groups )
     {
-        itemTitle = [ NSString stringWithFormat: @"%@ (%u)", groupObject.name, groupObject.uid ];
+        itemTitle = [ NSString stringWithFormat: @"%@ (%i)", groupObject.name, groupObject.gid ];
         
-        [ owner addItemWithTitle: itemTitle ];
-        [ [ owner itemWithTitle: itemTitle ] setTag: groupObject.uid ];
-        [ [ owner itemWithTitle: itemTitle ] setImage: [ NSImage imageNamed: NSImageNameUser ] ];
-        [ [ [ owner itemWithTitle: itemTitle ] image ] setSize: NSMakeSize( 16, 16 ) ];
+        [ group addItemWithTitle: itemTitle ];
+        [ [ group itemWithTitle: itemTitle ] setTag: groupObject.gid ];
+        [ [ group itemWithTitle: itemTitle ] setImage: [ NSImage imageNamed: NSImageNameUser ] ];
+        [ [ [ group itemWithTitle: itemTitle ] image ] setSize: NSMakeSize( 16, 16 ) ];
     }
     
     [ group selectItemWithTag: 0 ];

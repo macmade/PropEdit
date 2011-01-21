@@ -26,6 +26,7 @@
 
 - ( void )getUsers
 {
+    NSUInteger     i;
     User         * user;
     NSFileHandle * fh;
     NSString     * list;
@@ -37,6 +38,7 @@
     
     [ users release ];
     
+    i        = 0;
     users    = [ [ NSMutableArray arrayWithCapacity: 100 ] retain ];
     fh       = [ [ ( NLApplication * )( [ NSApplication sharedApplication ] ) execution ] execute: @"/usr/bin/dscl" arguments: [ NSArray arrayWithObjects: @"localhost", @"-list", @"/Local/Default/Users", @"uid", nil ] ];
     list     = [ [ NSString alloc ] initWithData: [ fh readDataToEndOfFile ] encoding: NSUTF8StringEncoding ];
@@ -51,7 +53,7 @@
             userId    = [ userInfos lastObject ];
             user      = [ User userWithName: userName uid: [ userId integerValue ] ];
             
-            [ users insertObject: user atIndex: [ userId integerValue ] ];
+            [ users insertObject: user atIndex: i++ ];
         }
     }
     
@@ -60,6 +62,7 @@
 
 - ( void )getGroups
 {
+    NSUInteger     i;
     Group        * group;
     NSFileHandle * fh;
     NSString     * list;
@@ -71,8 +74,9 @@
     
     [ groups release ];
     
+    i        = 0;
     groups    = [ [ NSMutableArray arrayWithCapacity: 100 ] retain ];
-    fh        = [ [ ( NLApplication * )( [ NSApplication sharedApplication ] ) execution ] execute: @"/usr/bin/dscl" arguments: [ NSArray arrayWithObjects: @"localhost", @"-list", @"/Local/Default/Users", @"uid", nil ] ];
+    fh        = [ [ ( NLApplication * )( [ NSApplication sharedApplication ] ) execution ] execute: @"/usr/bin/dscl" arguments: [ NSArray arrayWithObjects: @"localhost", @"-list", @"/Local/Default/Groups", @"gid", nil ] ];
     list      = [ [ NSString alloc ] initWithData: [ fh readDataToEndOfFile ] encoding: NSUTF8StringEncoding ];
     groupList = [ list componentsSeparatedByString: @"\n" ];
     
@@ -85,7 +89,7 @@
             groupId    = [ groupInfos lastObject ];
             group      = [ Group groupWithName: groupName gid: [ groupId integerValue ] ];
             
-            [ groups insertObject: group atIndex: [ groupId integerValue ] ];
+            [ groups insertObject: group atIndex: i++ ];
         }
     }
     
