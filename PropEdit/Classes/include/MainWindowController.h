@@ -112,7 +112,6 @@
 - ( void )getAvailableUsers: ( DSCLHelper * )helper;
 - ( void )getAvailableGroups: ( DSCLHelper * )helper;
 - ( void )enableControls;
-- ( IBAction )selectFile: ( id )sender;
 - ( IBAction )apply: ( id )sender;
 - ( IBAction )applyRecursive: ( id )sender;
 - ( IBAction )showApplyView: ( id )sender;
@@ -123,5 +122,10 @@
 - ( IBAction )goNetwork: ( id )sender;
 - ( IBAction )goApplications: ( id )sender;
 - ( IBAction )goUtilities: ( id )sender;
+- ( IBAction )selectFile: ( id )sender;
+- ( void )getFiles: ( NSString * )readPath;
+- ( void )reloadFiles;
+- ( void )getFileAttributes;
+- ( void )getFileInfos;
 
 @end

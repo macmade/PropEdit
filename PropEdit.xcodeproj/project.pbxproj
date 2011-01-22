@@ -23,6 +23,7 @@
 		05C3AE9012E9E1E6000AEC46 /* DSCLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE8F12E9E1E6000AEC46 /* DSCLHelper.m */; };
 		05C88B7A12E9D075004E02C7 /* NL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05C88B5512E9CF24004E02C7 /* NL.framework */; };
 		05C88B7B12E9D077004E02C7 /* NL.framework in Copy Private Frameworks */ = {isa = PBXBuildFile; fileRef = 05C88B5512E9CF24004E02C7 /* NL.framework */; };
+		05F3474412EACE8B008B2343 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05F3474312EACE8B008B2343 /* Defaults.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,13 +39,6 @@
 			containerPortal = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 0575ED8812E89230005E2DC0;
-			remoteInfo = "NutShell (Private)";
-		};
-		05C88B8612E9D0A7004E02C7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 0575ED8712E89230005E2DC0;
 			remoteInfo = "NutShell (Private)";
 		};
 /* End PBXContainerItemProxy section */
@@ -96,6 +90,7 @@
 		05C3AE8E12E9E1A6000AEC46 /* DSCLHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSCLHelper.h; sourceTree = "<group>"; };
 		05C3AE8F12E9E1E6000AEC46 /* DSCLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCLHelper.m; sourceTree = "<group>"; };
 		05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NutShell.xcodeproj; path = "/Users/macmade/Documents/Brain/Mac Development/Frameworks/NutShell/trunk/NutShell.xcodeproj"; sourceTree = "<absolute>"; };
+		05F3474312EACE8B008B2343 /* Defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Defaults.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				05499D6812E9F7BF00D7AFEF /* include */,
+				05F3474312EACE8B008B2343 /* Defaults.plist */,
 				0564E15D12E8988F00035F08 /* PropEdit-Info.plist */,
 				0564E15E12E8988F00035F08 /* InfoPlist.strings */,
 				0564E16112E8988F00035F08 /* PropEdit-Prefix.pch */,
@@ -286,7 +282,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				05C88B8712E9D0A7004E02C7 /* PBXTargetDependency */,
 			);
 			name = PropEdit;
 			productName = PropEdit;
@@ -351,6 +346,7 @@
 				05C3AE5912E9D568000AEC46 /* MainWindow.xib in Resources */,
 				05C3AE6712E9D64C000AEC46 /* DarkGradient.tif in Resources */,
 				05C3AE7512E9D67F000AEC46 /* Application.icns in Resources */,
+				05F3474412EACE8B008B2343 /* Defaults.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,14 +369,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		05C88B8712E9D0A7004E02C7 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "NutShell (Private)";
-			targetProxy = 05C88B8612E9D0A7004E02C7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0564E15E12E8988F00035F08 /* InfoPlist.strings */ = {
@@ -526,6 +514,7 @@
 		0564E17012E8989000035F08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Jean-David Gadina";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -543,6 +532,7 @@
 		0564E17112E8989000035F08 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Jean-David Gadina";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_LOCATION = YES;

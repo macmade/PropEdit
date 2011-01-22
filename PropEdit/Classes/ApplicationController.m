@@ -89,6 +89,11 @@
     ( void )sheet;
     ( void )returnCode;
     ( void )contextInfo;
+    
+    if( returnCode == 0 )
+    {
+        [ main reloadFiles ];
+    }
 }
 
 @end

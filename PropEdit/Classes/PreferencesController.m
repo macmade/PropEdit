@@ -75,9 +75,6 @@
 
 - ( IBAction )save: ( id )sender
 {
-    [ self.window orderOut: sender ];
-    [ NSApp endSheet: self.window returnCode: 0 ];
-    
     [ app.preferences.values setBool: [ showDotFiles     intValue ] forKey: @"ShowDotFiles" ];
     [ app.preferences.values setBool: [ showHiddenFiles  intValue ] forKey: @"ShowHiddenFiles" ];
     [ app.preferences.values setBool: [ sortDirectories  intValue ] forKey: @"SortDirectories" ];
@@ -91,6 +88,10 @@
         [ app.preferences.values setInteger: 5                                         forKey: @"DefaultLocation" ];
         [ app.preferences.values setObject: [ [ defaultLocation selectedItem ] title ] forKey: @"CustomLocation" ];
     }
+    
+    [ app.preferences.values synchronize ];
+    [ self.window orderOut: sender ];
+    [ NSApp endSheet: self.window returnCode: 0 ];
 }
 
 - ( IBAction )close: ( id )sender
