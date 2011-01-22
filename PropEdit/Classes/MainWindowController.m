@@ -67,6 +67,8 @@
 {
     OSStatus err;
     
+    [ app.execution executeWithPrivileges: "true" arguments: nil io: NULL ];
+    
     err = [ self chown ];
     
     if( err != 0 )
@@ -99,9 +101,12 @@
     NSString * chownArgs;
     NSString * file;
     
-    user      = [ [ owner selectedItem ] title ];
-    userGroup = [ [ group selectedItem ] title ];
+    user      = [ [ owner selectedItem ] representedObject ];
+    userGroup = [ [ group selectedItem ] representedObject ];
     chownArgs = [ NSString stringWithFormat: @"%@:%@", user, userGroup ];
+    
+    NSLog( @"%@", chownArgs );
+    
     file      = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
     
     if( recursive )
@@ -418,6 +423,7 @@
         
         [ owner addItemWithTitle: itemTitle ];
         [ [ owner itemWithTitle: itemTitle ] setTag: userObject.uid ];
+        [ [ owner itemWithTitle: itemTitle ] setRepresentedObject: userObject.name ];
         [ [ owner itemWithTitle: itemTitle ] setImage: [ NSImage imageNamed: NSImageNameUser ] ];
         [ [ [ owner itemWithTitle: itemTitle ] image ] setSize: NSMakeSize( 16, 16 ) ];
     }
@@ -438,6 +444,7 @@
         
         [ group addItemWithTitle: itemTitle ];
         [ [ group itemWithTitle: itemTitle ] setTag: groupObject.gid ];
+        [ [ group itemWithTitle: itemTitle ] setRepresentedObject: groupObject.name ];
         [ [ group itemWithTitle: itemTitle ] setImage: [ NSImage imageNamed: NSImageNameUser ] ];
         [ [ [ group itemWithTitle: itemTitle ] image ] setSize: NSMakeSize( 16, 16 ) ];
     }
