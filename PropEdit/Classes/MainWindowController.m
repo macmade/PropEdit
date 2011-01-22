@@ -18,7 +18,6 @@
 #import "DSCLHelper.h"
 #import "User.h"
 #import "Group.h"
-#import "File.h"
 
 /*******************************************************************************
  * Private methods
@@ -288,21 +287,14 @@
     [ self getAvailableUsers: dscl ];
     [ self getAvailableGroups: dscl ];
     
-    /* Gets the subfiles */
-    [ self getFiles: currentFile.path ];
-    
     /* View initialization */
     [ [ self window ] setTitle: currentFile.displayName ];
     [ browser setPath: currentFile.path ];
     [ icon setImage: [ workspace iconForFile: currentFile.path ] ];
     
     /* Stores path informations */
-    displayPath      = [ [ NSString alloc ] initWithString: @"//" ];
+    displayPath      = [ [ NSString alloc ] initWithString: currentFile.path ];
     displayPathInfos = [ [ displayPath componentsSeparatedByString: @"/" ] retain ];
-    
-    /* Displays the current file informations */
-    [ self getFileInfos ];
-    [ self getFileAttributes ];
     
     /* Sets the window delegate */
     [ [ self window ] setDelegate: self ];
@@ -565,247 +557,6 @@
 
 #pragma mark - File management -
 
-- ( void )reloadFiles
-{
-    
-}
-
-- ( void )getFiles: ( NSString * )readPath
-{
-    BOOL                    showDotFiles;
-    BOOL                    showHiddenFiles;
-    BOOL                    sortDirectories;
-    File                  * file;
-    File                  * subFile;
-    NSDirectoryEnumerator * dir;
-    NSMutableArray        * subFiles;
-    NSMutableArray        * subFilesRegular;
-    NSString              * subFilePath;
-    
-    if( [ files objectForKey: readPath ] != nil )
-    {
-        return;
-    }
-    
-    file = [ File fileWithPath: readPath ];
-    
-    if( file == nil )
-    {
-        return;
-    }
-    
-    if( file.isDirectory == NO )
-    {
-        return;
-    }
-    
-    subFiles        = [ NSMutableArray arrayWithCapacity: 50 ];
-    subFilesRegular = [ NSMutableArray arrayWithCapacity: 50 ];
-    dir             = [ fileManager enumeratorAtPath: readPath ];
-    showDotFiles    = [ app.preferences.values boolForKey: @"ShowDotFiles" ];
-    showHiddenFiles = [ app.preferences.values boolForKey: @"ShowHiddenFiles" ];
-    sortDirectories = [ app.preferences.values boolForKey: @"SortDirectories" ];
-    
-    [ files setObject: subFiles forKey: readPath ];
-    
-    for( subFilePath in dir )
-    {
-        [ dir skipDescendents ];
-        
-        if( [ readPath isEqualToString: @"/" ] && ( [ subFilePath isEqualToString: @"net" ] || [ subFilePath isEqualToString: @"home" ] || [ subFilePath isEqualToString: @"dev" ] ) )
-        {
-            continue;
-        }
-        
-        if( showDotFiles == NO && [ [ subFilePath substringToIndex: 1 ] isEqualToString: @"." ] ) {
-            
-            continue;
-        }
-        
-        subFile = [ File fileWithPath: [ readPath stringByAppendingString: subFilePath ] ];
-        
-        if( showHiddenFiles == NO && subFile.hidden == YES )
-        {
-            continue;
-        }
-        
-        if( sortDirectories == NO )
-        {
-            [ subFiles addObject: subFile ];
-        }
-        else if( file.isDirectory == YES )
-        {
-            [ subFiles addObject: subFile ];
-        }
-        else
-        {
-            [ subFilesRegular addObject: subFile ];
-        }
-    }
-    
-    if( sortDirectories == YES )
-    {
-        for( subFile in subFilesRegular )
-        {
-            [ subFiles addObject: subFile ];
-        }
-    }
-}
-
-- ( void )getFileAttributes
-{
-    unsigned long   posixPerms;
-    struct stat     fileStat;
-    int             err;
-    NSString      * filePath;
-    NSDictionary  * attribs;
-    
-    filePath   = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
-    attribs    = [ fileManager attributesOfItemAtPath: filePath error: NULL ];
-    posixPerms = [ [ attribs objectForKey: @"NSFilePosixPermissions" ] unsignedLongValue ];
-    
-    [ owner selectItemWithTag: [ [ attribs objectForKey: @"NSFileOwnerAccountID" ] intValue ] ];
-    [ group selectItemWithTag: [ [ attribs objectForKey: @"NSFileGroupOwnerAccountID" ] intValue ] ];
-    
-    [ setUID setIntegerValue:     ( NSInteger )posixPerms & 2048 ];
-    [ setGID setIntegerValue:     ( NSInteger )posixPerms & 1024 ];
-    [ sticky setIntegerValue:     ( NSInteger )posixPerms &  512 ];
-    [ userRead setIntegerValue:   ( NSInteger )posixPerms &  256 ];
-    [ userWrite setIntegerValue:  ( NSInteger )posixPerms &  128 ];
-    [ userExec setIntegerValue:   ( NSInteger )posixPerms &   64 ];
-    [ groupRead setIntegerValue:  ( NSInteger )posixPerms &   32 ];
-    [ groupWrite setIntegerValue: ( NSInteger )posixPerms &   16 ];
-    [ groupExec setIntegerValue:  ( NSInteger )posixPerms &    8 ];
-    [ worldRead setIntegerValue:  ( NSInteger )posixPerms &    4 ];
-    [ worldWrite setIntegerValue: ( NSInteger )posixPerms &    2 ];
-    [ worldExec setIntegerValue:  ( NSInteger )posixPerms &    1 ];
-    
-    err = stat( ( char * )[ filePath cStringUsingEncoding: NSUTF8StringEncoding ], &fileStat );
-    
-    if( err != 0 )
-    {
-        [ self disableFlagControls ];
-        
-        return;
-    }
-    
-    [ flagArchived setIntValue:         fileStat.st_flags & SF_ARCHIVED ];
-    [ flagHidden setIntValue:           fileStat.st_flags & UF_HIDDEN ];
-    [ flagNoDump setIntValue:           fileStat.st_flags & UF_NODUMP ];
-    [ flagOpaque setIntValue:           fileStat.st_flags & UF_OPAQUE ];
-    [ flagSystemAppendOnly setIntValue: fileStat.st_flags & SF_APPEND ];
-    [ flagSystemImmutable setIntValue:  fileStat.st_flags & SF_IMMUTABLE ];
-    [ flagUserAppendOnly setIntValue:   fileStat.st_flags & UF_APPEND ];
-    [ flagUserImmutable setIntValue:    fileStat.st_flags & UF_IMMUTABLE ];
-}
-
-- ( void )getFileInfos
-{
-    BOOL isDir;
-    NSMutableAttributedString * infos;
-    NSAttributedString        * name;
-    NSAttributedString        * size;
-    NSAttributedString        * cTime;
-    NSAttributedString        * mTime;
-    NSAttributedString        * nameLabel;
-    NSAttributedString        * sizeLabel;
-    NSAttributedString        * cTimeLabel;
-    NSAttributedString        * mTimeLabel;
-    NSMutableParagraphStyle   * paragraph;
-    NSString                  * filePath;
-    NSDictionary              * attribs;
-    NSNumber                  * fileSize;
-    NSString                  * fileSizeUnit;
-    NSDateFormatter           * dateFormat;
-    NSNumberFormatter         * sizeFormat;
-    
-    filePath   = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
-    attribs    = [ fileManager attributesOfItemAtPath: filePath error: NULL ];
-    dateFormat = [ [ [ NSDateFormatter alloc ] init ]  autorelease ];
-    sizeFormat = [ [ [ NSNumberFormatter alloc ] init ]  autorelease ];
-    
-    [ dateFormat setDateStyle: NSDateFormatterShortStyle ];
-    [ dateFormat setTimeStyle: NSDateFormatterShortStyle ];
-    [ sizeFormat setMinimumFractionDigits: 0 ];
-    [ sizeFormat setMaximumFractionDigits: 2 ];
-    
-    [ fileManager fileExistsAtPath: filePath isDirectory: &isDir ];
-    
-    if( [ [ attribs objectForKey: @"NSFileSize" ] unsignedLongValue ] > ( 1024 * 1024 * 1024 ) )
-    {
-        fileSize     = [ NSNumber numberWithFloat: ( ( [ [ attribs objectForKey: @"NSFileSize" ] floatValue ] / 1024 ) / 1024 ) / 1024 ];
-        fileSizeUnit = @" GB";
-    }
-    else if( [ [ attribs objectForKey: @"NSFileSize" ] unsignedIntValue ] > ( 1024 * 1024 ) )
-    {
-        fileSize     = [ NSNumber numberWithFloat: ( [ [ attribs objectForKey: @"NSFileSize" ] floatValue ] / 1024 ) / 1024 ];
-        fileSizeUnit = @" MB";
-    }
-    else if( [ [ attribs objectForKey: @"NSFileSize" ] unsignedIntValue ] > 1024 )
-    {
-        fileSize     = [ NSNumber numberWithFloat: [ [ attribs objectForKey: @"NSFileSize" ] floatValue ] / 1024 ];
-        fileSizeUnit = @" KB";
-    }
-    else
-    {
-        fileSize     = [ attribs objectForKey: @"NSFileSize" ];
-        fileSizeUnit = @" B";
-    }
-    
-    nameLabel  = [ [ NSAttributedString alloc ] initWithRTF: [ [ NSString stringWithFormat: @"{\\b %@{\\par}}",               NSLocalizedString( @"FileName", nil ) ]  dataUsingEncoding: NSUTF8StringEncoding ] documentAttributes: nil ];
-    sizeLabel  = [ [ NSAttributedString alloc ] initWithRTF: [ [ NSString stringWithFormat: @"{{\\par}{\\par}\\b %@{\\par}}", NSLocalizedString( @"FileSize", nil ) ]  dataUsingEncoding: NSUTF8StringEncoding ] documentAttributes: nil ];
-    cTimeLabel = [ [ NSAttributedString alloc ] initWithRTF: [ [ NSString stringWithFormat: @"{{\\par}{\\par}\\b %@{\\par}}", NSLocalizedString( @"FileCTime", nil ) ] dataUsingEncoding: NSUTF8StringEncoding ] documentAttributes: nil ];
-    mTimeLabel = [ [ NSAttributedString alloc ] initWithRTF: [ [ NSString stringWithFormat: @"{{\\par}{\\par}\\b %@{\\par}}", NSLocalizedString( @"FileMTime", nil ) ] dataUsingEncoding: NSUTF8StringEncoding ] documentAttributes: nil ];
-    
-    if( [ ( NSString * )[ displayPathInfos objectAtIndex: [ displayPathInfos count ] - 2 ] length ] == 0 )
-    {
-        name = [ [ NSAttributedString alloc ] initWithString: [ fileManager displayNameAtPath: @"/" ] ];
-    }
-    else
-    {
-        name = [ [ NSAttributedString alloc ] initWithString: [ fileManager displayNameAtPath: filePath ] ];
-    }
-    
-    size       = [ [ NSAttributedString alloc ] initWithString: [ [ sizeFormat stringFromNumber: fileSize ] stringByAppendingString: fileSizeUnit ] ];
-    cTime      = [ [ NSAttributedString alloc ] initWithString: [ dateFormat stringFromDate: [ attribs objectForKey: @"NSFileCreationDate" ] ] ];
-    mTime      = [ [ NSAttributedString alloc ] initWithString: [ dateFormat stringFromDate: [ attribs objectForKey: @"NSFileModificationDate" ] ] ];
-    
-    paragraph  = [ [ NSMutableParagraphStyle alloc ] init ];
-    infos      = [ [ NSMutableAttributedString alloc ] initWithString: @"" ];
-    
-    [ infos insertAttributedString: nameLabel atIndex: [ infos length ] ];
-    [ infos insertAttributedString: name atIndex: [ infos length ] ];
-    
-    [ infos insertAttributedString: cTimeLabel atIndex: [ infos length ] ];
-    [ infos insertAttributedString: cTime atIndex: [ infos length ] ];
-    
-    [ infos insertAttributedString: mTimeLabel atIndex: [ infos length ] ];
-    [ infos insertAttributedString: mTime atIndex: [ infos length ] ];
-    
-    if( isDir == NO )
-    {
-        [ infos insertAttributedString: sizeLabel atIndex: [ infos length ] ];
-        [ infos insertAttributedString: size atIndex: [ infos length ] ];
-    }
-    
-    [ paragraph setAlignment: NSCenterTextAlignment ];
-    [ infos addAttributes: [ NSDictionary dictionaryWithObject: paragraph forKey: NSParagraphStyleAttributeName ] range: NSMakeRange( 0, [ infos length ] ) ];
-    
-    [ fileInfos setStringValue: ( NSString * )infos ];
-    
-    [ nameLabel release ];
-    [ sizeLabel release ];
-    [ cTimeLabel release ];
-    [ mTimeLabel release ];
-    [ name release ];
-    [ size release ];
-    [ cTime release ];
-    [ mTime release ];
-    [ infos release ];
-    [ paragraph release ];
-    
-}
-
 /*******************************************************************************
  * NSBrowser delegate methods
  ******************************************************************************/
@@ -830,41 +581,15 @@
     ( void )sender;
     ( void )column;
     
-    [ displayPath release ];
-    [ displayPathInfos release ];
-    
-    displayPath      = [ [ NSString alloc ] initWithString: [ [ browser path ] stringByAppendingString: @"/" ] ];
-    displayPathInfos = [ [ displayPath componentsSeparatedByString: @"/" ] retain ];
-    
-    [ self getFiles: displayPath ];
-    
     return [ ( NSArray * )[ files objectForKey: displayPath ] count ];
 }
 
 - ( void )browser: ( NSBrowser * )sender willDisplayCell: ( NSBrowserCell * )cell atRow: ( NSInteger )row column: ( NSInteger )column
 {
-    NSString * fileKey;
-    NSString * filePath;
-    NSImage  * fileIcon;
-    File     * file;
-    
     ( void )sender;
-    
-    fileKey  = [ [ [ displayPathInfos subarrayWithRange: NSMakeRange( 0, column + 1 ) ] componentsJoinedByString: @"/" ] stringByAppendingString: @"/" ];
-    filePath = [ fileKey stringByAppendingString: [ [ [ files objectForKey: fileKey ] objectAtIndex: row ] name ] ];
-    file     = [ [ files objectForKey: fileKey ] objectAtIndex: row ];
-    
-    [ cell setTitle: file.name ];
-    
-    if( file.isDirectory == NO )
-    {
-        [ cell setLeaf: YES ];
-    }
-    
-    fileIcon = [ workspace iconForFile: filePath ];
-    
-    [ fileIcon setSize: NSMakeSize( 14, 14 ) ];
-    [ cell setImage: fileIcon ];
+    ( void )cell;
+    ( void )row;
+    ( void )column;
 }
 
 - ( IBAction )selectFile: ( id )sender
@@ -873,16 +598,6 @@
     {
         [ self hideApplyView: sender ];
     }
-    
-    displayPath      = [ [ NSString alloc ] initWithString: [ [ browser path ] stringByAppendingString: @"/" ] ];
-    displayPathInfos = [ [ displayPath componentsSeparatedByString: @"/" ] retain ];
-    
-    [ path setURL: [ NSURL URLWithString: [ @"file://localhost" stringByAppendingString: [ displayPath stringByReplacingOccurrencesOfString: @" " withString: @"%20" ] ] ] ];
-    [ icon setImage: [ workspace iconForFile: displayPath ] ];
-    [ self getFileAttributes ];
-    [ self getFileInfos ];
-    [ [ self window ] setTitle: [ fileManager displayNameAtPath: [ browser path ] ] ];
-    [ self enableControls ];
 }
 
 @end

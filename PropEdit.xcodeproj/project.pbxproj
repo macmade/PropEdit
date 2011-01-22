@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		05499D6412E9E98500D7AFEF /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D6312E9E98500D7AFEF /* Group.m */; };
 		05499D6512E9EEA900D7AFEF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D5F12E9E8F200D7AFEF /* User.m */; };
-		05499D7C12EA0DAA00D7AFEF /* File.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D7112E9FF9500D7AFEF /* File.m */; };
 		0564E15612E8988F00035F08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0564E15512E8988F00035F08 /* Cocoa.framework */; };
 		0564E16012E8988F00035F08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0564E15E12E8988F00035F08 /* InfoPlist.strings */; };
 		0564E16312E8988F00035F08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0564E16212E8988F00035F08 /* main.m */; };
@@ -73,8 +72,6 @@
 		05499D6D12E9F7CC00D7AFEF /* __arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __arm.h; sourceTree = "<group>"; };
 		05499D6E12E9F7CC00D7AFEF /* __i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __i386.h; sourceTree = "<group>"; };
 		05499D6F12E9F7CC00D7AFEF /* eos-skl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "eos-skl.h"; sourceTree = "<group>"; };
-		05499D7012E9FF1100D7AFEF /* File.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = File.h; sourceTree = "<group>"; };
-		05499D7112E9FF9500D7AFEF /* File.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = File.m; sourceTree = "<group>"; };
 		0564E15112E8988F00035F08 /* PropEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0564E15512E8988F00035F08 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0564E15812E8988F00035F08 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -227,7 +224,6 @@
 				05C3AE4E12E9D487000AEC46 /* AboutController.m */,
 				05C3AE4812E9D183000AEC46 /* ApplicationController.m */,
 				05C3AE8F12E9E1E6000AEC46 /* DSCLHelper.m */,
-				05499D7112E9FF9500D7AFEF /* File.m */,
 				05499D6312E9E98500D7AFEF /* Group.m */,
 				05C3AE4F12E9D487000AEC46 /* MainWindowController.m */,
 				05C3AE5012E9D487000AEC46 /* PreferencesController.m */,
@@ -242,7 +238,6 @@
 				05C3AE4B12E9D466000AEC46 /* AboutController.h */,
 				05C3AE4A12E9D1B4000AEC46 /* ApplicationController.h */,
 				05C3AE8E12E9E1A6000AEC46 /* DSCLHelper.h */,
-				05499D7012E9FF1100D7AFEF /* File.h */,
 				05499D6212E9E97E00D7AFEF /* Group.h */,
 				05C3AE4C12E9D46E000AEC46 /* MainWindowController.h */,
 				05C3AE4D12E9D46E000AEC46 /* PreferencesController.h */,
@@ -374,7 +369,6 @@
 				05C3AE9012E9E1E6000AEC46 /* DSCLHelper.m in Sources */,
 				05499D6412E9E98500D7AFEF /* Group.m in Sources */,
 				05499D6512E9EEA900D7AFEF /* User.m in Sources */,
-				05499D7C12EA0DAA00D7AFEF /* File.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

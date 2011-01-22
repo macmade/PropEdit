@@ -26,7 +26,6 @@
 @synthesize showDotFiles;
 @synthesize showHiddenFiles;
 @synthesize sortDirectories;
-@synthesize warnForRootFiles;
 @synthesize app;
 
 - ( void )dealloc
@@ -36,7 +35,6 @@
     [ showDotFiles release ];
     [ showHiddenFiles release ];
     [ sortDirectories release ];
-    [ warnForRootFiles release ];
     [ app release ];
     [ super dealloc ];
 }
@@ -73,7 +71,6 @@
     [ showDotFiles     setIntValue:       [ app.preferences.values boolForKey:     @"ShowDotFiles" ] ];
     [ showHiddenFiles  setIntValue:       [ app.preferences.values boolForKey:     @"ShowHiddenFiles" ] ];
     [ sortDirectories  setIntValue:       [ app.preferences.values boolForKey:     @"SortDirectories" ] ];
-    [ warnForRootFiles setIntValue:       [ app.preferences.values boolForKey:     @"WarnForRootFiles" ] ];
 }
 
 - ( IBAction )save: ( id )sender
@@ -84,7 +81,6 @@
     [ app.preferences.values setBool: [ showDotFiles     intValue ] forKey: @"ShowDotFiles" ];
     [ app.preferences.values setBool: [ showHiddenFiles  intValue ] forKey: @"ShowHiddenFiles" ];
     [ app.preferences.values setBool: [ sortDirectories  intValue ] forKey: @"SortDirectories" ];
-    [ app.preferences.values setBool: [ warnForRootFiles intValue ] forKey: @"WarnForRootFiles" ];
     
     if( [ [ defaultLocation selectedItem ] tag ] > 0 )
     {
