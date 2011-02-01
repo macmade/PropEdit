@@ -67,8 +67,6 @@
 {
     OSStatus err;
     
-    [ app.execution executeWithPrivileges: "true" arguments: nil io: NULL ];
-    
     err = [ self chown ];
     
     if( err != 0 )
