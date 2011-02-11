@@ -748,7 +748,7 @@
     NLFileInfos * file;
     NSString    * filePath;
     
-    if( [ [ displayPath substringFromIndex: [ displayPath length ] - 1 ] isEqualToString: @"/" ] )
+    if( [ displayPath length ] > 1 && [ [ displayPath substringFromIndex: [ displayPath length ] - 1 ] isEqualToString: @"/" ] )
     {
         filePath = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
     }
@@ -803,7 +803,7 @@
     NSDateFormatter           * dateFormat;
     NSNumberFormatter         * sizeFormat;
     
-    if( [ [ displayPath substringFromIndex: [ displayPath length ] - 1 ] isEqualToString: @"/" ] )
+    if( [ displayPath length ] > 1 && [ [ displayPath substringFromIndex: [ displayPath length ] - 1 ] isEqualToString: @"/" ] )
     {
         filePath = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
     }
