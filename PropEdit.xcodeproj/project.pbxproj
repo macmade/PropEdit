@@ -270,6 +270,7 @@
 		0564E14812E8988F00035F08 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = eosgarden;
 			};
 			buildConfigurationList = 0564E14B12E8988F00035F08 /* Build configuration list for PBXProject "PropEdit" */;
