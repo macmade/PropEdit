@@ -15,6 +15,7 @@
 #import "AboutController.h"
 #import "PreferencesController.h"
 #import "MainWindowController.h"
+#import "RegisterController.h"
 
 @interface ApplicationController( Private )
 
@@ -41,10 +42,12 @@
 
 - ( void )dealloc
 {
-    [ preferences release ];
-    [ aboutWindow release ];
-    [ preferencesPanel release ];
-    [ main release ];
+    [ preferences           release ];
+    [ aboutWindow           release ];
+    [ preferencesPanel      release ];
+    [ registerController    release ];
+    [ main                  release ];
+    
     [ super dealloc ];
 }
 
@@ -94,6 +97,24 @@
     {
         [ main reloadFiles ];
     }
+}
+
+- ( IBAction )showRegisterWindow: ( id )sender
+{
+    ( void )sender;
+    
+    if( registerController == nil )
+    {
+        registerController = [ RegisterController new ];
+    }
+    
+    [ NSApp
+        beginSheet:         [ registerController window ]
+        modalForWindow:     [ ( NSWindowController * )main window ]
+        modalDelegate:      nil
+        didEndSelector:     NULL
+        contextInfo:        nil
+     ];
 }
 
 @end

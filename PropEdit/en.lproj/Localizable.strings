@@ -5,8 +5,11 @@
  
 /* $Id$ */
 
-"FileName"  = "Name:";
-"FileSize"  = "Size:";
-"FileCTime" = "Created:";
-"FileMTime" = "Modified:";
-"Version"   = "Version %@";
+"FileName"              = "Name:";
+"FileSize"              = "Size:";
+"FileCTime"             = "Created:";
+"FileMTime"             = "Modified:";
+"Version"               = "Version %@";
+"ConnectionError"       = "Connection failed";
+"ConnectionErrorText"   = "Impossible to establish a network connection. Please ensure you have a working Internet connection and try again.";
+"OK"                    = "OK";

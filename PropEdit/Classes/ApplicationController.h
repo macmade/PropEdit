@@ -11,7 +11,10 @@
  * @abstract    ...
  */
 
-@class MainWindowController, AboutController, PreferencesController;
+@class MainWindowController;
+@class AboutController;
+@class PreferencesController;
+@class RegisterController;
 
 @interface ApplicationController: NLApplication
 {
@@ -21,6 +24,7 @@
     AboutController       * aboutWindow;
     PreferencesController * preferencesPanel;
     MainWindowController  * main;
+    RegisterController    * registerController;
     
 @private
     
@@ -36,5 +40,6 @@
 - ( IBAction )openMainWindow: ( id )sender;
 - ( IBAction )showPreferences: ( id )sender;
 - ( IBAction )showAboutWindow: ( id )sender;
+- ( IBAction )showRegisterWindow: ( id )sender;
 
 @end
