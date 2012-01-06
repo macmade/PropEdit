@@ -103,7 +103,7 @@
 									<reference key="NSOnImage" ref="353210768"/>
 									<reference key="NSMixedImage" ref="549394948"/>
 								</object>
-								<object class="NSMenuItem" id="765320396">
+								<object class="NSMenuItem" id="180256353">
 									<reference key="NSMenu" ref="110575045"/>
 									<string key="NSTitle">Register...</string>
 									<string key="NSKeyEquiv"/>
@@ -490,7 +490,7 @@
 							<int key="NSvFlags">273</int>
 							<object class="NSMutableArray" key="NSSubviews">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSButton" id="321578022">
+								<object class="NSButton" id="78703363">
 									<reference key="NSNextResponder" ref="129647480"/>
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{14, 123}, {270, 32}}</string>
@@ -499,7 +499,7 @@
 									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:687</string>
 									<bool key="NSEnabled">YES</bool>
-									<object class="NSButtonCell" key="NSCell" id="597200681">
+									<object class="NSButtonCell" key="NSCell" id="490707627">
 										<int key="NSCellFlags">67239424</int>
 										<int key="NSCellFlags2">134217728</int>
 										<string key="NSContents">ACL Editor</string>
@@ -509,7 +509,7 @@
 											<int key="NSfFlags">1044</int>
 										</object>
 										<string key="NSCellIdentifier">_NS:687</string>
-										<reference key="NSControlView" ref="321578022"/>
+										<reference key="NSControlView" ref="78703363"/>
 										<int key="NSButtonFlags">-2038284033</int>
 										<int key="NSButtonFlags2">129</int>
 										<string key="NSAlternateContents"/>
@@ -878,7 +878,7 @@
 													<string key="NSFrame">{{16, 12}, {152, 18}}</string>
 													<reference key="NSSuperview" ref="603415190"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="321578022"/>
+													<reference key="NSNextKeyView" ref="78703363"/>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSButtonCell" key="NSCell" id="72059071">
 														<int key="NSCellFlags">604110336</int>
@@ -2776,6 +2776,14 @@
 					<int key="connectionID">1097</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">editACLs:</string>
+						<reference key="source" ref="327892595"/>
+						<reference key="destination" ref="78703363"/>
+					</object>
+					<int key="connectionID">1186</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">window</string>
 						<reference key="source" ref="572492752"/>
@@ -3034,7 +3042,7 @@
 							<reference ref="342932134"/>
 							<reference ref="471688021"/>
 							<reference ref="822035639"/>
-							<reference ref="765320396"/>
+							<reference ref="180256353"/>
 						</object>
 						<reference key="parent" ref="694149608"/>
 					</object>
@@ -3627,7 +3635,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1183</int>
-						<reference key="object" ref="765320396"/>
+						<reference key="object" ref="180256353"/>
 						<reference key="parent" ref="110575045"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -3638,7 +3646,7 @@
 							<reference ref="25159140"/>
 							<reference ref="1019981822"/>
 							<reference ref="520232809"/>
-							<reference ref="321578022"/>
+							<reference ref="78703363"/>
 						</object>
 						<reference key="parent" ref="414427165"/>
 					</object>
@@ -4123,17 +4131,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1184</int>
-						<reference key="object" ref="321578022"/>
+						<reference key="object" ref="78703363"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="597200681"/>
+							<reference ref="490707627"/>
 						</object>
 						<reference key="parent" ref="129647480"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1185</int>
-						<reference key="object" ref="597200681"/>
-						<reference key="parent" ref="321578022"/>
+						<reference key="object" ref="490707627"/>
+						<reference key="parent" ref="78703363"/>
 					</object>
 				</object>
 			</object>
@@ -4524,7 +4532,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1185</int>
+			<int key="maxID">1186</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4643,6 +4651,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>apply:</string>
 							<string>applyRecursive:</string>
+							<string>editACLs:</string>
 							<string>goApplications:</string>
 							<string>goComputer:</string>
 							<string>goDesktop:</string>
@@ -4655,6 +4664,7 @@
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>
@@ -4674,6 +4684,7 @@
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>apply:</string>
 							<string>applyRecursive:</string>
+							<string>editACLs:</string>
 							<string>goApplications:</string>
 							<string>goComputer:</string>
 							<string>goDesktop:</string>
@@ -4692,6 +4703,10 @@
 							</object>
 							<object class="IBActionInfo">
 								<string key="name">applyRecursive:</string>
+								<string key="candidateClassName">id</string>
+							</object>
+							<object class="IBActionInfo">
+								<string key="name">editACLs:</string>
 								<string key="candidateClassName">id</string>
 							</object>
 							<object class="IBActionInfo">

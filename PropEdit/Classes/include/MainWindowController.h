@@ -123,6 +123,7 @@
 - ( IBAction )goApplications: ( id )sender;
 - ( IBAction )goUtilities: ( id )sender;
 - ( IBAction )selectFile: ( id )sender;
+- ( IBAction )editACLs: ( id )sender;
 - ( void )getFiles: ( NSString * )readPath;
 - ( void )reloadFiles;
 - ( void )getFileAttributes;

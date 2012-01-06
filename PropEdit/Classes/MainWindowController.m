@@ -18,6 +18,7 @@
 #import "DSCLHelper.h"
 #import "User.h"
 #import "Group.h"
+#import "ACLEditorController.h"
 
 /*******************************************************************************
  * Private methods
@@ -34,6 +35,7 @@
 - ( OSStatus )chown;
 - ( OSStatus )chmod;
 - ( OSStatus )chflags;
+- ( void )sheetDidEnd: ( NSWindow * )sheet returnCode: ( int )returnCode contextInfo: ( void * )contextInfo;
 
 @end
 
@@ -192,6 +194,14 @@
     }
     
     return [ app.execution executeWithPrivileges: "/usr/bin/chflags" arguments: args io: NULL ];
+}
+
+- ( void )sheetDidEnd: ( NSWindow * )sheet returnCode: ( int )returnCode contextInfo: ( void * )contextInfo
+{
+    ( void )sheet;
+    ( void )returnCode;
+    
+    [ ( id )contextInfo release ];
 }
 
 @end
@@ -629,6 +639,23 @@
     [ self enableControls ];
     [ self getFileAttributes ];
     [ self getFileInfos ];
+}
+
+- ( IBAction )editACLs: ( id )sender
+{
+    ACLEditorController * acl;
+    
+    ( void )sender;
+    
+    acl = [ [ ACLEditorController alloc ] initWithPath: @"" ];
+    
+    [ NSApp
+        beginSheet:         [ acl window ]
+        modalForWindow:     [ self window ]
+        modalDelegate:      self
+        didEndSelector:     NULL
+        contextInfo:        ( void * )acl
+     ];
 }
 
 /*******************************************************************************
