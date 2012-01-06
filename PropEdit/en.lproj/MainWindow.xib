@@ -103,7 +103,7 @@
 									<reference key="NSOnImage" ref="353210768"/>
 									<reference key="NSMixedImage" ref="549394948"/>
 								</object>
-								<object class="NSMenuItem" id="34575141">
+								<object class="NSMenuItem" id="479039141">
 									<reference key="NSMenu" ref="110575045"/>
 									<string key="NSTitle">Register...</string>
 									<string key="NSKeyEquiv"/>
@@ -490,7 +490,7 @@
 							<int key="NSvFlags">273</int>
 							<object class="NSMutableArray" key="NSSubviews">
 								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSButton" id="575827093">
+								<object class="NSButton" id="933694762">
 									<reference key="NSNextResponder" ref="129647480"/>
 									<int key="NSvFlags">268</int>
 									<string key="NSFrame">{{14, 123}, {270, 32}}</string>
@@ -499,7 +499,7 @@
 									<reference key="NSNextKeyView"/>
 									<string key="NSReuseIdentifierKey">_NS:687</string>
 									<bool key="NSEnabled">YES</bool>
-									<object class="NSButtonCell" key="NSCell" id="66450866">
+									<object class="NSButtonCell" key="NSCell" id="366548000">
 										<int key="NSCellFlags">67239424</int>
 										<int key="NSCellFlags2">134217728</int>
 										<string key="NSContents">ACL Editor</string>
@@ -509,7 +509,7 @@
 											<int key="NSfFlags">1044</int>
 										</object>
 										<string key="NSCellIdentifier">_NS:687</string>
-										<reference key="NSControlView" ref="575827093"/>
+										<reference key="NSControlView" ref="933694762"/>
 										<int key="NSButtonFlags">-2038284033</int>
 										<int key="NSButtonFlags2">129</int>
 										<string key="NSAlternateContents"/>
@@ -878,7 +878,7 @@
 													<string key="NSFrame">{{16, 12}, {152, 18}}</string>
 													<reference key="NSSuperview" ref="603415190"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="575827093"/>
+													<reference key="NSNextKeyView" ref="933694762"/>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSButtonCell" key="NSCell" id="72059071">
 														<int key="NSCellFlags">604110336</int>
@@ -2116,9 +2116,17 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">showRegisterWindow:</string>
 						<reference key="source" ref="1050"/>
-						<reference key="destination" ref="34575141"/>
+						<reference key="destination" ref="479039141"/>
 					</object>
 					<int key="connectionID">1187</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">registerMenuItem</string>
+						<reference key="source" ref="1050"/>
+						<reference key="destination" ref="479039141"/>
+					</object>
+					<int key="connectionID">1188</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2796,7 +2804,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">editACLs:</string>
 						<reference key="source" ref="327892595"/>
-						<reference key="destination" ref="575827093"/>
+						<reference key="destination" ref="933694762"/>
 					</object>
 					<int key="connectionID">1186</int>
 				</object>
@@ -3059,7 +3067,7 @@
 							<reference ref="342932134"/>
 							<reference ref="471688021"/>
 							<reference ref="822035639"/>
-							<reference ref="34575141"/>
+							<reference ref="479039141"/>
 						</object>
 						<reference key="parent" ref="694149608"/>
 					</object>
@@ -3652,7 +3660,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1183</int>
-						<reference key="object" ref="34575141"/>
+						<reference key="object" ref="479039141"/>
 						<reference key="parent" ref="110575045"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -3663,7 +3671,7 @@
 							<reference ref="25159140"/>
 							<reference ref="1019981822"/>
 							<reference ref="520232809"/>
-							<reference ref="575827093"/>
+							<reference ref="933694762"/>
 						</object>
 						<reference key="parent" ref="414427165"/>
 					</object>
@@ -4148,17 +4156,17 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1184</int>
-						<reference key="object" ref="575827093"/>
+						<reference key="object" ref="933694762"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="66450866"/>
+							<reference ref="366548000"/>
 						</object>
 						<reference key="parent" ref="129647480"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1185</int>
-						<reference key="object" ref="66450866"/>
-						<reference key="parent" ref="575827093"/>
+						<reference key="object" ref="366548000"/>
+						<reference key="parent" ref="933694762"/>
 					</object>
 				</object>
 			</object>
@@ -4549,7 +4557,7 @@
 				<reference key="dict.values" ref="0"/>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">1187</int>
+			<int key="maxID">1188</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -4629,12 +4637,14 @@
 							<string>aboutWindow</string>
 							<string>main</string>
 							<string>preferencesPanel</string>
+							<string>registerMenuItem</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>AboutController</string>
 							<string>MainWindowController</string>
 							<string>PreferencesController</string>
+							<string>NSMenuItem</string>
 						</object>
 					</object>
 					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -4644,6 +4654,7 @@
 							<string>aboutWindow</string>
 							<string>main</string>
 							<string>preferencesPanel</string>
+							<string>registerMenuItem</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
@@ -4658,6 +4669,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">preferencesPanel</string>
 								<string key="candidateClassName">PreferencesController</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">registerMenuItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
 							</object>
 						</object>
 					</object>

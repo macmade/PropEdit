@@ -17,3 +17,5 @@
 "SerialNumberInvalidText"   = "Please make sure that all digits and dashes are entered in the correct order.";
 "SerialNumberValid"         = "Registration complete!";
 "SerialNumberValidText"     = "Thank you so much for purchasing PropEdit!";
+"ACLRegisterAlert"          = "Registration needed";
+"ACLRegisterAlertText"      = "The ACL editor is only available for registered users.";

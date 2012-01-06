@@ -18,6 +18,7 @@
 
 @synthesize serial      = _serial;
 @synthesize buyProgress = _buyProgress;
+@synthesize menuItem    = _menuItem;
 
 - ( id )init
 {
@@ -31,6 +32,10 @@
 
 - ( void )dealloc
 {
+    [ _serial       release ];
+    [ _buyProgress  release ];
+    [ _menuItem     release ];
+    
     [ super dealloc ];
 }
 
@@ -73,11 +78,12 @@
         [ alert runModal ];
         [ alert release ];
         
-        [ [ NSUserDefaults standardUserDefaults ] setObject: [ _serial stringValue ] forKey: @"SN" ];
+        [ [ NSUserDefaults standardUserDefaults ] setObject: [ _serial stringValue ] forKey: @"sn" ];
         [ [ NSUserDefaults standardUserDefaults ] synchronize ];
         
         [ self.window orderOut: sender ];
         [ NSApp endSheet: self.window returnCode: 0 ];
+        [ _menuItem setHidden: YES ];
     }
 }
 

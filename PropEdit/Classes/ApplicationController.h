@@ -25,6 +25,7 @@
     PreferencesController * preferencesPanel;
     MainWindowController  * main;
     RegisterController    * registerController;
+    NSMenuItem            * registerMenuItem;
     
 @private
     
@@ -36,6 +37,7 @@
 @property( nonatomic, retain ) IBOutlet AboutController * aboutWindow;
 @property( nonatomic, retain ) IBOutlet PreferencesController * preferencesPanel;
 @property( nonatomic, retain ) IBOutlet MainWindowController * main;
+@property( nonatomic, retain ) IBOutlet NSMenuItem           * registerMenuItem;
 
 - ( IBAction )openMainWindow: ( id )sender;
 - ( IBAction )showPreferences: ( id )sender;

@@ -30,6 +30,7 @@
 @synthesize aboutWindow;
 @synthesize preferencesPanel;
 @synthesize main;
+@synthesize registerMenuItem;
 
 - ( id )init
 {
@@ -51,6 +52,7 @@
     [ preferencesPanel      release ];
     [ registerController    release ];
     [ main                  release ];
+    [ registerMenuItem      release ];
     
     [ super dealloc ];
 }
@@ -59,6 +61,11 @@
 {
     [ [ ( NSWindowController * )main window ] center ];
     [ main showWindow: self ];
+    
+    if( [ [ ESellerate sharedInstance ] isRegistered ] == YES )
+    {
+        [ registerMenuItem setHidden: YES ];
+    }
 }
 
 - ( IBAction )openMainWindow: ( id )sender
@@ -109,7 +116,8 @@
     
     if( registerController == nil )
     {
-        registerController = [ RegisterController new ];
+        registerController          = [ RegisterController new ];
+        registerController.menuItem = registerMenuItem;
     }
     
     [ NSApp

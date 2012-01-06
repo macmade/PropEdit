@@ -20,6 +20,7 @@
     NSTextField          * _serial;
     NSProgressIndicator  * _buyProgress;
     ESellerate           * _eSell;
+    NSMenuItem           * _menuItem;
     
 @private
     
@@ -28,6 +29,7 @@
 
 @property( nonatomic, readwrite, retain ) IBOutlet NSTextField          * serial;
 @property( nonatomic, readwrite, retain ) IBOutlet NSProgressIndicator  * buyProgress;
+@property( atomic,    readwrite, retain ) IBOutlet NSMenuItem           * menuItem;
 
 - ( IBAction )cancel: ( id )sender;
 - ( IBAction )validate: ( id )sender;

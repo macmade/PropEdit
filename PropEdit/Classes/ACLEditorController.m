@@ -12,6 +12,7 @@
  */
 
 #import "ACLEditorController.h"
+#import <ESellerate/ESellerate.h>
 
 @implementation ACLEditorController
 
@@ -40,6 +41,25 @@
 
 - ( IBAction )apply: ( id )sender
 {
+    NSAlert * alert;
+    
+    if( [ [ ESellerate sharedInstance ] isRegistered ] == NO )
+    {
+        alert = [ [ NSAlert alloc ] init ];
+        
+        [ alert addButtonWithTitle:  NSLocalizedString( @"OK", nil ) ];
+        [ alert setMessageText:      NSLocalizedString( @"ACLRegisterAlert", nil ) ];
+        [ alert setInformativeText:  NSLocalizedString( @"ACLRegisterAlertText", nil ) ];
+        
+        NSBeep();
+        
+        [ alert setAlertStyle: NSInformationalAlertStyle ];
+        [ alert runModal ];
+        [ alert release ];
+        
+        return;
+    }
+    
     [ self.window orderOut: sender ];
     [ NSApp endSheet: self.window returnCode: 0 ];
 }
