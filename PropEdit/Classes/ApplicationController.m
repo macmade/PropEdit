@@ -16,6 +16,7 @@
 #import "PreferencesController.h"
 #import "MainWindowController.h"
 #import "RegisterController.h"
+#import <ESellerate/ESellerate.h>
 
 @interface ApplicationController( Private )
 
@@ -34,6 +35,9 @@
 {
     if( ( self = [ super init ] ) )
     {
+        [ ESellerate setPublisherId: @"PUB9310734649" ];
+        [ ESellerate setSerialKey:   @"0RL2-ND96-7SXR-XNHM-6YH0" ];
+        
         preferences = [ [ NLPreferences alloc ] initWithPropertyList: @"Defaults" owner: self ];
     }
     

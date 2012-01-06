@@ -42,7 +42,43 @@
 
 - ( IBAction )validate: ( id )sender
 {
-    ( void )sender;
+    NSAlert * alert;
+    
+    if( [ _eSell registerSerialNumber: [ _serial stringValue ] ] == NO )
+    {
+        alert = [ [ NSAlert alloc ] init ];
+        
+        [ alert addButtonWithTitle:  NSLocalizedString( @"OK", nil ) ];
+        [ alert setMessageText:      NSLocalizedString( @"SerialNumberInvalid", nil ) ];
+        [ alert setInformativeText:  NSLocalizedString( @"SerialNumberInvalidText", nil ) ];
+        
+        NSBeep();
+        
+        [ alert setAlertStyle: NSWarningAlertStyle ];
+        [ alert runModal ];
+        
+        [ alert release ];
+    }
+    else
+    {
+        alert = [ [ NSAlert alloc ] init ];
+        
+        [ alert addButtonWithTitle:  NSLocalizedString( @"OK", nil ) ];
+        [ alert setMessageText:      NSLocalizedString( @"SerialNumberValid", nil ) ];
+        [ alert setInformativeText:  NSLocalizedString( @"SerialNumberValidText", nil ) ];
+        
+        NSBeep();
+        
+        [ alert setAlertStyle: NSInformationalAlertStyle ];
+        [ alert runModal ];
+        [ alert release ];
+        
+        [ [ NSUserDefaults standardUserDefaults ] setObject: [ _serial stringValue ] forKey: @"SN" ];
+        [ [ NSUserDefaults standardUserDefaults ] synchronize ];
+        
+        [ self.window orderOut: sender ];
+        [ NSApp endSheet: self.window returnCode: 0 ];
+    }
 }
 
 - ( IBAction )buy: ( id )sender

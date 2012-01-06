@@ -5,11 +5,15 @@
  
 /* $Id$ */
 
-"FileName"              = "Name:";
-"FileSize"              = "Size:";
-"FileCTime"             = "Created:";
-"FileMTime"             = "Modified:";
-"Version"               = "Version %@";
-"ConnectionError"       = "Connection failed";
-"ConnectionErrorText"   = "Impossible to establish a network connection. Please ensure you have a working Internet connection and try again.";
-"OK"                    = "OK";
+"FileName"                  = "Name:";
+"FileSize"                  = "Size:";
+"FileCTime"                 = "Created:";
+"FileMTime"                 = "Modified:";
+"Version"                   = "Version %@";
+"ConnectionError"           = "Connection failed";
+"ConnectionErrorText"       = "Impossible to establish a network connection. Please ensure you have a working Internet connection and try again.";
+"OK"                        = "OK";
+"SerialNumberInvalid"       = "Sorry, that's not a valid PropEdit serial number!";
+"SerialNumberInvalidText"   = "Please make sure that all digits and dashes are entered in the correct order.";
+"SerialNumberValid"         = "Registration complete!";
+"SerialNumberValidText"     = "Thank you so much for purchasing PropEdit!";
