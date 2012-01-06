@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		050F16B01300A63B0046DF3C /* NL.framework in Copy Private Frameworks */ = {isa = PBXBuildFile; fileRef = 050F16AE1300A62C0046DF3C /* NL.framework */; };
 		050F16B11300A63E0046DF3C /* NL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050F16AE1300A62C0046DF3C /* NL.framework */; };
+		0537D30D14B769AB0004EBCB /* ACLEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537D30C14B769AB0004EBCB /* ACLEntry.m */; };
 		0542100414B70F49000FFB45 /* ACLEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0542100214B70F49000FFB45 /* ACLEditor.xib */; };
 		0542100714B70F73000FFB45 /* ACLEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542100614B70F73000FFB45 /* ACLEditorController.m */; };
 		0542100A14B71CF3000FFB45 /* Register.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0542100914B71CF3000FFB45 /* Register.xib */; };
@@ -92,6 +93,8 @@
 
 /* Begin PBXFileReference section */
 		050F16AE1300A62C0046DF3C /* NL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0537D30B14B769AB0004EBCB /* ACLEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLEntry.h; sourceTree = "<group>"; };
+		0537D30C14B769AB0004EBCB /* ACLEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLEntry.m; sourceTree = "<group>"; };
 		05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ESellerate.xcodeproj; path = ../../../Frameworks/ESellerate/trunk/ESellerate.xcodeproj; sourceTree = "<group>"; };
 		0542100314B70F49000FFB45 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACLEditor.xib; sourceTree = "<group>"; };
 		0542100614B70F73000FFB45 /* ACLEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLEditorController.m; sourceTree = "<group>"; };
@@ -298,6 +301,8 @@
 				0542100614B70F73000FFB45 /* ACLEditorController.m */,
 				0542101314B71E10000FFB45 /* RegisterController.h */,
 				0542101414B71E11000FFB45 /* RegisterController.m */,
+				0537D30B14B769AB0004EBCB /* ACLEntry.h */,
+				0537D30C14B769AB0004EBCB /* ACLEntry.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -458,6 +463,7 @@
 				05499D6512E9EEA900D7AFEF /* User.m in Sources */,
 				0542100714B70F73000FFB45 /* ACLEditorController.m in Sources */,
 				0542101514B71E11000FFB45 /* RegisterController.m in Sources */,
+				0537D30D14B769AB0004EBCB /* ACLEntry.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
