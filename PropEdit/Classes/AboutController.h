@@ -15,14 +15,15 @@
 {
 @protected
     
-    NSTextField * version;
+    NSTextField * _version;
+    NSTextField * _serial;
     
 @private
     
-    id r1;
-    id r2;
+    id _AboutController_Reserved[ 5 ] __attribute__( ( unused ) );
 }
 
-@property( atomic, readwrite, retain ) IBOutlet NSTextField * version;
+@property( nonatomic, readwrite, retain ) IBOutlet NSTextField * version;
+@property( nonatomic, readwrite, retain ) IBOutlet NSTextField * serial;
 
 @end

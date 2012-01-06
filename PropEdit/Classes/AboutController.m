@@ -12,14 +12,34 @@
  */
 
 #import "AboutController.h"
+#import <ESellerate/ESellerate.h>
 
 @implementation AboutController
 
-@synthesize version;
+@synthesize version = _version;
+@synthesize serial  = _serial;
 
 - ( void )awakeFromNib
 {
-    [ version setStringValue: [ NSString stringWithFormat: NSLocalizedString( @"Version", nil ), [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleShortVersionString" ] ] ];
+    [ _version setStringValue: [ NSString stringWithFormat: NSLocalizedString( @"Version", nil ), [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleShortVersionString" ] ] ];
+}
+
+- ( void )dealloc
+{
+    [ _version release ];
+    [ _serial  release ];
+    
+    [ super dealloc ];
+}
+
+- ( void )showWindow: ( id )sender
+{
+    if( [ [ ESellerate sharedInstance ] isRegistered ] == YES )
+    {
+        [ _serial setStringValue: [ [ NSUserDefaults standardUserDefaults ] objectForKey: @"sn" ] ];
+    }
+    
+    [ super showWindow: sender ];
 }
 
 @end
