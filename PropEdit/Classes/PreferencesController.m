@@ -14,12 +14,6 @@
 #import "PreferencesController.h"
 #import "ApplicationController.h"
 
-@interface PreferencesController( Private )
-
-- ( void )customLocationPanelDidEnd: ( NSOpenPanel * )sheet returnCode: ( int )returnCode contextInfo: ( void * )contextInfo;
-
-@end
-
 @implementation PreferencesController
 
 @synthesize defaultLocation;
@@ -110,35 +104,28 @@
     
     [ openPanel setCanChooseDirectories: YES ];
     [ openPanel setCanChooseFiles:       NO ];
-    
-    [ openPanel
-        beginSheetForDirectory:     NSHomeDirectory()
-        file:                       nil
-        types:                      nil
-        modalForWindow:             self.window
-        modalDelegate:              self
-        didEndSelector:             @selector( customLocationPanelDidEnd: returnCode: contextInfo: )
-        contextInfo:                nil
+    [ openPanel beginSheetModalForWindow: self.window completionHandler: ^( NSInteger returnCode )
+        {
+            NSString * filename;
+            
+            ( void )returnCode;
+            
+            if( customLocation != nil )
+            {
+                [ defaultLocation removeItemWithTitle: [ customLocation title ] ];
+                [ customLocation release ];
+                
+                customLocation = nil;
+            }
+            
+            filename = [ openPanel.URL path ];
+            
+            [ defaultLocation addItemWithTitle: filename ];
+            [ defaultLocation selectItemWithTitle: filename ];
+            
+            customLocation = [ [ defaultLocation itemWithTitle: filename ] retain ];
+        }
     ];
-}
-
-- ( void )customLocationPanelDidEnd: ( NSOpenPanel * )sheet returnCode: ( int )returnCode contextInfo: ( void * )contextInfo
-{
-    ( void )returnCode;
-    ( void )contextInfo;
-    
-    if( customLocation != nil )
-    {
-        [ defaultLocation removeItemWithTitle: [ customLocation title ] ];
-        [ customLocation release ];
-        
-        customLocation = nil;
-    }
-    
-    [ defaultLocation addItemWithTitle: [ sheet filename ] ];
-    [ defaultLocation selectItemWithTitle: [ sheet filename ] ];
-    
-    customLocation = [ [ defaultLocation itemWithTitle: [ sheet filename ] ] retain ];
 }
 
 @end
