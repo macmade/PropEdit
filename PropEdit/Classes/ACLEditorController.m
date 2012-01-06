@@ -16,6 +16,9 @@
 
 @implementation ACLEditorController
 
+@synthesize table        = _table;
+@synthesize removeButton = _removeButton;
+
 - ( id )initWithPath: ( NSString * )path
 {
     if( ( self = [ super initWithWindowNibName: @"ACLEditor" owner: self ] ) )
@@ -26,9 +29,16 @@
     return self;
 }
 
+- ( void )awakeFromNib
+{
+    [ _removeButton setEnabled: NO ];
+}
+
 - ( void )dealloc
 {
-    [ _path release ];
+    [ _path         release ];
+    [ _table        release ];
+    [ _removeButton release ];
     
     [ super dealloc ];
 }
@@ -62,6 +72,16 @@
     
     [ self.window orderOut: sender ];
     [ NSApp endSheet: self.window returnCode: 0 ];
+}
+
+- ( IBAction )add: ( id )sender
+{
+    ( void )sender;
+}
+
+- ( IBAction )remove: ( id )sender
+{
+    ( void )sender;
 }
 
 @end
