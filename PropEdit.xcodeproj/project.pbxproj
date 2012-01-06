@@ -41,6 +41,34 @@
 			remoteGlobalIDString = 0575ED8812E89230005E2DC0;
 			remoteInfo = "NutShell (Private)";
 		};
+		05420FF214B70DC9000FFB45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0517B2E4131E5F620036FC8B;
+			remoteInfo = "ESellerate (Public)";
+		};
+		05420FF414B70DC9000FFB45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0517B352131E6AEF0036FC8B;
+			remoteInfo = "ESellerate (Private)";
+		};
+		05420FF614B70DD6000FFB45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0517B340131E6AEF0036FC8B;
+			remoteInfo = "ESellerate (Private)";
+		};
+		05420FF814B70DD6000FFB45 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0575ED8712E89230005E2DC0;
+			remoteInfo = "NutShell (Private)";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,6 +87,7 @@
 
 /* Begin PBXFileReference section */
 		050F16AE1300A62C0046DF3C /* NL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ESellerate.xcodeproj; path = ../../../Frameworks/ESellerate/trunk/ESellerate.xcodeproj; sourceTree = "<group>"; };
 		05499D5E12E9E88400D7AFEF /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		05499D5F12E9E8F200D7AFEF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		05499D6212E9E97E00D7AFEF /* Group.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
@@ -116,6 +145,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		05420FEB14B70DC9000FFB45 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05420FF314B70DC9000FFB45 /* ESellerate.framework */,
+				05420FF514B70DC9000FFB45 /* ESell.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		05499D6812E9F7BF00D7AFEF /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +193,7 @@
 		0564E14612E8988F00035F08 = {
 			isa = PBXGroup;
 			children = (
+				05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */,
 				05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */,
 				0564E15B12E8988F00035F08 /* PropEdit */,
 				0564E15412E8988F00035F08 /* Frameworks */,
@@ -276,6 +315,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0564E16F12E8989000035F08 /* Build configuration list for PBXNativeTarget "PropEdit" */;
 			buildPhases = (
+				0542100114B70DEA000FFB45 /* ShellScript */,
 				0564E14D12E8988F00035F08 /* Sources */,
 				0564E14E12E8988F00035F08 /* Frameworks */,
 				0564E14F12E8988F00035F08 /* Resources */,
@@ -284,6 +324,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				05420FF714B70DD6000FFB45 /* PBXTargetDependency */,
+				05420FF914B70DD6000FFB45 /* PBXTargetDependency */,
 			);
 			name = PropEdit;
 			productName = PropEdit;
@@ -311,6 +353,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 05420FEB14B70DC9000FFB45 /* Products */;
+					ProjectRef = 05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */;
+				},
+				{
 					ProductGroup = 05420FE214B706FB000FFB45 /* Products */;
 					ProjectRef = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
 				},
@@ -337,6 +383,20 @@
 			remoteRef = 05420FE814B706FB000FFB45 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		05420FF314B70DC9000FFB45 /* ESellerate.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ESellerate.framework;
+			remoteRef = 05420FF214B70DC9000FFB45 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		05420FF514B70DC9000FFB45 /* ESell.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ESell.framework;
+			remoteRef = 05420FF414B70DC9000FFB45 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -355,6 +415,22 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0542100114B70DEA000FFB45 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "#!/bin/bash\nplist=\"PropEdit/PropEdit-Info.plist\"\nsvn update\nrev=$(svn info | grep '^Revision:' | sed -e 's/^Revision: //')\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $rev\" \"$plist\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		0564E14D12E8988F00035F08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -372,6 +448,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05420FF714B70DD6000FFB45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ESellerate (Private)";
+			targetProxy = 05420FF614B70DD6000FFB45 /* PBXContainerItemProxy */;
+		};
+		05420FF914B70DD6000FFB45 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "NutShell (Private)";
+			targetProxy = 05420FF814B70DD6000FFB45 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0564E15E12E8988F00035F08 /* InfoPlist.strings */ = {
