@@ -15,4 +15,11 @@
 
 @implementation AboutController
 
+@synthesize version;
+
+- ( void )awakeFromNib
+{
+    [ version setStringValue: [ NSString stringWithFormat: NSLocalizedString( @"Version", nil ), [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleShortVersionString" ] ] ];
+}
+
 @end

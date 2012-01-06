@@ -9,3 +9,4 @@
 "FileSize"  = "Size:";
 "FileCTime" = "Created:";
 "FileMTime" = "Modified:";
+"Version"   = "Version %@";

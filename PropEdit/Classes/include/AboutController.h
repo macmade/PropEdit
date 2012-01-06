@@ -13,10 +13,16 @@
 
 @interface AboutController: NSWindowController
 {
+@protected
+    
+    NSTextField * version;
+    
 @private
     
     id r1;
     id r2;
 }
+
+@property( atomic, readwrite, retain ) IBOutlet NSTextField * version;
 
 @end
