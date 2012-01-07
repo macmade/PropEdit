@@ -27,6 +27,7 @@
     DSCLHelper      * _dscl;
     NSArray         * _users;
     NSArray         * _groups;
+    NSTextField     * _trialNote;
     
 @private
     
@@ -37,6 +38,7 @@
 @property( nonatomic, readwrite, retain ) IBOutlet NSButton    * removeButton;
 @property( nonatomic, readwrite, retain ) IBOutlet NSTextField * filePathLabel;
 @property( nonatomic, readwrite, retain ) IBOutlet NSImageView * fileIcon;
+@property( nonatomic, readwrite, retain ) IBOutlet NSTextField * trialNote;
 
 - ( id )initWithPath: ( NSString * )path;
 - ( IBAction )cancel: ( id )sender;

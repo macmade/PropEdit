@@ -224,6 +224,7 @@
 @synthesize removeButton  = _removeButton;
 @synthesize filePathLabel = _filePathLabel;
 @synthesize fileIcon      = _fileIcon;
+@synthesize trialNote     = _trialNote;
 
 - ( id )initWithPath: ( NSString * )path
 {
@@ -293,6 +294,11 @@
     
     [ _table setTarget: self ];
     [ _table setDoubleAction: @selector( editACL: ) ];
+    
+    if( [ [ ESellerate sharedInstance ] isRegistered ] == YES )
+    {
+        [ _trialNote  setHidden: YES ];
+    }
 }
 
 - ( void )dealloc
