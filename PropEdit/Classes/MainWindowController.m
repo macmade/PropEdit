@@ -375,6 +375,7 @@
 @synthesize rightView;
 @synthesize bottomView;
 @synthesize applyView;
+@synthesize unwriteableView;
 @synthesize fileInfos;
 @synthesize goComputerMenu;
 @synthesize goHomeMenu;
@@ -539,10 +540,11 @@
     
     [ path setBackgroundColor: [ NSColor finderSidebarColor ] ];
     
-    leftView.backgroundColor   = [ NSColor finderSidebarColor ];
-    rightView.backgroundColor  = [ NSColor finderSidebarColor ];
-    bottomView.backgroundColor = [ NSColor finderSidebarColor ];
-    applyView.backgroundImage  = [ NSImage imageNamed: @"DarkGradient" ];
+    leftView.backgroundColor        = [ NSColor finderSidebarColor ];
+    rightView.backgroundColor       = [ NSColor finderSidebarColor ];
+    bottomView.backgroundColor      = [ NSColor finderSidebarColor ];
+    applyView.backgroundImage       = [ NSImage imageNamed: @"DarkGradient" ];
+    unwriteableView.backgroundImage = [ NSImage imageNamed: @"DarkGradient-Red" ];
 }
 
 - ( void )windowDidResignKey: ( NSNotification * )notification
@@ -551,10 +553,11 @@
     
     [ path setBackgroundColor: [ NSColor disabledFinderSidebarColor ] ];
     
-    leftView.backgroundColor   = [ NSColor disabledFinderSidebarColor ];
-    rightView.backgroundColor  = [ NSColor disabledFinderSidebarColor ];
-    bottomView.backgroundColor = [ NSColor disabledFinderSidebarColor ];
-    applyView.backgroundColor  = [ NSColor disabledFinderSidebarColor ];
+    leftView.backgroundColor        = [ NSColor disabledFinderSidebarColor ];
+    rightView.backgroundColor       = [ NSColor disabledFinderSidebarColor ];
+    bottomView.backgroundColor      = [ NSColor disabledFinderSidebarColor ];
+    applyView.backgroundColor       = [ NSColor disabledFinderSidebarColor ];
+    unwriteableView.backgroundColor = [ NSColor disabledFinderSidebarColor ];
 }
 
 /*******************************************************************************
@@ -783,6 +786,37 @@
     hasApplyView = YES;
 }
 
+- ( IBAction )showUnwriteableView: ( id )sender
+{
+    NSRect   applyFrame;
+    NSRect   browserFrame;
+    NSView * content;
+    
+    ( void )sender;
+    
+    content               = [ [ self window ] contentView ];
+    browserFrame          = [ browser frame ];
+    applyFrame            = [ unwriteableView frame ];
+    applyFrame.size.width = [ browser frame ].size.width;
+    
+    if( hasUnwriteableView == YES )
+    {
+        return;
+    }
+    
+    applyFrame.origin.x       = [ browser frame ].origin.x;
+    applyFrame.origin.y       = [ browser frame ].origin.y;
+    browserFrame.size.height -= 56;
+    browserFrame.origin.y    += 56;
+    [ browser setFrame: browserFrame ];
+    
+    [ unwriteableView setAutoresizingMask: NSViewWidthSizable ];
+    [ unwriteableView setFrame: applyFrame ];
+    [ content addSubview: unwriteableView ];
+    
+    hasUnwriteableView = YES;
+}
+
 - ( IBAction )hideApplyView: ( id )sender
 {
     NSRect   browserFrame;
@@ -805,6 +839,30 @@
     [ browser setFrame: browserFrame ];
     
     hasApplyView = NO;
+}
+
+- ( IBAction )hideUnwriteableView: ( id )sender
+{
+    NSRect   browserFrame;
+    NSView * content;
+    
+    ( void )sender;
+    
+    content      = [ [ self window ] contentView ];
+    browserFrame = [ browser frame ];
+    
+    if( hasUnwriteableView == NO )
+    {
+        return;
+    }
+    
+    browserFrame.size.height += 56;
+    browserFrame.origin.y    -= 56;
+    
+    [ [ unwriteableView retain ] removeFromSuperview ];
+    [ browser setFrame: browserFrame ];
+    
+    hasUnwriteableView = NO;
 }
 
 - ( IBAction )selectFile: ( id )sender
@@ -833,10 +891,12 @@
     if( [ fileManager isWritableFileAtPath: [ browser path ] ] )
     {
         [ self enableControls ];
+        [ self hideUnwriteableView: sender ];
     }
     else
     {
         [ self disableControls ];
+        [ self showUnwriteableView: sender ];
     }
     
     #endif

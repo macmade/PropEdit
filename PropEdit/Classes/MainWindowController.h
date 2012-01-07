@@ -20,6 +20,7 @@
 @protected
     
     BOOL                    hasApplyView;
+    BOOL                    hasUnwriteableView;
     BOOL                    recursive;
     NSMutableDictionary   * files;
     NSFileManager         * fileManager;
@@ -56,6 +57,7 @@
     NLView                * rightView;
     NLView                * bottomView;
     NLView                * applyView;
+    NLView                * unwriteableView;
     NSTextField           * fileInfos;
     NSMenuItem            * goComputerMenu;
     NSMenuItem            * goHomeMenu;
@@ -103,6 +105,7 @@
 @property( nonatomic, retain ) IBOutlet NLView                * rightView;
 @property( nonatomic, retain ) IBOutlet NLView                * bottomView;
 @property( nonatomic, retain ) IBOutlet NLView                * applyView;
+@property( nonatomic, retain ) IBOutlet NLView                * unwriteableView;
 @property( nonatomic, retain ) IBOutlet NSTextField           * fileInfos;
 @property( nonatomic, retain ) IBOutlet NSMenuItem            * goComputerMenu;
 @property( nonatomic, retain ) IBOutlet NSMenuItem            * goHomeMenu;
@@ -122,6 +125,8 @@
 - ( IBAction )applyRecursive: ( id )sender;
 - ( IBAction )showApplyView: ( id )sender;
 - ( IBAction )hideApplyView: ( id )sender;
+- ( IBAction )showUnwriteableView: ( id )sender;
+- ( IBAction )hideUnwriteableView: ( id )sender;
 - ( IBAction )goComputer: ( id )sender;
 - ( IBAction )goHome: ( id )sender;
 - ( IBAction )goDesktop: ( id )sender;

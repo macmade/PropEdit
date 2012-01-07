@@ -44,6 +44,8 @@
 		0560E01914B873F50041D14E /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0560E01614B873F50041D14E /* QuickLook.framework */; };
 		0560E01A14B873F50041D14E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0560E01714B873F50041D14E /* Security.framework */; };
 		0560E01B14B873F50041D14E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0560E01814B873F50041D14E /* SystemConfiguration.framework */; };
+		0560E01D14B87F3A0041D14E /* DarkGradient-Red.tif in Resources */ = {isa = PBXBuildFile; fileRef = 0560E01C14B87F3A0041D14E /* DarkGradient-Red.tif */; };
+		0560E01E14B87F3A0041D14E /* DarkGradient-Red.tif in Resources */ = {isa = PBXBuildFile; fileRef = 0560E01C14B87F3A0041D14E /* DarkGradient-Red.tif */; };
 		0564E15612E8988F00035F08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0564E15512E8988F00035F08 /* Cocoa.framework */; };
 		0564E16012E8988F00035F08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0564E15E12E8988F00035F08 /* InfoPlist.strings */; };
 		0564E16312E8988F00035F08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0564E16212E8988F00035F08 /* main.m */; };
@@ -171,6 +173,7 @@
 		0560E01614B873F50041D14E /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		0560E01714B873F50041D14E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		0560E01814B873F50041D14E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		0560E01C14B87F3A0041D14E /* DarkGradient-Red.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = "DarkGradient-Red.tif"; path = "Images/DarkGradient-Red.tif"; sourceTree = "<group>"; };
 		0564E15112E8988F00035F08 /* PropEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0564E15512E8988F00035F08 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0564E15812E8988F00035F08 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -394,6 +397,7 @@
 		05C3AE6512E9D63C000AEC46 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				0560E01C14B87F3A0041D14E /* DarkGradient-Red.tif */,
 				05C3AE6612E9D64C000AEC46 /* DarkGradient.tif */,
 			);
 			name = Images;
@@ -531,6 +535,7 @@
 				0560E00514B870E50041D14E /* Defaults.plist in Resources */,
 				0560E00614B870E50041D14E /* ACLEditor.xib in Resources */,
 				0560E00814B870E50041D14E /* ACLEntryEditor.xib in Resources */,
+				0560E01E14B87F3A0041D14E /* DarkGradient-Red.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +552,7 @@
 				0542100414B70F49000FFB45 /* ACLEditor.xib in Resources */,
 				0542100A14B71CF3000FFB45 /* Register.xib in Resources */,
 				0537D31B14B8131E0004EBCB /* ACLEntryEditor.xib in Resources */,
+				0560E01D14B87F3A0041D14E /* DarkGradient-Red.tif in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
