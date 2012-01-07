@@ -450,10 +450,18 @@
     [ _table setTarget: self ];
     [ _table setDoubleAction: @selector( editACL: ) ];
     
+    #ifdef APPSTORE
+    
+    [ _trialNote  setHidden: YES ];
+    
+    #else
+    
     if( [ [ ESellerate sharedInstance ] isRegistered ] == YES )
     {
         [ _trialNote  setHidden: YES ];
     }
+    
+    #endif
 }
 
 - ( void )dealloc
@@ -478,24 +486,30 @@
 
 - ( IBAction )apply: ( id )sender
 {
-    NSAlert  * alert;
+    #ifndef APPSTORE
     
-    if( [ [ ESellerate sharedInstance ] isRegistered ] == NO )
     {
-        alert = [ [ NSAlert alloc ] init ];
+        NSAlert  * alert;
         
-        [ alert addButtonWithTitle:  NSLocalizedString( @"OK", nil ) ];
-        [ alert setMessageText:      NSLocalizedString( @"ACLRegisterAlert", nil ) ];
-        [ alert setInformativeText:  NSLocalizedString( @"ACLRegisterAlertText", nil ) ];
-        
-        NSBeep();
-        
-        [ alert setAlertStyle: NSInformationalAlertStyle ];
-        [ alert runModal ];
-        [ alert release ];
-        
-        return;
+        if( [ [ ESellerate sharedInstance ] isRegistered ] == NO )
+        {
+            alert = [ [ NSAlert alloc ] init ];
+            
+            [ alert addButtonWithTitle:  NSLocalizedString( @"OK", nil ) ];
+            [ alert setMessageText:      NSLocalizedString( @"ACLRegisterAlert", nil ) ];
+            [ alert setInformativeText:  NSLocalizedString( @"ACLRegisterAlertText", nil ) ];
+            
+            NSBeep();
+            
+            [ alert setAlertStyle: NSInformationalAlertStyle ];
+            [ alert runModal ];
+            [ alert release ];
+            
+            return;
+        }
     }
+    
+    #endif
     
     [ self clearACLs ];
     [ self setACLs ];

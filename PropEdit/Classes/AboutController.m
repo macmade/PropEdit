@@ -40,10 +40,18 @@
 
 - ( void )showWindow: ( id )sender
 {
+    #ifdef APPSTORE
+    
+    [ _serial setStringValue: NSLocalizedString( @"AppStoreVersion", nil ) ];
+    
+    #else
+    
     if( [ [ ESellerate sharedInstance ] isRegistered ] == YES )
     {
         [ _serial setStringValue: [ [ NSUserDefaults standardUserDefaults ] objectForKey: @"sn" ] ];
     }
+    
+    #endif
     
     [ super showWindow: sender ];
 }

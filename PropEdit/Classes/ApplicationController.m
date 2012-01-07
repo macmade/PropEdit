@@ -15,8 +15,13 @@
 #import "AboutController.h"
 #import "PreferencesController.h"
 #import "MainWindowController.h"
+
+#ifndef APPSTORE
+
 #import "RegisterController.h"
 #import <ESellerate/ESellerate.h>
+
+#endif
 
 @interface ApplicationController( Private )
 
@@ -36,8 +41,12 @@
 {
     if( ( self = [ super init ] ) )
     {
+        #ifndef APPSTORE
+        
         [ ESellerate setPublisherId: @"PUB9310734649" ];
         [ ESellerate setSerialKey:   @"0RL2-ND96-7SXR-XNHM-6YH0" ];
+        
+        #endif
         
         preferences = [ [ NLPreferences alloc ] initWithPropertyList: @"Defaults" owner: self ];
     }
@@ -50,9 +59,14 @@
     [ preferences           release ];
     [ aboutWindow           release ];
     [ preferencesPanel      release ];
-    [ registerController    release ];
     [ main                  release ];
     [ registerMenuItem      release ];
+    
+    #ifndef APPSTORE
+    
+    [ registerController    release ];
+    
+    #endif
     
     [ super dealloc ];
 }
@@ -62,10 +76,18 @@
     [ [ ( NSWindowController * )main window ] center ];
     [ main showWindow: self ];
     
+    #ifdef APPSTORE
+    
+    [ registerMenuItem setHidden: YES ];
+    
+    #else
+    
     if( [ [ ESellerate sharedInstance ] isRegistered ] == YES )
     {
         [ registerMenuItem setHidden: YES ];
     }
+    
+    #endif
 }
 
 - ( IBAction )openMainWindow: ( id )sender
@@ -110,6 +132,8 @@
     }
 }
 
+#ifndef APPSTORE
+
 - ( IBAction )showRegisterWindow: ( id )sender
 {
     ( void )sender;
@@ -128,5 +152,7 @@
         contextInfo:        nil
      ];
 }
+
+#endif
 
 @end

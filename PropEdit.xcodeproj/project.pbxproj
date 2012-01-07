@@ -20,6 +20,30 @@
 		05499D6512E9EEA900D7AFEF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D5F12E9E8F200D7AFEF /* User.m */; };
 		0560DF7014B843DB0041D14E /* ESell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05420FF514B70DC9000FFB45 /* ESell.framework */; };
 		0560DF7114B844170041D14E /* ESell.framework in Copy Private Frameworks */ = {isa = PBXBuildFile; fileRef = 05420FF514B70DC9000FFB45 /* ESell.framework */; };
+		0560DFEF14B870E50041D14E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0564E16212E8988F00035F08 /* main.m */; };
+		0560DFF014B870E50041D14E /* ApplicationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE4812E9D183000AEC46 /* ApplicationController.m */; };
+		0560DFF114B870E50041D14E /* AboutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE4E12E9D487000AEC46 /* AboutController.m */; };
+		0560DFF214B870E50041D14E /* MainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE4F12E9D487000AEC46 /* MainWindowController.m */; };
+		0560DFF314B870E50041D14E /* PreferencesController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE5012E9D487000AEC46 /* PreferencesController.m */; };
+		0560DFF414B870E50041D14E /* DSCLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE8F12E9E1E6000AEC46 /* DSCLHelper.m */; };
+		0560DFF514B870E50041D14E /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D6312E9E98500D7AFEF /* Group.m */; };
+		0560DFF614B870E50041D14E /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D5F12E9E8F200D7AFEF /* User.m */; };
+		0560DFF714B870E50041D14E /* ACLEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542100614B70F73000FFB45 /* ACLEditorController.m */; };
+		0560DFF914B870E50041D14E /* ACLEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537D30C14B769AB0004EBCB /* ACLEntry.m */; };
+		0560DFFA14B870E50041D14E /* ACLEntryEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537D31D14B8133F0004EBCB /* ACLEntryEditorController.m */; };
+		0560DFFC14B870E50041D14E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0564E15512E8988F00035F08 /* Cocoa.framework */; };
+		0560E00014B870E50041D14E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0564E15E12E8988F00035F08 /* InfoPlist.strings */; };
+		0560E00114B870E50041D14E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05C3AE5412E9D4EA000AEC46 /* Localizable.strings */; };
+		0560E00214B870E50041D14E /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05C3AE5612E9D4EA000AEC46 /* MainWindow.xib */; };
+		0560E00314B870E50041D14E /* DarkGradient.tif in Resources */ = {isa = PBXBuildFile; fileRef = 05C3AE6612E9D64C000AEC46 /* DarkGradient.tif */; };
+		0560E00414B870E50041D14E /* Application.icns in Resources */ = {isa = PBXBuildFile; fileRef = 05C3AE7412E9D67F000AEC46 /* Application.icns */; };
+		0560E00514B870E50041D14E /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05F3474312EACE8B008B2343 /* Defaults.plist */; };
+		0560E00614B870E50041D14E /* ACLEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0542100214B70F49000FFB45 /* ACLEditor.xib */; };
+		0560E00814B870E50041D14E /* ACLEntryEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0537D31914B8131E0004EBCB /* ACLEntryEditor.xib */; };
+		0560E01514B8716F0041D14E /* libNLStatic.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0560E01314B870E50041D14E /* libNLStatic.a */; };
+		0560E01914B873F50041D14E /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0560E01614B873F50041D14E /* QuickLook.framework */; };
+		0560E01A14B873F50041D14E /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0560E01714B873F50041D14E /* Security.framework */; };
+		0560E01B14B873F50041D14E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0560E01814B873F50041D14E /* SystemConfiguration.framework */; };
 		0564E15612E8988F00035F08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0564E15512E8988F00035F08 /* Cocoa.framework */; };
 		0564E16012E8988F00035F08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0564E15E12E8988F00035F08 /* InfoPlist.strings */; };
 		0564E16312E8988F00035F08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0564E16212E8988F00035F08 /* main.m */; };
@@ -78,6 +102,27 @@
 			remoteGlobalIDString = 0575ED8712E89230005E2DC0;
 			remoteInfo = "NutShell (Private)";
 		};
+		0560DFEA14B870E50041D14E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0517B340131E6AEF0036FC8B;
+			remoteInfo = "ESellerate (Private)";
+		};
+		0560DFEC14B870E50041D14E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 0575ED8712E89230005E2DC0;
+			remoteInfo = "NutShell (Private)";
+		};
+		0560E01214B870E50041D14E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 0560DFB214B86FA30041D14E;
+			remoteInfo = "NutShell (Static)";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -122,6 +167,10 @@
 		05499D6D12E9F7CC00D7AFEF /* __arm.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __arm.h; sourceTree = "<group>"; };
 		05499D6E12E9F7CC00D7AFEF /* __i386.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = __i386.h; sourceTree = "<group>"; };
 		05499D6F12E9F7CC00D7AFEF /* eos-skl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "eos-skl.h"; sourceTree = "<group>"; };
+		0560E00F14B870E50041D14E /* PropEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0560E01614B873F50041D14E /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
+		0560E01714B873F50041D14E /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		0560E01814B873F50041D14E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0564E15112E8988F00035F08 /* PropEdit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PropEdit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0564E15512E8988F00035F08 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		0564E15812E8988F00035F08 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -145,6 +194,18 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0560DFFB14B870E50041D14E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0560E01914B873F50041D14E /* QuickLook.framework in Frameworks */,
+				0560E01A14B873F50041D14E /* Security.framework in Frameworks */,
+				0560E01B14B873F50041D14E /* SystemConfiguration.framework in Frameworks */,
+				0560E01514B8716F0041D14E /* libNLStatic.a in Frameworks */,
+				0560DFFC14B870E50041D14E /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0564E14E12E8988F00035F08 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -163,6 +224,7 @@
 			children = (
 				05420FE714B706FB000FFB45 /* NutShell.framework */,
 				05420FE914B706FB000FFB45 /* NL.framework */,
+				0560E01314B870E50041D14E /* libNLStatic.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				0564E15112E8988F00035F08 /* PropEdit.app */,
+				0560E00F14B870E50041D14E /* PropEdit.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -234,6 +297,9 @@
 		0564E15412E8988F00035F08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0560E01614B873F50041D14E /* QuickLook.framework */,
+				0560E01714B873F50041D14E /* Security.framework */,
+				0560E01814B873F50041D14E /* SystemConfiguration.framework */,
 				0564E15512E8988F00035F08 /* Cocoa.framework */,
 				050F16AE1300A62C0046DF3C /* NL.framework */,
 				0564E15712E8988F00035F08 /* Other Frameworks */,
@@ -336,6 +402,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0560DFE814B870E50041D14E /* PropEdit (AppStore) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0560E00C14B870E50041D14E /* Build configuration list for PBXNativeTarget "PropEdit (AppStore)" */;
+			buildPhases = (
+				0560DFED14B870E50041D14E /* ShellScript */,
+				0560DFEE14B870E50041D14E /* Sources */,
+				0560DFFB14B870E50041D14E /* Frameworks */,
+				0560DFFF14B870E50041D14E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0560DFE914B870E50041D14E /* PBXTargetDependency */,
+				0560DFEB14B870E50041D14E /* PBXTargetDependency */,
+			);
+			name = "PropEdit (AppStore)";
+			productName = PropEdit;
+			productReference = 0560E00F14B870E50041D14E /* PropEdit.app */;
+			productType = "com.apple.product-type.application";
+		};
 		0564E15012E8988F00035F08 /* PropEdit */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0564E16F12E8989000035F08 /* Build configuration list for PBXNativeTarget "PropEdit" */;
@@ -389,6 +475,7 @@
 			projectRoot = "";
 			targets = (
 				0564E15012E8988F00035F08 /* PropEdit */,
+				0560DFE814B870E50041D14E /* PropEdit (AppStore) */,
 			);
 		};
 /* End PBXProject section */
@@ -422,9 +509,31 @@
 			remoteRef = 05420FF414B70DC9000FFB45 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		0560E01314B870E50041D14E /* libNLStatic.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libNLStatic.a;
+			remoteRef = 0560E01214B870E50041D14E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0560DFFF14B870E50041D14E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0560E00014B870E50041D14E /* InfoPlist.strings in Resources */,
+				0560E00114B870E50041D14E /* Localizable.strings in Resources */,
+				0560E00214B870E50041D14E /* MainWindow.xib in Resources */,
+				0560E00314B870E50041D14E /* DarkGradient.tif in Resources */,
+				0560E00414B870E50041D14E /* Application.icns in Resources */,
+				0560E00514B870E50041D14E /* Defaults.plist in Resources */,
+				0560E00614B870E50041D14E /* ACLEditor.xib in Resources */,
+				0560E00814B870E50041D14E /* ACLEntryEditor.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0564E14F12E8988F00035F08 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -457,9 +566,40 @@
 			shellPath = /bin/bash;
 			shellScript = "#!/bin/bash\nplist=\"PropEdit/PropEdit-Info.plist\"\nsvn update\nrev=$(svn info | grep '^Revision:' | sed -e 's/^Revision: //')\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $rev\" \"$plist\"\n";
 		};
+		0560DFED14B870E50041D14E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "#!/bin/bash\nplist=\"PropEdit/PropEdit-Info.plist\"\nsvn update\nrev=$(svn info | grep '^Revision:' | sed -e 's/^Revision: //')\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $rev\" \"$plist\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0560DFEE14B870E50041D14E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0560DFEF14B870E50041D14E /* main.m in Sources */,
+				0560DFF014B870E50041D14E /* ApplicationController.m in Sources */,
+				0560DFF114B870E50041D14E /* AboutController.m in Sources */,
+				0560DFF214B870E50041D14E /* MainWindowController.m in Sources */,
+				0560DFF314B870E50041D14E /* PreferencesController.m in Sources */,
+				0560DFF414B870E50041D14E /* DSCLHelper.m in Sources */,
+				0560DFF514B870E50041D14E /* Group.m in Sources */,
+				0560DFF614B870E50041D14E /* User.m in Sources */,
+				0560DFF714B870E50041D14E /* ACLEditorController.m in Sources */,
+				0560DFF914B870E50041D14E /* ACLEntry.m in Sources */,
+				0560DFFA14B870E50041D14E /* ACLEntryEditorController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0564E14D12E8988F00035F08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -491,6 +631,16 @@
 			isa = PBXTargetDependency;
 			name = "NutShell (Private)";
 			targetProxy = 05420FF814B70DD6000FFB45 /* PBXContainerItemProxy */;
+		};
+		0560DFE914B870E50041D14E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "ESellerate (Private)";
+			targetProxy = 0560DFEA14B870E50041D14E /* PBXContainerItemProxy */;
+		};
+		0560DFEB14B870E50041D14E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "NutShell (Private)";
+			targetProxy = 0560DFEC14B870E50041D14E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -538,6 +688,66 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		0560E00D14B870E50041D14E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Jean-David Gadina";
+				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PropEdit/PropEdit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					APPSTORE,
+					DEBUG,
+				);
+				INFOPLIST_FILE = "PropEdit/PropEdit-Info.plist";
+				INSTALL_PATH = /Applications;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = PropEdit;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		0560E00E14B870E50041D14E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Jean-David Gadina";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEPLOYMENT_LOCATION = YES;
+				DEPLOYMENT_POSTPROCESSING = YES;
+				DSTROOT = /;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PropEdit/PropEdit-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = APPSTORE;
+				INFOPLIST_FILE = "PropEdit/PropEdit-Info.plist";
+				INSTALL_PATH = /Applications;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = PropEdit;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
 		0564E16D12E8989000035F08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -701,6 +911,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0560E00C14B870E50041D14E /* Build configuration list for PBXNativeTarget "PropEdit (AppStore)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0560E00D14B870E50041D14E /* Debug */,
+				0560E00E14B870E50041D14E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		0564E14B12E8988F00035F08 /* Build configuration list for PBXProject "PropEdit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

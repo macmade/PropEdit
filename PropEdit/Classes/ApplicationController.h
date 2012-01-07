@@ -24,8 +24,13 @@
     AboutController       * aboutWindow;
     PreferencesController * preferencesPanel;
     MainWindowController  * main;
-    RegisterController    * registerController;
     NSMenuItem            * registerMenuItem;
+    
+    #ifndef APPSTORE
+    
+    RegisterController    * registerController;
+    
+    #endif
     
 @private
     
@@ -42,6 +47,11 @@
 - ( IBAction )openMainWindow: ( id )sender;
 - ( IBAction )showPreferences: ( id )sender;
 - ( IBAction )showAboutWindow: ( id )sender;
+
+#ifndef APPSTORE
+
 - ( IBAction )showRegisterWindow: ( id )sender;
+
+#endif
 
 @end
