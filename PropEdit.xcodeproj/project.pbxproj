@@ -10,6 +10,8 @@
 		050F16B01300A63B0046DF3C /* NL.framework in Copy Private Frameworks */ = {isa = PBXBuildFile; fileRef = 050F16AE1300A62C0046DF3C /* NL.framework */; };
 		050F16B11300A63E0046DF3C /* NL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050F16AE1300A62C0046DF3C /* NL.framework */; };
 		0537D30D14B769AB0004EBCB /* ACLEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537D30C14B769AB0004EBCB /* ACLEntry.m */; };
+		0537D31B14B8131E0004EBCB /* ACLEntryEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0537D31914B8131E0004EBCB /* ACLEntryEditor.xib */; };
+		0537D31E14B8133F0004EBCB /* ACLEntryEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537D31D14B8133F0004EBCB /* ACLEntryEditorController.m */; };
 		0542100414B70F49000FFB45 /* ACLEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0542100214B70F49000FFB45 /* ACLEditor.xib */; };
 		0542100714B70F73000FFB45 /* ACLEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542100614B70F73000FFB45 /* ACLEditorController.m */; };
 		0542100A14B71CF3000FFB45 /* Register.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0542100914B71CF3000FFB45 /* Register.xib */; };
@@ -95,6 +97,9 @@
 		050F16AE1300A62C0046DF3C /* NL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0537D30B14B769AB0004EBCB /* ACLEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLEntry.h; sourceTree = "<group>"; };
 		0537D30C14B769AB0004EBCB /* ACLEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLEntry.m; sourceTree = "<group>"; };
+		0537D31A14B8131E0004EBCB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACLEntryEditor.xib; sourceTree = "<group>"; };
+		0537D31C14B8133F0004EBCB /* ACLEntryEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLEntryEditorController.h; sourceTree = "<group>"; };
+		0537D31D14B8133F0004EBCB /* ACLEntryEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLEntryEditorController.m; sourceTree = "<group>"; };
 		05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ESellerate.xcodeproj; path = ../../../Frameworks/ESellerate/trunk/ESellerate.xcodeproj; sourceTree = "<group>"; };
 		0542100314B70F49000FFB45 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACLEditor.xib; sourceTree = "<group>"; };
 		0542100614B70F73000FFB45 /* ACLEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLEditorController.m; sourceTree = "<group>"; };
@@ -274,8 +279,9 @@
 				05C3AE6512E9D63C000AEC46 /* Images */,
 				05C3AE5412E9D4EA000AEC46 /* Localizable.strings */,
 				05C3AE5612E9D4EA000AEC46 /* MainWindow.xib */,
-				0542100214B70F49000FFB45 /* ACLEditor.xib */,
 				0542100914B71CF3000FFB45 /* Register.xib */,
+				0542100214B70F49000FFB45 /* ACLEditor.xib */,
+				0537D31914B8131E0004EBCB /* ACLEntryEditor.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -283,26 +289,28 @@
 		05C3ADF312E9C563000AEC46 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				0542100B14B71D58000FFB45 /* AboutController.h */,
-				05C3AE4E12E9D487000AEC46 /* AboutController.m */,
-				0542100D14B71D58000FFB45 /* ApplicationController.h */,
-				05C3AE4812E9D183000AEC46 /* ApplicationController.m */,
 				0542100E14B71D58000FFB45 /* DSCLHelper.h */,
 				05C3AE8F12E9E1E6000AEC46 /* DSCLHelper.m */,
+				0542101214B71D58000FFB45 /* User.h */,
+				05499D5F12E9E8F200D7AFEF /* User.m */,
 				0542100F14B71D58000FFB45 /* Group.h */,
 				05499D6312E9E98500D7AFEF /* Group.m */,
+				0537D30B14B769AB0004EBCB /* ACLEntry.h */,
+				0537D30C14B769AB0004EBCB /* ACLEntry.m */,
+				0542100D14B71D58000FFB45 /* ApplicationController.h */,
+				05C3AE4812E9D183000AEC46 /* ApplicationController.m */,
+				0542100B14B71D58000FFB45 /* AboutController.h */,
+				05C3AE4E12E9D487000AEC46 /* AboutController.m */,
 				0542101014B71D58000FFB45 /* MainWindowController.h */,
 				05C3AE4F12E9D487000AEC46 /* MainWindowController.m */,
 				0542101114B71D58000FFB45 /* PreferencesController.h */,
 				05C3AE5012E9D487000AEC46 /* PreferencesController.m */,
-				0542101214B71D58000FFB45 /* User.h */,
-				05499D5F12E9E8F200D7AFEF /* User.m */,
-				0542100C14B71D58000FFB45 /* ACLEditorController.h */,
-				0542100614B70F73000FFB45 /* ACLEditorController.m */,
 				0542101314B71E10000FFB45 /* RegisterController.h */,
 				0542101414B71E11000FFB45 /* RegisterController.m */,
-				0537D30B14B769AB0004EBCB /* ACLEntry.h */,
-				0537D30C14B769AB0004EBCB /* ACLEntry.m */,
+				0542100C14B71D58000FFB45 /* ACLEditorController.h */,
+				0542100614B70F73000FFB45 /* ACLEditorController.m */,
+				0537D31C14B8133F0004EBCB /* ACLEntryEditorController.h */,
+				0537D31D14B8133F0004EBCB /* ACLEntryEditorController.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -427,6 +435,7 @@
 				05F3474412EACE8B008B2343 /* Defaults.plist in Resources */,
 				0542100414B70F49000FFB45 /* ACLEditor.xib in Resources */,
 				0542100A14B71CF3000FFB45 /* Register.xib in Resources */,
+				0537D31B14B8131E0004EBCB /* ACLEntryEditor.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +473,7 @@
 				0542100714B70F73000FFB45 /* ACLEditorController.m in Sources */,
 				0542101514B71E11000FFB45 /* RegisterController.m in Sources */,
 				0537D30D14B769AB0004EBCB /* ACLEntry.m in Sources */,
+				0537D31E14B8133F0004EBCB /* ACLEntryEditorController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,6 +493,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0537D31914B8131E0004EBCB /* ACLEntryEditor.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0537D31A14B8131E0004EBCB /* en */,
+			);
+			name = ACLEntryEditor.xib;
+			sourceTree = "<group>";
+		};
 		0542100214B70F49000FFB45 /* ACLEditor.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
