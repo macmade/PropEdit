@@ -287,6 +287,7 @@
 {
     ACLEntryEditorController * acl;
     NSInteger                  row;
+    id                         relation;
     
     ( void )sender;
     
@@ -294,7 +295,18 @@
     
     ( void )sender;
     
-    acl = [ [ ACLEntryEditorController alloc ] init ];
+    acl      = [ [ ACLEntryEditorController alloc ] init ];
+    relation = [ _entriesRelations objectAtIndex: row ];
+    acl.acl  = [ _entries objectAtIndex: row ];
+    
+    if( [ relation isKindOfClass: [ User class ] ] )
+    {
+        acl.user = relation;
+    }
+    else if( [ relation isKindOfClass: [ Group class ] ] )
+    {
+        acl.group = relation;
+    }
     
     [ NSApp
         beginSheet:         [ acl window ]

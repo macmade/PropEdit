@@ -23,6 +23,9 @@
 @synthesize baseMatrix      = _baseMatrix;
 @synthesize directoryMatrix = _directoryMatrix;
 @synthesize fileMatrix      = _fileMatrix;
+@synthesize acl             = _acl;
+@synthesize user            = _user;
+@synthesize group           = _group;
 
 - ( id )init
 {
@@ -122,6 +125,9 @@
     [ _dscl             release ];
     [ _users            release ];
     [ _groups           release ];
+    [ _acl              release ];
+    [ _user             release ];
+    [ _group            release ];
     
     [ super dealloc ];
 }
