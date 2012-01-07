@@ -11,6 +11,8 @@
  * @abstract    ...
  */
 
+@class DSCLHelper;
+
 @interface ACLEntryEditorController: NSWindowController
 {
 @protected
@@ -20,6 +22,9 @@
     NSMatrix      * _baseMatrix;
     NSMatrix      * _directoryMatrix;
     NSMatrix      * _fileMatrix;
+    DSCLHelper    * _dscl;
+    NSArray       * _users;
+    NSArray       * _groups;
     
 @private
     

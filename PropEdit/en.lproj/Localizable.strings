@@ -22,3 +22,5 @@
 "ACLAllow"                  = "Allow";
 "ACLDeny"                   = "Deny";
 "ACLUnknown"                = "Unknown";
+"Users"                     = "Users";
+"Groups"                    = "Groups";
