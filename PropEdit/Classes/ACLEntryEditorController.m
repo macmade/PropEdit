@@ -15,6 +15,12 @@
 
 @implementation ACLEntryEditorController
 
+@synthesize entrySelect     = _entrySelect;
+@synthesize userSelect      = _userSelect;
+@synthesize baseMatrix      = _baseMatrix;
+@synthesize directoryMatrix = _directoryMatrix;
+@synthesize fileMatrix      = _fileMatrix;
+
 - ( id )init
 {
     if( ( self = [ super initWithWindowNibName: @"ACLEntryEditor" owner: self ] ) )
@@ -30,5 +36,11 @@
 {
     [ super dealloc ];
 }
+
+- ( IBAction )cancel: ( id )sender
+{}
+
+- ( IBAction )save: ( id )sender
+{}
 
 @end
