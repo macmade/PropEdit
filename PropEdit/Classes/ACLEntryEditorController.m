@@ -25,8 +25,6 @@
 @synthesize directoryMatrix = _directoryMatrix;
 @synthesize fileMatrix      = _fileMatrix;
 @synthesize acl             = _acl;
-@synthesize user            = _user;
-@synthesize group           = _group;
 
 - ( id )init
 {
@@ -48,6 +46,9 @@
     NSString     * itemTitle;
     NSMenuItem   * item;
     NSMenu       * menu;
+    
+    user  = nil;
+    group = nil;
     
     for( cell in _baseMatrix.cells )
     {
@@ -136,26 +137,25 @@
                 break;
             }
         }
-
     }
     
     for( item in [ _userSelect itemArray ] )
     {
-        if( _user != nil && [ item.representedObject isKindOfClass: [ User class ] ] )
+        if( [ item.representedObject isKindOfClass: [ User class ] ] )
         {
             user = item.representedObject;
             
-            if( user.uid == _user.uid )
+            if( [ user.guid isEqualToString: _acl.guid ] )
             {
                 [ _userSelect selectItem: item ];
                 break;
             }
         }
-        else if( _group != nil && [ item.representedObject isKindOfClass: [ Group class ] ] )
+        else if( [ item.representedObject isKindOfClass: [ Group class ] ] )
         {
             group = item.representedObject;
             
-            if( group.gid == _group.gid )
+            if( [ group.guid isEqualToString: _acl.guid ] )
             {
                 [ _userSelect selectItem: item ];
                 break;
@@ -263,8 +263,6 @@
     [ _users            release ];
     [ _groups           release ];
     [ _acl              release ];
-    [ _user             release ];
-    [ _group            release ];
     
     [ super dealloc ];
 }

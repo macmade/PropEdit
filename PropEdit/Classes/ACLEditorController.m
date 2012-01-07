@@ -29,10 +29,77 @@
 
 - ( void )sheetDidEnd: ( NSWindow * )sheet returnCode: ( int )returnCode contextInfo: ( void * )contextInfo
 {
-    ( void )sheet;
-    ( void )returnCode;
+    ACLEntryEditorController * editor;
+    ACLEntry                 * entry;
+    User                     * user;
+    Group                    * group;
+    NSUInteger                 index;
     
-    [ ( id )contextInfo release ];
+    ( void )sheet;
+    
+    editor = contextInfo;
+    entry  = editor.acl;
+    index  = [ _entries indexOfObject: entry ];
+    
+    if( returnCode == 0 )
+    {
+        if( index == NSNotFound )
+        {
+            [ _entries addObject: entry ];
+            
+            for( user in _users )
+            {
+                if( [ user.guid isEqualToString: entry.guid ] )
+                {
+                    [ _entriesRelations addObject: user ];
+                    break;
+                }
+                
+                user = nil;
+            }
+            
+            if( user == nil )
+            {
+                for( group in _groups )
+                {
+                    if( [ group.guid isEqualToString: entry.guid ] )
+                    {
+                        [ _entriesRelations addObject: group ];
+                        break;
+                    }
+                }
+            }
+            
+            [ _table reloadData ];
+        }
+        else
+        {
+            for( user in _users )
+            {
+                if( [ user.guid isEqualToString: entry.guid ] )
+                {
+                    [ _entriesRelations replaceObjectAtIndex: index withObject: user ];
+                    break;
+                }
+                
+                user = nil;
+            }
+            
+            if( user == nil )
+            {
+                for( group in _groups )
+                {
+                    if( [ group.guid isEqualToString: entry.guid ] )
+                    {
+                        [ _entriesRelations replaceObjectAtIndex: index withObject: group ];
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    
+    [ editor release ];
 }
 
 @end
@@ -172,7 +239,7 @@
         }
         
         _path             = [ path copy ];
-        _entries          = [ [ ACLEntry entriesForFile: _path ] retain ];
+        _entries          = [ [ ACLEntry entriesForFile: _path ] mutableCopy ];
         _dscl             = [ DSCLHelper new ];
         _users            = [ [ _dscl users ] retain ];
         _groups           = [ [ _dscl groups ] retain ];
@@ -187,6 +254,8 @@
                     [ _entriesRelations addObject: user ];
                     break;
                 }
+                
+                user = nil;
             }
             
             if( user == nil )
@@ -308,15 +377,6 @@
     acl      = [ [ ACLEntryEditorController alloc ] init ];
     relation = [ _entriesRelations objectAtIndex: row ];
     acl.acl  = [ _entries objectAtIndex: row ];
-    
-    if( [ relation isKindOfClass: [ User class ] ] )
-    {
-        acl.user = relation;
-    }
-    else if( [ relation isKindOfClass: [ Group class ] ] )
-    {
-        acl.group = relation;
-    }
     
     [ NSApp
         beginSheet:         [ acl window ]

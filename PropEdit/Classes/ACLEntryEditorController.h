@@ -29,8 +29,6 @@
     NSArray       * _users;
     NSArray       * _groups;
     ACLEntry      * _acl;
-    User          * _user;
-    Group         * _group;
     
 @private
     
@@ -43,8 +41,6 @@
 @property( atomic, retain ) IBOutlet NSMatrix      * directoryMatrix;
 @property( atomic, retain ) IBOutlet NSMatrix      * fileMatrix;
 @property( atomic, readwrite, retain ) ACLEntry    * acl;
-@property( atomic, readwrite, retain ) User        * user;
-@property( atomic, readwrite, retain ) Group       * group;
 
 - ( IBAction )cancel: ( id )sender;
 - ( IBAction )save: ( id )sender;

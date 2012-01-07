@@ -22,7 +22,7 @@
     NSButton        * _removeButton;
     NSTextField     * _filePathLabel;
     NSImageView     * _fileIcon;
-    NSArray         * _entries;
+    NSMutableArray  * _entries;
     NSMutableArray  * _entriesRelations;
     DSCLHelper      * _dscl;
     NSArray         * _users;
