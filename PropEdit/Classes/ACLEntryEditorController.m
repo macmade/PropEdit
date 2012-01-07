@@ -38,9 +38,13 @@
 }
 
 - ( IBAction )cancel: ( id )sender
-{}
+{
+    ( void )sender;
+}
 
 - ( IBAction )save: ( id )sender
-{}
+{
+    ( void )sender;
+}
 
 @end
