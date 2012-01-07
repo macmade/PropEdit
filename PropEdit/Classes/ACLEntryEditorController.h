@@ -48,5 +48,8 @@
 
 - ( IBAction )cancel: ( id )sender;
 - ( IBAction )save: ( id )sender;
+- ( IBAction )selectAllBase: ( id )sender;
+- ( IBAction )selectAllDirectory: ( id )sender;
+- ( IBAction )selectAllFile: ( id )sender;
 
 @end

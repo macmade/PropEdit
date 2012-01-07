@@ -281,4 +281,40 @@
     [ NSApp endSheet: self.window returnCode: 0 ];
 }
 
+- ( IBAction )selectAllBase: ( id )sender
+{
+    NSButtonCell * cell;
+    
+    ( void )sender;
+    
+    for( cell in _baseMatrix.cells )
+    {
+        [ cell setIntValue: 1 ];
+    }
+}
+
+- ( IBAction )selectAllDirectory: ( id )sender
+{
+    NSButtonCell * cell;
+    
+    ( void )sender;
+    
+    for( cell in _directoryMatrix.cells )
+    {
+        [ cell setIntValue: 1 ];
+    }
+}
+
+- ( IBAction )selectAllFile: ( id )sender
+{
+    NSButtonCell * cell;
+    
+    ( void )sender;
+    
+    for( cell in _fileMatrix.cells )
+    {
+        [ cell setIntValue: 1 ];
+    }
+}
+
 @end
