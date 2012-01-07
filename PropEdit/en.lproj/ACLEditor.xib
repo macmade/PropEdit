@@ -220,7 +220,7 @@
 											<string key="NSFrameSize">{808, 342}</string>
 											<reference key="NSSuperview" ref="685880703"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="503872969"/>
+											<reference key="NSNextKeyView" ref="1061689436"/>
 											<string key="NSReuseIdentifierKey">_NS:1828</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTableHeaderView" key="NSHeaderView" id="1041159732">
@@ -279,7 +279,6 @@
 													</object>
 													<int key="NSResizingMask">3</int>
 													<bool key="NSIsResizeable">YES</bool>
-													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="68743520"/>
 												</object>
 												<object class="NSTableColumn" id="531898973">
@@ -311,7 +310,6 @@
 													</object>
 													<int key="NSResizingMask">3</int>
 													<bool key="NSIsResizeable">YES</bool>
-													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="68743520"/>
 												</object>
 												<object class="NSTableColumn" id="939192343">
@@ -341,7 +339,6 @@
 													</object>
 													<int key="NSResizingMask">3</int>
 													<bool key="NSIsResizeable">YES</bool>
-													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="68743520"/>
 												</object>
 												<object class="NSTableColumn" id="992378106">
@@ -368,7 +365,6 @@
 													</object>
 													<int key="NSResizingMask">3</int>
 													<bool key="NSIsResizeable">YES</bool>
-													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="68743520"/>
 												</object>
 												<object class="NSTableColumn" id="205430871">
@@ -399,7 +395,6 @@
 													</object>
 													<int key="NSResizingMask">3</int>
 													<bool key="NSIsResizeable">YES</bool>
-													<bool key="NSIsEditable">YES</bool>
 													<reference key="NSTableView" ref="68743520"/>
 												</object>
 											</object>
@@ -423,7 +418,7 @@
 											<int key="NSDraggingSourceMaskForLocal">15</int>
 											<int key="NSDraggingSourceMaskForNonLocal">0</int>
 											<bool key="NSAllowsTypeSelect">YES</bool>
-											<int key="NSTableViewDraggingDestinationStyle">0</int>
+											<int key="NSTableViewDraggingDestinationStyle">1</int>
 											<int key="NSTableViewGroupRowStyle">1</int>
 										</object>
 									</object>
@@ -482,7 +477,7 @@
 							<string key="NSFrame">{{20, 98}, {810, 360}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView" ref="1061689436"/>
+							<reference key="NSNextKeyView" ref="685880703"/>
 							<string key="NSReuseIdentifierKey">_NS:1824</string>
 							<int key="NSsFlags">133682</int>
 							<reference key="NSVScroller" ref="503872969"/>
@@ -521,7 +516,6 @@
 							<string key="NSFrame">{{428, 12}, {76, 32}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:687</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="598974757">
