@@ -830,7 +830,7 @@
     
     #ifdef APPSTORE
     
-    if( [ fileManager isWritableFileAtPath: displayPath ] )
+    if( [ fileManager isWritableFileAtPath: [ browser path ] ] )
     {
         [ self enableControls ];
     }
