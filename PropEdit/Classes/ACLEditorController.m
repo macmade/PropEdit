@@ -12,18 +12,95 @@
  */
 
 #import "ACLEditorController.h"
+#import "ACLEntry.h"
 #import <ESellerate/ESellerate.h>
+
+@interface ACLEditorController( NSTableViewDataSource ) < NSTableViewDataSource >
+
+@end
+
+@implementation ACLEditorController( NSTableViewDataSource )
+
+- ( NSInteger )numberOfRowsInTableView: ( NSTableView * )tableView
+{
+    ( void )tableView;
+    
+    return [ _entries count ];
+}
+
+- ( id )tableView: ( NSTableView * )tableView objectValueForTableColumn: ( NSTableColumn * )tableColumn row: ( NSInteger )row
+{
+    ACLEntry * entry;
+    
+    ( void )tableView;
+    
+    entry = [ _entries objectAtIndex: row ];
+    
+    if( [ tableColumn.identifier isEqualToString: @"icon" ] )
+    {
+        return [ NSImage imageNamed: NSImageNameUser ];
+    }
+    else if( [ tableColumn.identifier isEqualToString: @"uid" ] )
+    {
+        
+    }
+    else if( [ tableColumn.identifier isEqualToString: @"user" ] )
+    {
+        
+    }
+    else if( [ tableColumn.identifier isEqualToString: @"type" ] )
+    {
+        switch( entry.type )
+        {
+            case ACLEntryTypeAllow:
+                
+                return NSLocalizedString( @"ACLAllow", nil );
+                
+            case ACLEntryTypeDeny:
+                
+                return NSLocalizedString( @"ACLDeny", nil );
+                
+            case ACLEntryTypeUnknown:
+                
+                return NSLocalizedString( @"ACLUnknown", nil );
+        }
+    }
+    else if( [ tableColumn.identifier isEqualToString: @"guid" ] )
+    {
+        return entry.guid;
+    }
+    
+    return @"";
+}
+
+@end
+
+@interface ACLEditorController( NSTableViewDelegate ) < NSTableViewDelegate >
+
+@end
+
+@implementation ACLEditorController( NSTableViewDelegate )
+
+@end
 
 @implementation ACLEditorController
 
-@synthesize table        = _table;
-@synthesize removeButton = _removeButton;
+@synthesize table         = _table;
+@synthesize removeButton  = _removeButton;
+@synthesize filePathLabel = _filePathLabel;
+@synthesize fileIcon      = _fileIcon;
 
 - ( id )initWithPath: ( NSString * )path
 {
     if( ( self = [ super initWithWindowNibName: @"ACLEditor" owner: self ] ) )
     {
-        _path = [ path copy ];
+        if( path == nil || path.length == 0 )
+        {
+            path = @"/";
+        }
+        
+        _path    = [ path copy ];
+        _entries = [ [ ACLEntry entriesForFile: _path ] retain ];
     }
     
     return self;
@@ -32,6 +109,20 @@
 - ( void )awakeFromNib
 {
     [ _removeButton setEnabled: NO ];
+    
+    if( [ _path isEqualToString: @"/" ] )
+    {
+        [ _filePathLabel setStringValue: [ NSString stringWithFormat: @"%@", [ [ NSFileManager defaultManager ] displayNameAtPath: _path ] ] ];
+    }
+    else
+    {
+        [ _filePathLabel setStringValue: [ NSString stringWithFormat: @"%@ (%@)", [ [ NSFileManager defaultManager ] displayNameAtPath: _path ], [ _path stringByDeletingLastPathComponent ] ] ];
+    }
+    
+    [ _fileIcon setImage: [ [ NSWorkspace sharedWorkspace ] iconForFile: _path ] ];
+    
+    _table.dataSource = self;
+    _table.delegate   = self;
 }
 
 - ( void )dealloc
@@ -39,6 +130,7 @@
     [ _path         release ];
     [ _table        release ];
     [ _removeButton release ];
+    [ _entries      release ];
     
     [ super dealloc ];
 }

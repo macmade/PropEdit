@@ -18,6 +18,9 @@
     NSString    * _path;
     NSTableView * _table;
     NSButton    * _removeButton;
+    NSTextField * _filePathLabel;
+    NSImageView * _fileIcon;
+    NSArray     * _entries;
     
 @private
     
@@ -26,6 +29,8 @@
 
 @property( nonatomic, readwrite, retain ) IBOutlet NSTableView * table;
 @property( nonatomic, readwrite, retain ) IBOutlet NSButton    * removeButton;
+@property( nonatomic, readwrite, retain ) IBOutlet NSTextField * filePathLabel;
+@property( nonatomic, readwrite, retain ) IBOutlet NSImageView * fileIcon;
 
 - ( id )initWithPath: ( NSString * )path;
 - ( IBAction )cancel: ( id )sender;
