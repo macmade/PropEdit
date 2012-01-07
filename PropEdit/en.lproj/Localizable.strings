@@ -9,7 +9,7 @@
 "FileSize"                  = "Size:";
 "FileCTime"                 = "Created:";
 "FileMTime"                 = "Modified:";
-"Version"                   = "Version %@";
+"Version"                   = "Version %@ (%X)";
 "ConnectionError"           = "Connection failed";
 "ConnectionErrorText"       = "Impossible to establish a network connection. Please ensure you have a working Internet connection and try again.";
 "OK"                        = "OK";

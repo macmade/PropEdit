@@ -21,7 +21,13 @@
 
 - ( void )awakeFromNib
 {
-    [ _version setStringValue: [ NSString stringWithFormat: NSLocalizedString( @"Version", nil ), [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleShortVersionString" ] ] ];
+    NSString * version;
+    NSString * build;
+    
+    version = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleShortVersionString" ];
+    build   = [ [ NSBundle mainBundle ] objectForInfoDictionaryKey: @"CFBundleVersion" ];
+    
+    [ _version setStringValue: [ NSString stringWithFormat: NSLocalizedString( @"Version", nil ), version, [ build integerValue ] ] ];
 }
 
 - ( void )dealloc
