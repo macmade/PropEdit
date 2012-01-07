@@ -26,74 +26,64 @@
 
 - ( void )getUsers
 {
-    NSUInteger     i;
-    User         * user;
-    NSFileHandle * fh;
-    NSString     * list;
-    NSString     * userString;
-    NSString     * userName;
-    NSString     * userId;
-    NSArray      * userList;
-    NSArray      * userInfos;
+    NSFileHandle       * fh;
+    NSData             * plistData;
+    NSArray            * plist;
+    NSDictionary       * userDict;
+    User               * user;
+    NSPropertyListFormat format;
     
     [ users release ];
     
-    i        = 0;
-    users    = [ [ NSMutableArray arrayWithCapacity: 100 ] retain ];
-    fh       = [ [ ( NLApplication * )( [ NSApplication sharedApplication ] ) execution ] execute: @"/usr/bin/dscl" arguments: [ NSArray arrayWithObjects: @"localhost", @"-list", @"/Local/Default/Users", @"uid", nil ] ];
-    list     = [ [ NSString alloc ] initWithData: [ fh readDataToEndOfFile ] encoding: NSUTF8StringEncoding ];
-    userList = [ list componentsSeparatedByString: @"\n" ];
+    format    = NSPropertyListXMLFormat_v1_0;
+    users     = [ [ NSMutableArray arrayWithCapacity: 100 ] retain ];
+    fh        = [ [ ( NLApplication * )( [ NSApplication sharedApplication ] ) execution ] execute: @"/usr/bin/dscl" arguments: [ NSArray arrayWithObjects: @"-plist", @"localhost", @"-readall", @"/Local/Default/Users", nil ] ];
+    plistData = [ fh readDataToEndOfFile ];
+    plist     = ( NSArray * )[ NSPropertyListSerialization propertyListFromData: plistData mutabilityOption: NSPropertyListMutableContainersAndLeaves format: &format errorDescription: NULL ];
     
-    for( userString in userList )
+    if( plist != nil )
     {
-        if( [ userString length ] > 0 )
+        for( userDict in plist )
         {
-            userInfos = [ userString componentsSeparatedByString: @" " ];
-            userName  = [ userInfos objectAtIndex: 0 ];
-            userId    = [ userInfos lastObject ];
-            user      = [ User userWithName: userName uid: [ userId integerValue ] ];
+            user = [ User userWithDictionary: userDict ];
             
-            [ users insertObject: user atIndex: i++ ];
+            if( user != nil )
+            {
+                [ users addObject: user ];
+            }
         }
     }
-    
-    [ list release ];
 }
 
 - ( void )getGroups
 {
-    NSUInteger     i;
-    Group        * group;
-    NSFileHandle * fh;
-    NSString     * list;
-    NSString     * groupString;
-    NSString     * groupName;
-    NSString     * groupId;
-    NSArray      * groupList;
-    NSArray      * groupInfos;
+    NSFileHandle       * fh;
+    NSData             * plistData;
+    NSArray            * plist;
+    NSDictionary       * groupDict;
+    Group              * group;
+    NSPropertyListFormat format;
     
     [ groups release ];
     
-    i        = 0;
+    format    = NSPropertyListXMLFormat_v1_0;
     groups    = [ [ NSMutableArray arrayWithCapacity: 100 ] retain ];
-    fh        = [ [ ( NLApplication * )( [ NSApplication sharedApplication ] ) execution ] execute: @"/usr/bin/dscl" arguments: [ NSArray arrayWithObjects: @"localhost", @"-list", @"/Local/Default/Groups", @"gid", nil ] ];
-    list      = [ [ NSString alloc ] initWithData: [ fh readDataToEndOfFile ] encoding: NSUTF8StringEncoding ];
-    groupList = [ list componentsSeparatedByString: @"\n" ];
+    fh        = [ [ ( NLApplication * )( [ NSApplication sharedApplication ] ) execution ] execute: @"/usr/bin/dscl" arguments: [ NSArray arrayWithObjects: @"-plist", @"localhost", @"-readall", @"/Local/Default/Groups", nil ] ];
+    plistData = [ fh readDataToEndOfFile ];
+    plist     = ( NSArray * )[ NSPropertyListSerialization propertyListFromData: plistData mutabilityOption: NSPropertyListMutableContainersAndLeaves format: &format errorDescription: NULL ];
     
-    for( groupString in groupList )
+    if( plist != nil )
     {
-        if( [ groupString length ] > 0 )
+        for( groupDict in plist )
         {
-            groupInfos = [ groupString componentsSeparatedByString: @" " ];
-            groupName  = [ groupInfos objectAtIndex: 0 ];
-            groupId    = [ groupInfos lastObject ];
-            group      = [ Group groupWithName: groupName gid: [ groupId integerValue ] ];
+            group = [ Group groupWithDictionary: groupDict ];
             
-            [ groups insertObject: group atIndex: i++ ];
+            if( group != nil )
+            {
+                [ groups addObject: group ];
+            }
         }
     }
-    
-    [ list release ];
 }
 
 @end

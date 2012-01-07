@@ -19,18 +19,22 @@
 {
 @protected
     
-    NSUInteger gid;
-    NSString * name;
+    NSUInteger _gid;        /* dsAttrTypeStandard:PrimaryGroupID */
+    NSString * _name;       /* dsAttrTypeStandard:RecordName */
+    NSString * _realName;   /* dsAttrTypeStandard:RealName */
+    NSString * _guid;       /* dsAttrTypeStandard:GeneratedUID */
     
 @private
     
-    id r1;
-    id r2;
+    id _Group_Resrved[ 5 ] __attribute__( ( unused ) );
 }
 
-@property( assign, readwrite ) NSUInteger gid;
-@property( retain, readwrite ) NSString * name;
+@property( atomic, readonly ) NSUInteger gid;
+@property( atomic, readonly ) NSString * name;
+@property( atomic, readonly ) NSString * realName;
+@property( atomic, readonly ) NSString * guid;
 
-+ ( id )groupWithName: ( NSString * )groupName gid: ( NSUInteger )groupId;
++ ( Group * )groupWithDictionary: ( NSDictionary * )dict;
+- ( id )initWithDictionary: ( NSDictionary * )dict;
 
 @end

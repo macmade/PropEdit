@@ -15,17 +15,16 @@
 
 @implementation Group
 
-@synthesize gid;
-@synthesize name;
+@synthesize gid      = _gid;
+@synthesize name     = _name;
+@synthesize realName = _realName;
+@synthesize guid     = _guid;
 
-+ ( id )groupWithName: ( NSString * )groupName gid: ( NSUInteger )groupId
++ ( Group * )groupWithDictionary: ( NSDictionary * )dict
 {
     Group * group;
     
-    group = [ [ self alloc ] init ];
-    
-    [ group setGid:  groupId ];
-    [ group setName: groupName ];
+    group = [ [ Group alloc ] initWithDictionary: dict ];
     
     return [ group autorelease ];
 }
@@ -33,9 +32,45 @@
 - ( id )init
 {
     if( ( self = [ super init ] ) )
+    {}
+    
+    return self;
+}
+
+- ( id )initWithDictionary: ( NSDictionary * )dict
+{
+    NSArray  * gidValues;
+    NSArray  * nameValues;
+    NSArray  * realNameValues;
+    NSArray  * guidValues;
+    NSString * gid;
+    NSString * name;
+    NSString * realName;
+    NSString * guid;
+    
+    if( ( self = [ self init ] ) )
     {
-        gid  = 0;
-        name = nil;
+        gidValues       = [ dict objectForKey: @"dsAttrTypeStandard:PrimaryGroupID" ] ;
+        nameValues      = [ dict objectForKey: @"dsAttrTypeStandard:RecordName" ];
+        realNameValues  = [ dict objectForKey: @"dsAttrTypeStandard:RealName" ];
+        guidValues      = [ dict objectForKey: @"dsAttrTypeStandard:GeneratedUID" ];
+        
+        if( gidValues.count == 0 || nameValues.count == 0 || guidValues.count == 0 )
+        {
+            [ self release ];
+            
+            return nil;
+        }
+        
+        gid      = [ gidValues      objectAtIndex: 0 ];
+        name     = [ nameValues     objectAtIndex: 0 ];
+        realName = [ realNameValues objectAtIndex: 0 ];
+        guid     = [ guidValues     objectAtIndex: 0 ];
+        
+        _gid      = [ gid integerValue ];
+        _name     = [ name     copy ];
+        _realName = [ realName copy ];
+        _guid     = [ guid     copy ];
     }
     
     return self;
@@ -43,7 +78,10 @@
 
 - ( void )dealloc
 {
-    [ name release ];
+    [ _name     release ];
+    [ _realName release ];
+    [ _guid     release ];
+    
     [ super dealloc ];
 }
 

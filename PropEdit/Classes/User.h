@@ -19,18 +19,22 @@
 {
 @protected
     
-    NSUInteger uid;
-    NSString * name;
+    NSUInteger _uid;        /* dsAttrTypeStandard:UniqueID */
+    NSString * _name;       /* dsAttrTypeStandard:RecordName */
+    NSString * _realName;   /* dsAttrTypeStandard:RealName */
+    NSString * _guid;       /* dsAttrTypeStandard:GeneratedUID */
     
 @private
     
-    id r1;
-    id r2;
+    id _User_Resrved[ 5 ] __attribute__( ( unused ) );
 }
 
-@property( assign, readwrite ) NSUInteger uid;
-@property( retain, readwrite ) NSString * name;
+@property( atomic, readonly ) NSUInteger uid;
+@property( atomic, readonly ) NSString * name;
+@property( atomic, readonly ) NSString * realName;
+@property( atomic, readonly ) NSString * guid;
 
-+ ( id )userWithName: ( NSString * )userName uid: ( NSUInteger )userId;
++ ( User * )userWithDictionary: ( NSDictionary * )dict;
+- ( id )initWithDictionary: ( NSDictionary * )dict;
 
 @end
