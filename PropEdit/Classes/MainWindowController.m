@@ -94,6 +94,8 @@
             [ worldRead  setIntValue: ( o & 4 ) ? 1 : 0 ];
             [ worldWrite setIntValue: ( o & 2 ) ? 1 : 0 ];
             [ worldExec  setIntValue: ( o & 1 ) ? 1 : 0 ];
+            
+            [ self showApplyView: nil ];
         }
         else
         {
