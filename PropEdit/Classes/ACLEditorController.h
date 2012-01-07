@@ -17,15 +17,16 @@
 {
 @protected
     
-    NSString    * _path;
-    NSTableView * _table;
-    NSButton    * _removeButton;
-    NSTextField * _filePathLabel;
-    NSImageView * _fileIcon;
-    NSArray     * _entries;
-    DSCLHelper  * _dscl;
-    NSArray     * _users;
-    NSArray     * _groups;
+    NSString        * _path;
+    NSTableView     * _table;
+    NSButton        * _removeButton;
+    NSTextField     * _filePathLabel;
+    NSImageView     * _fileIcon;
+    NSArray         * _entries;
+    NSMutableArray  * _entriesRelations;
+    DSCLHelper      * _dscl;
+    NSArray         * _users;
+    NSArray         * _groups;
     
 @private
     

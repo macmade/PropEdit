@@ -35,35 +35,23 @@
 {
     ACLEntry * entry;
     User     * user;
-    User     * userObject;
     Group    * group;
-    Group    * groupObject;
+    id         relation;
     
     ( void )tableView;
     
-    entry = [ _entries objectAtIndex: row ];
-    user  = nil;
-    group = nil;
+    entry    = [ _entries objectAtIndex: row ];
+    relation = [ _entriesRelations objectAtIndex: row ];
+    user     = nil;
+    group    = nil;
     
-    for( userObject in _users )
+    if( [ relation isKindOfClass: [ User class ] ] )
     {
-        if( [ userObject.guid isEqualToString: entry.guid ] )
-        {
-            user = userObject;
-            break;
-        }
+        user = ( User * )relation;
     }
-    
-    if( user == nil )
+    else if( [ relation isKindOfClass: [ Group class ] ] )
     {
-        for( groupObject in _groups )
-        {
-            if( [ groupObject.guid isEqualToString: entry.guid ] )
-            {
-                group = groupObject;
-                break;
-            }
-        }
+        group = ( Group * )relation;
     }
     
     if( [ tableColumn.identifier isEqualToString: @"icon" ] )
@@ -153,6 +141,10 @@
 
 - ( id )initWithPath: ( NSString * )path
 {
+    ACLEntry * entry;
+    User     * user;
+    Group    * group;
+    
     if( ( self = [ super initWithWindowNibName: @"ACLEditor" owner: self ] ) )
     {
         if( path == nil || path.length == 0 )
@@ -160,11 +152,36 @@
             path = @"/";
         }
         
-        _path    = [ path copy ];
-        _entries = [ [ ACLEntry entriesForFile: _path ] retain ];
-        _dscl    = [ DSCLHelper new ];
-        _users   = [ [ _dscl users ] retain ];
-        _groups  = [ [ _dscl groups ] retain ];
+        _path             = [ path copy ];
+        _entries          = [ [ ACLEntry entriesForFile: _path ] retain ];
+        _dscl             = [ DSCLHelper new ];
+        _users            = [ [ _dscl users ] retain ];
+        _groups           = [ [ _dscl groups ] retain ];
+        _entriesRelations = [ [ NSMutableArray alloc ] initWithCapacity: _entries.count ];
+        
+        for( entry in _entries )
+        {
+            for( user in _users )
+            {
+                if( [ user.guid isEqualToString: entry.guid ] )
+                {
+                    [ _entriesRelations addObject: user ];
+                    break;
+                }
+            }
+            
+            if( user == nil )
+            {
+                for( group in _groups )
+                {
+                    if( [ group.guid isEqualToString: entry.guid ] )
+                    {
+                        [ _entriesRelations addObject: group ];
+                        break;
+                    }
+                }
+            }
+        }
     }
     
     return self;
@@ -191,13 +208,14 @@
 
 - ( void )dealloc
 {
-    [ _path         release ];
-    [ _table        release ];
-    [ _removeButton release ];
-    [ _entries      release ];
-    [ _dscl         release ];
-    [ _users        release ];
-    [ _groups       release ];
+    [ _path             release ];
+    [ _table            release ];
+    [ _removeButton     release ];
+    [ _entries          release ];
+    [ _dscl             release ];
+    [ _users            release ];
+    [ _groups           release ];
+    [ _entriesRelations release ];
     
     [ super dealloc ];
 }
