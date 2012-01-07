@@ -15,6 +15,7 @@
 #import "DSCLHelper.h"
 #import "User.h"
 #import "Group.h"
+#import "ACLEntry.h"
 
 @implementation ACLEntryEditorController
 
@@ -110,8 +111,56 @@
         
         item = [ [ NSMenuItem alloc ] initWithTitle: itemTitle action: NULL keyEquivalent: @"" ];
         
-        [ item setRepresentedObject: user ];
+        [ item setRepresentedObject: group ];
         [ menu addItem: [ item autorelease ] ];
+    }
+    
+    if( _acl.type == ACLEntryTypeAllow )
+    {
+        [ _entrySelect selectItemAtIndex: 0 ];
+    }
+    else if( _acl.type == ACLEntryTypeDeny )
+    {
+        [ _entrySelect selectItemAtIndex: 1 ];
+    }
+    
+    for( item in [ _userSelect itemArray ] )
+    {
+        if( [ item.representedObject isKindOfClass: [ User class ] ] )
+        {
+            user = item.representedObject;
+            
+            if( user.uid == getuid() )
+            {
+                [ _userSelect selectItem: item ];
+                break;
+            }
+        }
+
+    }
+    
+    for( item in [ _userSelect itemArray ] )
+    {
+        if( _user != nil && [ item.representedObject isKindOfClass: [ User class ] ] )
+        {
+            user = item.representedObject;
+            
+            if( user.uid == _user.uid )
+            {
+                [ _userSelect selectItem: item ];
+                break;
+            }
+        }
+        else if( _group != nil && [ item.representedObject isKindOfClass: [ Group class ] ] )
+        {
+            group = item.representedObject;
+            
+            if( group.gid == _group.gid )
+            {
+                [ _userSelect selectItem: item ];
+                break;
+            }
+        }
     }
 }
 
