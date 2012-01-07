@@ -162,6 +162,94 @@
             }
         }
     }
+    
+    if( _acl != nil )
+    {
+        if( _acl.readAttributes )
+        {
+            [ _baseMatrix selectCellAtRow: 0 column: 0 ];
+        }
+        
+        if( _acl.writeAttributes )
+        {
+            [ _baseMatrix selectCellAtRow: 0 column: 1 ];
+        }
+        
+        if( _acl.readExtendedAttributes )
+        {
+            [ _baseMatrix selectCellAtRow: 1 column: 0 ];
+        }
+        
+        if( _acl.writeExtendedAttributes )
+        {
+            [ _baseMatrix selectCellAtRow: 1 column: 1 ];
+        }
+        
+        if( _acl.readSecurity )
+        {
+            [ _baseMatrix selectCellAtRow: 2 column: 0 ];
+        }
+        
+        if( _acl.writeSecurity )
+        {
+            [ _baseMatrix selectCellAtRow: 2 column: 1 ];
+        }
+        
+        if( _acl.delete )
+        {
+            [ _baseMatrix selectCellAtRow: 3 column: 0 ];
+        }
+        
+        if( _acl.changeOwner )
+        {
+            [ _baseMatrix selectCellAtRow: 3 column: 1 ];
+        }
+        
+        if( _acl.listDirectory )
+        {
+            [ _directoryMatrix selectCellAtRow: 0 column: 0 ];
+        }
+        
+        if( _acl.search )
+        {
+            [ _directoryMatrix selectCellAtRow: 1 column: 0 ];
+        }
+        
+        if( _acl.addFile )
+        {
+            [ _directoryMatrix selectCellAtRow: 2 column: 0 ];
+        }
+        
+        if( _acl.addSubDirectory )
+        {
+            [ _directoryMatrix selectCellAtRow: 3 column: 0 ];
+        }
+        
+        if( _acl.deleteChild )
+        {
+            [ _directoryMatrix selectCellAtRow: 4 column: 0 ];
+        }
+        
+        if( _acl.readData )
+        {
+            [ _fileMatrix selectCellAtRow: 0 column: 0 ];
+        }
+        
+        if( _acl.writeData )
+        {
+            [ _fileMatrix selectCellAtRow: 1 column: 0 ];
+        }
+        
+        if( _acl.appendData )
+        {
+            [ _fileMatrix selectCellAtRow: 2 column: 0 ];
+        }
+        
+        if( _acl.execute )
+        {
+            [ _fileMatrix selectCellAtRow: 3 column: 0 ];
+        }
+    }
 }
 
 - ( void )dealloc
