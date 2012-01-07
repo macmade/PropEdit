@@ -16,9 +16,10 @@
 		0542100714B70F73000FFB45 /* ACLEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542100614B70F73000FFB45 /* ACLEditorController.m */; };
 		0542100A14B71CF3000FFB45 /* Register.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0542100914B71CF3000FFB45 /* Register.xib */; };
 		0542101514B71E11000FFB45 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542101414B71E11000FFB45 /* RegisterController.m */; };
-		0542102214B7236C000FFB45 /* ESellerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05420FF314B70DC9000FFB45 /* ESellerate.framework */; };
 		05499D6412E9E98500D7AFEF /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D6312E9E98500D7AFEF /* Group.m */; };
 		05499D6512E9EEA900D7AFEF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D5F12E9E8F200D7AFEF /* User.m */; };
+		0560DF7014B843DB0041D14E /* ESell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05420FF514B70DC9000FFB45 /* ESell.framework */; };
+		0560DF7114B844170041D14E /* ESell.framework in Copy Private Frameworks */ = {isa = PBXBuildFile; fileRef = 05420FF514B70DC9000FFB45 /* ESell.framework */; };
 		0564E15612E8988F00035F08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0564E15512E8988F00035F08 /* Cocoa.framework */; };
 		0564E16012E8988F00035F08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0564E15E12E8988F00035F08 /* InfoPlist.strings */; };
 		0564E16312E8988F00035F08 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0564E16212E8988F00035F08 /* main.m */; };
@@ -86,6 +87,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				0560DF7114B844170041D14E /* ESell.framework in Copy Private Frameworks */,
 				050F16B01300A63B0046DF3C /* NL.framework in Copy Private Frameworks */,
 			);
 			name = "Copy Private Frameworks";
@@ -147,9 +149,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0542102214B7236C000FFB45 /* ESellerate.framework in Frameworks */,
 				0564E15612E8988F00035F08 /* Cocoa.framework in Frameworks */,
 				050F16B11300A63E0046DF3C /* NL.framework in Frameworks */,
+				0560DF7014B843DB0041D14E /* ESell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
