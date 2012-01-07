@@ -277,6 +277,115 @@
 
 - ( IBAction )save: ( id )sender
 {
+    User  * user;
+    Group * group;
+    id      relation;
+    
+    if( _acl == nil )
+    {
+       _acl = [ [ ACLEntry alloc ] init ];
+    }
+    
+    relation = _userSelect.selectedItem.representedObject;
+    
+    if( [ relation isKindOfClass: [ User class ] ] )
+    {
+        user      = relation;
+        _acl.guid = user.guid;
+    }
+    else if( [ relation isKindOfClass: [ Group class ] ] )
+    {
+        group     = relation;
+        _acl.guid = group.guid;
+    }
+    
+    _acl.type = ( _entrySelect.indexOfSelectedItem == 0 ) ? ACLEntryTypeAllow : ACLEntryTypeDeny;
+    
+    if( [ [ _baseMatrix cellAtRow: 0 column: 0 ] intValue ] )
+    {
+        _acl.readAttributes = YES;
+    }
+    
+    if( [ [ _baseMatrix cellAtRow: 0 column: 1 ] intValue ] )
+    {
+        _acl.writeAttributes = YES;
+    }
+    
+    if( [ [ _baseMatrix cellAtRow: 1 column: 0 ] intValue ] )
+    {
+        _acl.readExtendedAttributes = YES;
+    }
+    
+    if( [ [ _baseMatrix cellAtRow: 1 column: 1 ] intValue ] )
+    {
+        _acl.writeExtendedAttributes = YES;
+    }
+    
+    if( [ [ _baseMatrix cellAtRow: 2 column: 0 ] intValue ] )
+    {
+        _acl.readSecurity = YES;
+    }
+    
+    if( [ [ _baseMatrix cellAtRow: 2 column: 1 ] intValue ] )
+    {
+        _acl.writeSecurity = YES;
+    }
+    
+    if( [ [ _baseMatrix cellAtRow: 3 column: 0 ] intValue ] )
+    {
+        _acl.delete = YES;
+    }
+    
+    if( [ [ _baseMatrix cellAtRow: 3 column: 1 ] intValue ] )
+    {
+        _acl.changeOwner = YES;
+    }
+    
+    if( [ [ _directoryMatrix cellAtRow: 0 column: 0 ] intValue ] )
+    {
+        _acl.listDirectory = YES;
+    }
+    
+    if( [ [ _directoryMatrix cellAtRow: 1 column: 0 ] intValue ] )
+    {
+        _acl.search = YES;
+    }
+    
+    if( [ [ _directoryMatrix cellAtRow: 2 column: 0 ] intValue ] )
+    {
+        _acl.addFile = YES;
+    }
+    
+    if( [ [ _directoryMatrix cellAtRow: 3 column: 0 ] intValue ] )
+    {
+        _acl.addSubDirectory = YES;
+    }
+    
+    if( [ [ _directoryMatrix cellAtRow: 4 column: 0 ] intValue ] )
+    {
+        _acl.deleteChild = YES;
+    }
+    
+    if( [ [ _fileMatrix cellAtRow: 0 column: 0 ] intValue ] )
+    {
+        _acl.readData = YES;
+    }
+    
+    if( [ [ _fileMatrix cellAtRow: 0 column: 0 ] intValue ] )
+    {
+        _acl.writeData = YES;
+    }
+    
+    if( [ [ _fileMatrix cellAtRow: 1 column: 0 ] intValue ] )
+    {
+        _acl.appendData = YES;
+    }
+    
+    if( [ [ _fileMatrix cellAtRow: 3 column: 0 ] intValue ] )
+    {
+        _acl.execute = YES;
+    }
+    
     [ self.window orderOut: sender ];
     [ NSApp endSheet: self.window returnCode: 0 ];
 }
