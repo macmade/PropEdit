@@ -13,6 +13,7 @@
 
 @class ApplicationController;
 @class DSCLHelper;
+@class ACLEditorController;
 
 @interface MainWindowController: NSWindowController < NSBrowserDelegate, NSWindowDelegate >
 {

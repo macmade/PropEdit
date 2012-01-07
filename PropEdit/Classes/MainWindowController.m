@@ -427,7 +427,14 @@
     
     for( userObject in helper.users )
     {
-        itemTitle = [ NSString stringWithFormat: @"%@ (%i)", userObject.name, userObject.uid ];
+        if( userObject.realName != nil )
+        {
+            itemTitle = [ NSString stringWithFormat: @"%@ (%i) - %@", userObject.name, userObject.uid, userObject.realName ];
+        }
+        else
+        {
+            itemTitle = [ NSString stringWithFormat: @"%@ (%i)", userObject.name, userObject.uid ];
+        }
         
         [ owner addItemWithTitle: itemTitle ];
         [ [ owner itemWithTitle: itemTitle ] setTag: userObject.uid ];
@@ -448,12 +455,19 @@
     
     for( groupObject in helper.groups )
     {
-        itemTitle = [ NSString stringWithFormat: @"%@ (%i)", groupObject.name, groupObject.gid ];
+        if( groupObject.realName != nil )
+        {
+            itemTitle = [ NSString stringWithFormat: @"%@ (%i) - %@", groupObject.name, groupObject.gid, groupObject.realName ];
+        }
+        else
+        {
+            itemTitle = [ NSString stringWithFormat: @"%@ (%i)", groupObject.name, groupObject.gid ];
+        }
         
         [ group addItemWithTitle: itemTitle ];
         [ [ group itemWithTitle: itemTitle ] setTag: groupObject.gid ];
         [ [ group itemWithTitle: itemTitle ] setRepresentedObject: groupObject.name ];
-        [ [ group itemWithTitle: itemTitle ] setImage: [ NSImage imageNamed: NSImageNameUser ] ];
+        [ [ group itemWithTitle: itemTitle ] setImage: [ NSImage imageNamed: NSImageNameUserGroup ] ];
         [ [ [ group itemWithTitle: itemTitle ] image ] setSize: NSMakeSize( 16, 16 ) ];
     }
     
@@ -647,13 +661,13 @@
     
     ( void )sender;
     
-    acl = [ [ ACLEditorController alloc ] initWithPath: @"" ];
+    acl = [ [ ACLEditorController alloc ] initWithPath: [ browser path ] ];
     
     [ NSApp
         beginSheet:         [ acl window ]
         modalForWindow:     [ self window ]
         modalDelegate:      self
-        didEndSelector:     NULL
+        didEndSelector:     @selector( sheetDidEnd: returnCode: contextInfo: )
         contextInfo:        ( void * )acl
     ];
 }
