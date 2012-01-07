@@ -12,11 +12,30 @@
  */
 
 #import "ACLEditorController.h"
+#import "ACLEntryEditorController.h"
 #import "ACLEntry.h"
 #import "DSCLHelper.h"
 #import "User.h"
 #import "Group.h"
 #import <ESellerate/ESellerate.h>
+
+@interface ACLEditorController( Private )
+
+- ( void )sheetDidEnd: ( NSWindow * )sheet returnCode: ( int )returnCode contextInfo: ( void * )contextInfo;
+
+@end
+
+@implementation ACLEditorController( Private )
+
+- ( void )sheetDidEnd: ( NSWindow * )sheet returnCode: ( int )returnCode contextInfo: ( void * )contextInfo
+{
+    ( void )sheet;
+    ( void )returnCode;
+    
+    [ ( id )contextInfo release ];
+}
+
+@end
 
 @interface ACLEditorController( NSTableViewDataSource ) < NSTableViewDataSource >
 
@@ -204,6 +223,9 @@
     
     _table.dataSource = self;
     _table.delegate   = self;
+    
+    [ _table setTarget: self ];
+    [ _table setDoubleAction: @selector( editACL: ) ];
 }
 
 - ( void )dealloc
@@ -259,6 +281,28 @@
 - ( IBAction )remove: ( id )sender
 {
     ( void )sender;
+}
+
+- ( IBAction )editACL: ( id )sender
+{
+    ACLEntryEditorController * acl;
+    NSInteger                  row;
+    
+    ( void )sender;
+    
+    row = [ _table selectedRow ];
+    
+    ( void )sender;
+    
+    acl = [ [ ACLEntryEditorController alloc ] init ];
+    
+    [ NSApp
+        beginSheet:         [ acl window ]
+        modalForWindow:     [ self window ]
+        modalDelegate:      self
+        didEndSelector:     @selector( sheetDidEnd: returnCode: contextInfo: )
+        contextInfo:        ( void * )acl
+    ];
 }
 
 @end
