@@ -188,9 +188,6 @@
     user      = [ [ owner selectedItem ] representedObject ];
     userGroup = [ [ group selectedItem ] representedObject ];
     chownArgs = [ NSString stringWithFormat: @"%@:%@", user, userGroup ];
-    
-    NSLog( @"%@", chownArgs );
-    
     file      = [ displayPath substringToIndex: [ displayPath length ] - 1 ];
     
     if( recursive )
@@ -205,7 +202,24 @@
         args[ 1 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
     }
     
+    #ifdef APPSTORE
+    
+    if( recursive )
+    {
+        [ app.execution execute: @"/usr/sbin/chown" arguments: [ NSArray arrayWithObjects: @"-R", chownArgs, file, nil ] ];
+    }
+    else
+    {
+        [ app.execution execute: @"/usr/sbin/chown" arguments: [ NSArray arrayWithObjects: chownArgs, file, nil ] ];
+    }
+    
+    return 0;
+    
+    #else
+    
     return [ app.execution executeWithPrivileges: "/usr/sbin/chown" arguments: args io: NULL ];
+    
+    #endif
 }
 
 - ( OSStatus )chmod
@@ -244,7 +258,24 @@
         args[ 1 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
     }
     
+    #ifdef APPSTORE
+    
+    if( recursive )
+    {
+        [ app.execution execute: @"/bin/chmod" arguments: [ NSArray arrayWithObjects: @"-R", [ NSString stringWithFormat: @"%s", octalPerms ], file, nil ] ];
+    }
+    else
+    {
+        [ app.execution execute: @"/bin/chmod" arguments: [ NSArray arrayWithObjects: [ NSString stringWithFormat: @"%s", octalPerms ], file, nil ] ];
+    }
+    
+    return 0;
+    
+    #else
+    
     return [ app.execution executeWithPrivileges: "/bin/chmod" arguments: args io: NULL ];
+    
+    #endif
 }
 
 - ( OSStatus )chflags
@@ -277,7 +308,24 @@
         args[ 1 ] = ( char * )[ file cStringUsingEncoding: NSUTF8StringEncoding ];
     }
     
+    #ifdef APPSTORE
+    
+    if( recursive )
+    {
+        [ app.execution execute: @"/usr/bin/chflags" arguments: [ NSArray arrayWithObjects: @"-R", [ flags componentsJoinedByString: @"," ], file, nil ] ];
+    }
+    else
+    {
+        [ app.execution execute: @"/usr/bin/chflags" arguments: [ NSArray arrayWithObjects: [ flags componentsJoinedByString: @"," ], file, nil ] ];
+    }
+    
+    return 0;
+    
+    #else
+    
     return [ app.execution executeWithPrivileges: "/usr/bin/chflags" arguments: args io: NULL ];
+    
+    #endif
 }
 
 - ( void )sheetDidEnd: ( NSWindow * )sheet returnCode: ( int )returnCode contextInfo: ( void * )contextInfo

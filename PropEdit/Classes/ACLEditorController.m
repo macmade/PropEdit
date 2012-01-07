@@ -115,7 +115,15 @@
     args[ 1 ] = ( char * )[ _path cStringUsingEncoding: NSUTF8StringEncoding ];
     args[ 2 ] = NULL;
     
+    #ifdef APPSTORE
+    
+    [ app.execution execute: @"/bin/chmod" arguments: [ NSArray arrayWithObjects: @"-N", _path, nil ] ];
+    
+    #else
+    
     [ app.execution executeWithPrivileges: "/bin/chmod" arguments: args io: NULL ];
+    
+    #endif
 }
 
 - ( void )setACLs
@@ -247,7 +255,15 @@
         args[ 2 ] = ( char * )[ _path cStringUsingEncoding: NSUTF8StringEncoding ];
         args[ 3 ] = NULL;
         
+        #ifdef APPSTORE
+        
+        [ app.execution execute: @"/bin/chmod" arguments: [ NSArray arrayWithObjects: @"+a", aclString, _path, nil ] ];
+        
+        #else
+        
         [ app.execution executeWithPrivileges: "/bin/chmod" arguments: args io: NULL ];
+        
+        #endif
     }
 }
 
