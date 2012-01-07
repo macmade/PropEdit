@@ -65,6 +65,7 @@
     NSMenuItem            * goUtilitiesMenu;
     ApplicationController * app;
     NLFileInfos           * currentFile;
+    NSTextField           * octal;
     
 @private
     
@@ -109,6 +110,7 @@
 @property( nonatomic, retain ) IBOutlet NSMenuItem            * goApplicationsMenu;
 @property( nonatomic, retain ) IBOutlet NSMenuItem            * goUtilitiesMenu;
 @property( nonatomic, retain ) IBOutlet ApplicationController * app;
+@property( nonatomic, retain ) IBOutlet NSTextField           * octal;
 
 - ( void )getAvailableUsers: ( DSCLHelper * )helper;
 - ( void )getAvailableGroups: ( DSCLHelper * )helper;

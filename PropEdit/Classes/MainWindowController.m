@@ -26,6 +26,88 @@
 
 #pragma mark - Private methods -
 
+@interface MainWindowController( NSTextFieldDelegate ) < NSTextFieldDelegate >
+
+@end
+
+@implementation MainWindowController( NSTextFieldDelegate )
+
+- ( BOOL )control: ( NSControl * )control textShouldEndEditing: ( NSText * )fieldEditor
+{
+    NSUInteger   u;
+    NSUInteger   g;
+    NSUInteger   o;
+    NSString   * perms;
+    NSString   * previousPerms;
+    const char * cPerms;
+    
+    ( void )control;
+    ( void )fieldEditor;
+    
+    perms = [ octal stringValue ];
+    u     = 0;
+    g     = 0;
+    o     = 0;
+    
+    u |= ( [ userRead  intValue ] ) ? 4 : 0;
+    u |= ( [ userWrite intValue ] ) ? 2 : 0;
+    u |= ( [ userExec  intValue ] ) ? 1 : 0;
+    
+    g |= ( [ groupRead  intValue ] ) ? 4 : 0;
+    g |= ( [ groupWrite intValue ] ) ? 2 : 0;
+    g |= ( [ groupExec  intValue ] ) ? 1 : 0;
+    
+    o |= ( [ worldRead  intValue ] ) ? 4 : 0;
+    o |= ( [ worldWrite intValue ] ) ? 2 : 0;
+    o |= ( [ worldExec  intValue ] ) ? 1 : 0;
+    
+    previousPerms = [ NSString stringWithFormat: @"%u%u%u", u, g, o ];
+    
+    if( perms.length != 3 )
+    {
+        NSBeep();
+        [ octal setStringValue: previousPerms ];
+    }
+    else
+    {
+        cPerms = [ perms cStringUsingEncoding: NSASCIIStringEncoding ];
+        
+        if
+        (
+               cPerms[ 0 ] >= 48 && cPerms[ 0 ] <= 55
+            && cPerms[ 1 ] >= 48 && cPerms[ 1 ] <= 55
+            && cPerms[ 2 ] >= 48 && cPerms[ 2 ] <= 55
+        )
+        {
+            u = cPerms[ 0 ] - 48;
+            g = cPerms[ 1 ] - 48;
+            o = cPerms[ 2 ] - 48;
+            
+            [ userRead  setIntValue: ( u & 4 ) ? 1 : 0 ];
+            [ userWrite setIntValue: ( u & 2 ) ? 1 : 0 ];
+            [ userExec  setIntValue: ( u & 1 ) ? 1 : 0 ];
+            
+            [ groupRead  setIntValue: ( g & 4 ) ? 1 : 0 ];
+            [ groupWrite setIntValue: ( g & 2 ) ? 1 : 0 ];
+            [ groupExec  setIntValue: ( g & 1 ) ? 1 : 0 ];
+            
+            [ worldRead  setIntValue: ( o & 4 ) ? 1 : 0 ];
+            [ worldWrite setIntValue: ( o & 2 ) ? 1 : 0 ];
+            [ worldExec  setIntValue: ( o & 1 ) ? 1 : 0 ];
+        }
+        else
+        {
+            NSBeep();
+            [ octal setStringValue: previousPerms ];
+        }
+    }
+    
+    
+    return YES;
+}
+
+@end
+
 @interface MainWindowController( Private )
 
 - ( void )openFile: ( id )sender;
@@ -251,6 +333,7 @@
 @synthesize goApplicationsMenu;
 @synthesize goUtilitiesMenu;
 @synthesize app;
+@synthesize octal;
 
 /*******************************************************************************
  * Initialization
@@ -286,6 +369,8 @@
     DSCLHelper * dscl;
     
     defaultLocation = [ app.preferences.values integerForKey: @"DefaultLocation" ];
+    
+    [ octal setDelegate: self ];
     
     switch( defaultLocation )
     {
@@ -824,6 +909,8 @@
     [ flagSystemImmutable setIntValue:  file.flags.systemImmutable ];
     [ flagUserAppendOnly setIntValue:   file.flags.userAppendOnly ];
     [ flagUserImmutable setIntValue:    file.flags.userImmutable ];
+    
+    [ octal setStringValue: [ NSString stringWithFormat: @"%03u", file.octalPermissions ] ];
 }
 
 - ( void )getFileInfos
@@ -953,10 +1040,10 @@
 
 - ( void )browser: ( NSBrowser * )sender willDisplayCell: ( NSBrowserCell * )cell atRow: ( NSInteger )row column: ( NSInteger )column
 {
-    NSString * fileKey;
-    NSString * filePath;
-    NSImage  * fileIcon;
-    NLFileInfos     * file;
+    NSString    * fileKey;
+    NSString    * filePath;
+    NSImage     * fileIcon;
+    NLFileInfos * file;
     
     ( void )sender;
     
