@@ -39,12 +39,14 @@
 
 - ( IBAction )cancel: ( id )sender
 {
-    ( void )sender;
+    [ self.window orderOut: sender ];
+    [ NSApp endSheet: self.window returnCode: 1 ];
 }
 
 - ( IBAction )save: ( id )sender
 {
-    ( void )sender;
+    [ self.window orderOut: sender ];
+    [ NSApp endSheet: self.window returnCode: 0 ];
 }
 
 @end
