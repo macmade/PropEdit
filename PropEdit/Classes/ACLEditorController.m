@@ -17,10 +17,13 @@
 #import "DSCLHelper.h"
 #import "User.h"
 #import "Group.h"
+#import "ApplicationController.h"
 #import <ESellerate/ESellerate.h>
 
 @interface ACLEditorController( Private )
 
+- ( void )clearACLs;
+- ( void )setACLs;
 - ( void )sheetDidEnd: ( NSWindow * )sheet returnCode: ( int )returnCode contextInfo: ( void * )contextInfo;
 
 @end
@@ -100,6 +103,152 @@
     }
     
     [ editor release ];
+}
+
+- ( void )clearACLs
+{
+    ApplicationController * app;
+    char                  * args[ 3 ];
+    
+    app       = ( ApplicationController * )NSApp;
+    args[ 0 ] = "-N";
+    args[ 1 ] = ( char * )[ _path cStringUsingEncoding: NSUTF8StringEncoding ];
+    args[ 2 ] = NULL;
+    
+    [ app.execution executeWithPrivileges: "/bin/chmod" arguments: args io: NULL ];
+}
+
+- ( void )setACLs
+{
+    ApplicationController * app;
+    ACLEntry              * entry;
+    User                  * user;
+    Group                 * group;
+    id                      relation;
+    NSString              * name;
+    NSString              * type;
+    NSString              * aclString;
+    NSUInteger              index;
+    NSMutableArray        * perms;
+    char                  * args[ 4 ];
+    
+    app = ( ApplicationController * )NSApp;
+    
+    for( entry in _entries )
+    {
+        index    = [ _entries indexOfObject: entry ];
+        relation = [ _entriesRelations objectAtIndex: index ];
+        user     = nil;
+        group    = nil;
+        perms    = [ NSMutableArray arrayWithCapacity: 100 ];
+        
+        if( [ relation isKindOfClass: [ User class ] ] )
+        {
+            user = relation;
+            name = [ NSString stringWithFormat: @"user:%@", user.name ];
+        }
+        else if( [ relation isKindOfClass: [ Group class ] ] )
+        {
+            group = relation;
+            name = [ NSString stringWithFormat: @"group:%@", group.name ];
+        }
+        
+        type = ( entry.type == ACLEntryTypeAllow ) ? @"allow" : @"deny";
+        
+        if( entry.readAttributes )
+        {
+            [ perms addObject: @"readattr" ];
+        }
+        
+        if( entry.writeAttributes )
+        {
+            [ perms addObject: @"writeattr" ];
+        }
+        
+        if( entry.readExtendedAttributes )
+        {
+            [ perms addObject: @"readextattr" ];
+        }
+        
+        if( entry.writeExtendedAttributes )
+        {
+            [ perms addObject: @"writeextattr" ];
+        }
+        
+        if( entry.readSecurity )
+        {
+            [ perms addObject: @"readsecurity" ];
+        }
+        
+        if( entry.writeSecurity )
+        {
+            [ perms addObject: @"writesecurity" ];
+        }
+        
+        if( entry.delete )
+        {
+            [ perms addObject: @"delete" ];
+        }
+        
+        if( entry.changeOwner )
+        {
+            [ perms addObject: @"chown" ];
+        }
+        
+        if( entry.listDirectory )
+        {
+            [ perms addObject: @"list" ];
+        }
+        
+        if( entry.search )
+        {
+            [ perms addObject: @"search" ];
+        }
+        
+        if( entry.addFile )
+        {
+            [ perms addObject: @"add_file" ];
+        }
+        
+        if( entry.addSubDirectory )
+        {
+            [ perms addObject: @"add_subdirectory" ];
+        }
+        
+        if( entry.deleteChild )
+        {
+            [ perms addObject: @"delete_child" ];
+        }
+        
+        if( entry.readData )
+        {
+            [ perms addObject: @"read" ];
+        }
+        
+        if( entry.writeData )
+        {
+            [ perms addObject: @"write" ];
+        }
+        
+        if( entry.appendData )
+        {
+            [ perms addObject: @"append" ];
+        }
+        
+        if( entry.execute )
+        {
+            [ perms addObject: @"execute" ];
+        }
+        
+        aclString = [ NSString stringWithFormat: @"%@ %@ %@", name, type, [ perms componentsJoinedByString: @"," ] ];
+        
+        args[ 0 ] = "+a";
+        args[ 1 ] = ( char * )[ aclString cStringUsingEncoding: NSUTF8StringEncoding ];
+        args[ 2 ] = ( char * )[ _path cStringUsingEncoding: NSUTF8StringEncoding ];
+        args[ 3 ] = NULL;
+        
+        [ app.execution executeWithPrivileges: "/bin/chmod" arguments: args io: NULL ];
+    }
 }
 
 @end
@@ -323,7 +472,7 @@
 
 - ( IBAction )apply: ( id )sender
 {
-    NSAlert * alert;
+    NSAlert  * alert;
     
     if( [ [ ESellerate sharedInstance ] isRegistered ] == NO )
     {
@@ -341,6 +490,9 @@
         
         return;
     }
+    
+    [ self clearACLs ];
+    [ self setACLs ];
     
     [ self.window orderOut: sender ];
     [ NSApp endSheet: self.window returnCode: 0 ];
