@@ -74,7 +74,6 @@
 							<string key="NSFrame">{{552, 54}, {128, 128}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<string key="NSReuseIdentifierKey">_NS:2141</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSImageCell" key="NSCell" id="607680369">
@@ -262,7 +261,6 @@
 							<string key="NSFrame">{{340, 22}, {16, 16}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
-							<reference key="NSNextKeyView"/>
 							<int key="NSpiFlags">20746</int>
 							<double key="NSMinValue">16</double>
 							<double key="NSMaxValue">100</double>
@@ -645,11 +643,13 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>buyProgress</string>
+							<string>menuItem</string>
 							<string>serial</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>NSProgressIndicator</string>
+							<string>NSMenuItem</string>
 							<string>NSTextField</string>
 						</object>
 					</object>
@@ -658,6 +658,7 @@
 						<object class="NSArray" key="dict.sortedKeys">
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>buyProgress</string>
+							<string>menuItem</string>
 							<string>serial</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
@@ -665,6 +666,10 @@
 							<object class="IBToOneOutletInfo">
 								<string key="name">buyProgress</string>
 								<string key="candidateClassName">NSProgressIndicator</string>
+							</object>
+							<object class="IBToOneOutletInfo">
+								<string key="name">menuItem</string>
+								<string key="candidateClassName">NSMenuItem</string>
 							</object>
 							<object class="IBToOneOutletInfo">
 								<string key="name">serial</string>
