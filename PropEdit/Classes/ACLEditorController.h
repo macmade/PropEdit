@@ -11,6 +11,8 @@
  * @abstract    ...
  */
 
+@class DSCLHelper;
+
 @interface ACLEditorController: NSWindowController
 {
 @protected
@@ -21,6 +23,9 @@
     NSTextField * _filePathLabel;
     NSImageView * _fileIcon;
     NSArray     * _entries;
+    DSCLHelper  * _dscl;
+    NSArray     * _users;
+    NSArray     * _groups;
     
 @private
     

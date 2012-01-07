@@ -13,6 +13,9 @@
 
 #import "ACLEditorController.h"
 #import "ACLEntry.h"
+#import "DSCLHelper.h"
+#import "User.h"
+#import "Group.h"
 #import <ESellerate/ESellerate.h>
 
 @interface ACLEditorController( NSTableViewDataSource ) < NSTableViewDataSource >
@@ -31,22 +34,80 @@
 - ( id )tableView: ( NSTableView * )tableView objectValueForTableColumn: ( NSTableColumn * )tableColumn row: ( NSInteger )row
 {
     ACLEntry * entry;
+    User     * user;
+    User     * userObject;
+    Group    * group;
+    Group    * groupObject;
     
     ( void )tableView;
     
     entry = [ _entries objectAtIndex: row ];
+    user  = nil;
+    group = nil;
+    
+    for( userObject in _users )
+    {
+        if( [ userObject.guid isEqualToString: entry.guid ] )
+        {
+            user = userObject;
+            break;
+        }
+    }
+    
+    if( user == nil )
+    {
+        for( groupObject in _groups )
+        {
+            if( [ groupObject.guid isEqualToString: entry.guid ] )
+            {
+                group = groupObject;
+                break;
+            }
+        }
+    }
     
     if( [ tableColumn.identifier isEqualToString: @"icon" ] )
     {
+        if( group != nil )
+        {
+            return [ NSImage imageNamed: NSImageNameUserGroup ];
+        }
+        
         return [ NSImage imageNamed: NSImageNameUser ];
     }
     else if( [ tableColumn.identifier isEqualToString: @"uid" ] )
     {
+        if( group != nil )
+        {
+            return [ NSString stringWithFormat: @"%u", group.gid ];
+        }
         
+        return [ NSString stringWithFormat: @"%u", user.uid ];
     }
     else if( [ tableColumn.identifier isEqualToString: @"user" ] )
     {
+        if( group != nil )
+        {
+            if( group.realName != nil )
+            {
+                return [ NSString stringWithFormat: @"%@ (%@)", group.name, group.realName ];
+            }
+            else if( group.name != nil )
+            {
+                return group.name;
+            }
+        }
         
+        if( user.realName != nil )
+        {
+            return [ NSString stringWithFormat: @"%@ (%@)", user.name, user.realName ];
+        }
+        else if( user.name != nil )
+        {
+            return user.name;
+        }
+        
+        return @"";
     }
     else if( [ tableColumn.identifier isEqualToString: @"type" ] )
     {
@@ -101,6 +162,9 @@
         
         _path    = [ path copy ];
         _entries = [ [ ACLEntry entriesForFile: _path ] retain ];
+        _dscl    = [ DSCLHelper new ];
+        _users   = [ [ _dscl users ] retain ];
+        _groups  = [ [ _dscl groups ] retain ];
     }
     
     return self;
@@ -131,6 +195,9 @@
     [ _table        release ];
     [ _removeButton release ];
     [ _entries      release ];
+    [ _dscl         release ];
+    [ _users        release ];
+    [ _groups       release ];
     
     [ super dealloc ];
 }
