@@ -66,6 +66,7 @@
     ApplicationController * app;
     NLFileInfos           * currentFile;
     NSTextField           * octal;
+    NSButton              * aclButton;
     
 @private
     
@@ -111,10 +112,12 @@
 @property( nonatomic, retain ) IBOutlet NSMenuItem            * goUtilitiesMenu;
 @property( nonatomic, retain ) IBOutlet ApplicationController * app;
 @property( nonatomic, retain ) IBOutlet NSTextField           * octal;
+@property( nonatomic, retain ) IBOutlet NSButton              * aclButton;
 
 - ( void )getAvailableUsers: ( DSCLHelper * )helper;
 - ( void )getAvailableGroups: ( DSCLHelper * )helper;
 - ( void )enableControls;
+- ( void )disableControls;
 - ( IBAction )apply: ( id )sender;
 - ( IBAction )applyRecursive: ( id )sender;
 - ( IBAction )showApplyView: ( id )sender;

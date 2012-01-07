@@ -336,6 +336,7 @@
 @synthesize goUtilitiesMenu;
 @synthesize app;
 @synthesize octal;
+@synthesize aclButton;
 
 /*******************************************************************************
  * Initialization
@@ -416,6 +417,15 @@
             [ self enableControls ];
             break;
     }
+    
+    #ifdef APPSTORE
+    
+    if( [ fileManager isWritableFileAtPath: initialPath ] == NO )
+    {
+        [ self disableControls ];
+    }
+    
+    #endif
     
     currentFile = [ [ NLFileInfos createFromPath: initialPath ] retain ];
     
@@ -585,6 +595,35 @@
     [ flagSystemImmutable setEnabled:  YES ];
     [ flagUserAppendOnly setEnabled:   YES ];
     [ flagUserImmutable setEnabled:    YES ];
+    [ aclButton setEnabled:            YES ];
+}
+
+- ( void )disableControls
+{
+    [ owner setEnabled:                NO ];
+    [ group setEnabled:                NO ];
+    [ userRead setEnabled:             NO ];
+    [ userWrite setEnabled:            NO ];
+    [ userExec setEnabled:             NO ];
+    [ groupRead setEnabled:            NO ];
+    [ groupWrite setEnabled:           NO ];
+    [ groupExec setEnabled:            NO ];
+    [ worldRead setEnabled:            NO ];
+    [ worldWrite setEnabled:           NO ];
+    [ worldExec setEnabled:            NO ];
+    [ setUID setEnabled:               NO ];
+    [ setGID setEnabled:               NO ];
+    [ sticky setEnabled:               NO ];
+    [ flagArchived setEnabled:         NO ];
+    [ flagHidden setEnabled:           NO ];
+    [ flagNoDump setEnabled:           NO ];
+    [ flagOpaque setEnabled:           NO ];
+    [ flagSystemAppendOnly setEnabled: NO ];
+    [ flagSystemImmutable setEnabled:  NO ];
+    [ flagUserAppendOnly setEnabled:   NO ];
+    [ flagUserImmutable setEnabled:    NO ];
+    [ flagUserImmutable setEnabled:    NO ];
+    [ aclButton setEnabled:            NO ];
 }
 
 - ( void )disableFlagControls
@@ -740,6 +779,19 @@
     [ self enableControls ];
     [ self getFileAttributes ];
     [ self getFileInfos ];
+    
+    #ifdef APPSTORE
+    
+    if( [ fileManager isWritableFileAtPath: displayPath ] )
+    {
+        [ self enableControls ];
+    }
+    else
+    {
+        [ self disableControls ];
+    }
+    
+    #endif
 }
 
 - ( IBAction )editACLs: ( id )sender
