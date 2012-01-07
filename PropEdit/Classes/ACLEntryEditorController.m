@@ -87,6 +87,7 @@
         
         item = [ [ NSMenuItem alloc ] initWithTitle: itemTitle action: NULL keyEquivalent: @"" ];
         
+        [ item setImage: [ NSImage imageNamed: NSImageNameUser ] ];
         [ item setRepresentedObject: user ];
         [ menu addItem: [ item autorelease ] ];
     }
@@ -112,6 +113,7 @@
         
         item = [ [ NSMenuItem alloc ] initWithTitle: itemTitle action: NULL keyEquivalent: @"" ];
         
+        [ item setImage: [ NSImage imageNamed: NSImageNameUserGroup ] ];
         [ item setRepresentedObject: group ];
         [ menu addItem: [ item autorelease ] ];
     }
