@@ -46,7 +46,7 @@
     
     if( returnCode == 0 )
     {
-        if( index == NSNotFound )
+        if( index == NSNotFound || [ _entries count ] == 0 )
         {
             [ _entries addObject: entry ];
             
@@ -305,7 +305,7 @@
             return [ NSString stringWithFormat: @"%u", group.gid ];
         }
         
-        return [ NSString stringWithFormat: @"%u", user.uid ];
+        return [ NSString stringWithFormat: @"%i", user.uid ];
     }
     else if( [ tableColumn.identifier isEqualToString: @"user" ] )
     {
@@ -390,6 +390,12 @@
         
         _path             = [ path copy ];
         _entries          = [ [ ACLEntry entriesForFile: _path ] mutableCopy ];
+        
+        if( _entries == nil )
+        {
+            _entries = [ [ NSMutableArray arrayWithCapacity: 128 ] retain ];
+        }
+        
         _dscl             = [ DSCLHelper new ];
         _users            = [ [ _dscl users ] retain ];
         _groups           = [ [ _dscl groups ] retain ];
