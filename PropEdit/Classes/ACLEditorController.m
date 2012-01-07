@@ -277,8 +277,6 @@
 
 - ( void )awakeFromNib
 {
-    [ _removeButton setEnabled: NO ];
-    
     if( [ _path isEqualToString: @"/" ] )
     {
         [ _filePathLabel setStringValue: [ NSString stringWithFormat: @"%@", [ [ NSFileManager defaultManager ] displayNameAtPath: _path ] ] ];
@@ -361,7 +359,21 @@
 
 - ( IBAction )remove: ( id )sender
 {
+    NSInteger index;
+    
     ( void )sender;
+    
+    index = [ _table selectedRow ];
+    
+    if( index < 0 )
+    {
+        return;
+    }
+    
+    [ _entries          removeObjectAtIndex: index ];
+    [ _entriesRelations removeObjectAtIndex: index ];
+    
+    [ _table reloadData ];
 }
 
 - ( IBAction )editACL: ( id )sender
