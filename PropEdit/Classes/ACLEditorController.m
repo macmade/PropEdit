@@ -275,7 +275,19 @@
 
 - ( IBAction )add: ( id )sender
 {
+    ACLEntryEditorController * acl;
+    
     ( void )sender;
+    
+    acl = [ [ ACLEntryEditorController alloc ] init ];
+    
+    [ NSApp
+        beginSheet:         [ acl window ]
+        modalForWindow:     [ self window ]
+        modalDelegate:      self
+        didEndSelector:     @selector( sheetDidEnd: returnCode: contextInfo: )
+        contextInfo:        ( void * )acl
+    ];
 }
 
 - ( IBAction )remove: ( id )sender
@@ -292,8 +304,6 @@
     ( void )sender;
     
     row = [ _table selectedRow ];
-    
-    ( void )sender;
     
     acl      = [ [ ACLEntryEditorController alloc ] init ];
     relation = [ _entriesRelations objectAtIndex: row ];
