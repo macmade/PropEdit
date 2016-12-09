@@ -1,0 +1,3 @@
+[submodule "Submodules/NutShell"]
+	path = Submodules/NutShell
+	url = https://github.com/macmade/NutShell.git
