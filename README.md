@@ -10,7 +10,7 @@ PropEdit
 About
 -----
 
-Old macOS application to manage file permissions and ACLs:
+Old macOS application to manage file permissions and ACLs:  
 http://www.eosgarden.com/en/freeware/propedit/
 
 Repository Infos
