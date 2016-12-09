@@ -87,7 +87,7 @@
 
 - ( NSString * )description
 {
-    return [ NSString stringWithFormat: @"%@: %@ (%u) %@", [ super description ], _name, _uid, _guid ];
+    return [ NSString stringWithFormat: @"%@: %@ (%lu) %@", [ super description ], _name, ( unsigned long )_uid, _guid ];
 }
 
 @end

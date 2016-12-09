@@ -78,11 +78,11 @@
     {
         if( user.realName != nil )
         {
-            itemTitle = [ NSString stringWithFormat: @"%@ (%i) - %@", user.name, user.uid, user.realName ];
+            itemTitle = [ NSString stringWithFormat: @"%@ (%lu) - %@", user.name, ( unsigned long )user.uid, user.realName ];
         }
         else
         {
-            itemTitle = [ NSString stringWithFormat: @"%@ (%i)", user.name, user.uid ];
+            itemTitle = [ NSString stringWithFormat: @"%@ (%lu)", user.name, ( unsigned long )user.uid ];
         }
         
         item = [ [ NSMenuItem alloc ] initWithTitle: itemTitle action: NULL keyEquivalent: @"" ];
@@ -104,11 +104,11 @@
     {
         if( group.realName != nil )
         {
-            itemTitle = [ NSString stringWithFormat: @"%@ (%i) - %@", group.name, group.gid, group.realName ];
+            itemTitle = [ NSString stringWithFormat: @"%@ (%lu) - %@", group.name, ( unsigned long )group.gid, group.realName ];
         }
         else
         {
-            itemTitle = [ NSString stringWithFormat: @"%@ (%i)", group.name, group.gid ];
+            itemTitle = [ NSString stringWithFormat: @"%@ (%lu)", group.name, ( unsigned long )group.gid ];
         }
         
         item = [ [ NSMenuItem alloc ] initWithTitle: itemTitle action: NULL keyEquivalent: @"" ];

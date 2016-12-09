@@ -18,7 +18,6 @@
 #import "User.h"
 #import "Group.h"
 #import "ApplicationController.h"
-#import <ESellerate/ESellerate.h>
 
 @interface ACLEditorController( Private )
 
@@ -318,10 +317,10 @@
     {
         if( group != nil )
         {
-            return [ NSString stringWithFormat: @"%u", group.gid ];
+            return [ NSString stringWithFormat: @"%lu", ( unsigned long )group.gid ];
         }
         
-        return [ NSString stringWithFormat: @"%i", user.uid ];
+        return [ NSString stringWithFormat: @"%lu", ( unsigned long )user.uid ];
     }
     else if( [ tableColumn.identifier isEqualToString: @"user" ] )
     {
@@ -465,19 +464,6 @@
     
     [ _table setTarget: self ];
     [ _table setDoubleAction: @selector( editACL: ) ];
-    
-    #ifdef APPSTORE
-    
-    [ _trialNote  setHidden: YES ];
-    
-    #else
-    
-    if( [ [ ESellerate sharedInstance ] isRegistered ] == YES )
-    {
-        [ _trialNote  setHidden: YES ];
-    }
-    
-    #endif
 }
 
 - ( void )dealloc
@@ -502,31 +488,6 @@
 
 - ( IBAction )apply: ( id )sender
 {
-    #ifndef APPSTORE
-    
-    {
-        NSAlert  * alert;
-        
-        if( [ [ ESellerate sharedInstance ] isRegistered ] == NO )
-        {
-            alert = [ [ NSAlert alloc ] init ];
-            
-            [ alert addButtonWithTitle:  NSLocalizedString( @"OK", nil ) ];
-            [ alert setMessageText:      NSLocalizedString( @"ACLRegisterAlert", nil ) ];
-            [ alert setInformativeText:  NSLocalizedString( @"ACLRegisterAlertText", nil ) ];
-            
-            NSBeep();
-            
-            [ alert setAlertStyle: NSInformationalAlertStyle ];
-            [ alert runModal ];
-            [ alert release ];
-            
-            return;
-        }
-    }
-    
-    #endif
-    
     [ self clearACLs ];
     [ self setACLs ];
     

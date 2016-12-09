@@ -12,7 +12,6 @@
  */
 
 #import "RegisterController.h"
-#import <ESellerate/ESellerate.h>
 
 @implementation RegisterController
 
@@ -23,9 +22,7 @@
 - ( id )init
 {
     if( ( self = [ super initWithWindowNibName: @"Register" owner: self ] ) )
-    {
-        _eSell = [ ESellerate sharedInstance ];
-    }
+    {}
     
     return self;
 }
@@ -49,22 +46,6 @@
 {
     NSAlert * alert;
     
-    if( [ _eSell registerSerialNumber: [ _serial stringValue ] ] == NO )
-    {
-        alert = [ [ NSAlert alloc ] init ];
-        
-        [ alert addButtonWithTitle:  NSLocalizedString( @"OK", nil ) ];
-        [ alert setMessageText:      NSLocalizedString( @"SerialNumberInvalid", nil ) ];
-        [ alert setInformativeText:  NSLocalizedString( @"SerialNumberInvalidText", nil ) ];
-        
-        NSBeep();
-        
-        [ alert setAlertStyle: NSWarningAlertStyle ];
-        [ alert runModal ];
-        
-        [ alert release ];
-    }
-    else
     {
         alert = [ [ NSAlert alloc ] init ];
         

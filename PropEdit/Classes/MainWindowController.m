@@ -61,7 +61,7 @@
     o |= ( [ worldWrite intValue ] ) ? 2 : 0;
     o |= ( [ worldExec  intValue ] ) ? 1 : 0;
     
-    previousPerms = [ NSString stringWithFormat: @"%u%u%u", u, g, o ];
+    previousPerms = [ NSString stringWithFormat: @"%lu%lu%lu", ( unsigned long )u, ( unsigned long )g, ( unsigned long )o ];
     
     if( perms.length != 3 )
     {
@@ -577,11 +577,11 @@
     {
         if( userObject.realName != nil )
         {
-            itemTitle = [ NSString stringWithFormat: @"%@ (%i) - %@", userObject.name, userObject.uid, userObject.realName ];
+            itemTitle = [ NSString stringWithFormat: @"%@ (%lu) - %@", userObject.name, ( unsigned long )userObject.uid, userObject.realName ];
         }
         else
         {
-            itemTitle = [ NSString stringWithFormat: @"%@ (%i)", userObject.name, userObject.uid ];
+            itemTitle = [ NSString stringWithFormat: @"%@ (%lu)", userObject.name, ( unsigned long )userObject.uid ];
         }
         
         [ owner addItemWithTitle: itemTitle ];
@@ -605,11 +605,11 @@
     {
         if( groupObject.realName != nil )
         {
-            itemTitle = [ NSString stringWithFormat: @"%@ (%i) - %@", groupObject.name, groupObject.gid, groupObject.realName ];
+            itemTitle = [ NSString stringWithFormat: @"%@ (%lu) - %@", groupObject.name, ( unsigned long )groupObject.gid, groupObject.realName ];
         }
         else
         {
-            itemTitle = [ NSString stringWithFormat: @"%@ (%i)", groupObject.name, groupObject.gid ];
+            itemTitle = [ NSString stringWithFormat: @"%@ (%lu)", groupObject.name, ( unsigned long )groupObject.gid ];
         }
         
         [ group addItemWithTitle: itemTitle ];
@@ -1072,7 +1072,7 @@
     [ flagUserAppendOnly setIntValue:   file.flags.userAppendOnly ];
     [ flagUserImmutable setIntValue:    file.flags.userImmutable ];
     
-    [ octal setStringValue: [ NSString stringWithFormat: @"%03u", file.octalPermissions ] ];
+    [ octal setStringValue: [ NSString stringWithFormat: @"%03lu", ( unsigned long )file.octalPermissions ] ];
 }
 
 - ( void )getFileInfos

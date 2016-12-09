@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		050F16B01300A63B0046DF3C /* NL.framework in Copy Private Frameworks */ = {isa = PBXBuildFile; fileRef = 050F16AE1300A62C0046DF3C /* NL.framework */; };
-		050F16B11300A63E0046DF3C /* NL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 050F16AE1300A62C0046DF3C /* NL.framework */; };
 		0537D30D14B769AB0004EBCB /* ACLEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537D30C14B769AB0004EBCB /* ACLEntry.m */; };
 		0537D31B14B8131E0004EBCB /* ACLEntryEditor.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0537D31914B8131E0004EBCB /* ACLEntryEditor.xib */; };
 		0537D31E14B8133F0004EBCB /* ACLEntryEditorController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0537D31D14B8133F0004EBCB /* ACLEntryEditorController.m */; };
@@ -18,8 +16,6 @@
 		0542101514B71E11000FFB45 /* RegisterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0542101414B71E11000FFB45 /* RegisterController.m */; };
 		05499D6412E9E98500D7AFEF /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D6312E9E98500D7AFEF /* Group.m */; };
 		05499D6512E9EEA900D7AFEF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 05499D5F12E9E8F200D7AFEF /* User.m */; };
-		0560DF7014B843DB0041D14E /* ESell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05420FF514B70DC9000FFB45 /* ESell.framework */; };
-		0560DF7114B844170041D14E /* ESell.framework in Copy Private Frameworks */ = {isa = PBXBuildFile; fileRef = 05420FF514B70DC9000FFB45 /* ESell.framework */; };
 		0560E01D14B87F3A0041D14E /* DarkGradient-Red.tif in Resources */ = {isa = PBXBuildFile; fileRef = 0560E01C14B87F3A0041D14E /* DarkGradient-Red.tif */; };
 		0564E15612E8988F00035F08 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0564E15512E8988F00035F08 /* Cocoa.framework */; };
 		0564E16012E8988F00035F08 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0564E15E12E8988F00035F08 /* InfoPlist.strings */; };
@@ -33,58 +29,39 @@
 		05C3AE6712E9D64C000AEC46 /* DarkGradient.tif in Resources */ = {isa = PBXBuildFile; fileRef = 05C3AE6612E9D64C000AEC46 /* DarkGradient.tif */; };
 		05C3AE7512E9D67F000AEC46 /* Application.icns in Resources */ = {isa = PBXBuildFile; fileRef = 05C3AE7412E9D67F000AEC46 /* Application.icns */; };
 		05C3AE9012E9E1E6000AEC46 /* DSCLHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 05C3AE8F12E9E1E6000AEC46 /* DSCLHelper.m */; };
+		05F139D01DFAEE2500887C1F /* NutShell.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05F139C91DFAEE0300887C1F /* NutShell.framework */; };
+		05F139D11DFAEE2C00887C1F /* NutShell.framework in Copy Private Frameworks */ = {isa = PBXBuildFile; fileRef = 05F139C91DFAEE0300887C1F /* NutShell.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		05F3474412EACE8B008B2343 /* Defaults.plist in Resources */ = {isa = PBXBuildFile; fileRef = 05F3474312EACE8B008B2343 /* Defaults.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		05420FE614B706FB000FFB45 /* PBXContainerItemProxy */ = {
+		05F139C81DFAEE0300887C1F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
+			containerPortal = 05F139C21DFAEE0300887C1F /* NutShell.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 05B7571A12E807E600C5DF5B;
 			remoteInfo = "NutShell (Public)";
 		};
-		05420FE814B706FB000FFB45 /* PBXContainerItemProxy */ = {
+		05F139CA1DFAEE0300887C1F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
+			containerPortal = 05F139C21DFAEE0300887C1F /* NutShell.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 0575ED8812E89230005E2DC0;
 			remoteInfo = "NutShell (Private)";
 		};
-		05420FF214B70DC9000FFB45 /* PBXContainerItemProxy */ = {
+		05F139CC1DFAEE0300887C1F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0517B2E4131E5F620036FC8B;
-			remoteInfo = "ESellerate (Public)";
-		};
-		05420FF414B70DC9000FFB45 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0517B352131E6AEF0036FC8B;
-			remoteInfo = "ESellerate (Private)";
-		};
-		05420FF614B70DD6000FFB45 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 0517B340131E6AEF0036FC8B;
-			remoteInfo = "ESellerate (Private)";
-		};
-		05420FF814B70DD6000FFB45 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 0575ED8712E89230005E2DC0;
-			remoteInfo = "NutShell (Private)";
-		};
-		0560E01214B870E50041D14E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
+			containerPortal = 05F139C21DFAEE0300887C1F /* NutShell.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 0560DFB214B86FA30041D14E;
 			remoteInfo = "NutShell (Static)";
+		};
+		05F139CE1DFAEE2100887C1F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 05F139C21DFAEE0300887C1F /* NutShell.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 05B7571912E807E600C5DF5B;
+			remoteInfo = "NutShell (Public)";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -95,8 +72,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				0560DF7114B844170041D14E /* ESell.framework in Copy Private Frameworks */,
-				050F16B01300A63B0046DF3C /* NL.framework in Copy Private Frameworks */,
+				05F139D11DFAEE2C00887C1F /* NutShell.framework in Copy Private Frameworks */,
 			);
 			name = "Copy Private Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,7 +86,6 @@
 		0537D31A14B8131E0004EBCB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACLEntryEditor.xib; sourceTree = "<group>"; };
 		0537D31C14B8133F0004EBCB /* ACLEntryEditorController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACLEntryEditorController.h; sourceTree = "<group>"; };
 		0537D31D14B8133F0004EBCB /* ACLEntryEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLEntryEditorController.m; sourceTree = "<group>"; };
-		05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ESellerate.xcodeproj; path = ../../../Frameworks/ESellerate/trunk/ESellerate.xcodeproj; sourceTree = "<group>"; };
 		0542100314B70F49000FFB45 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ACLEditor.xib; sourceTree = "<group>"; };
 		0542100614B70F73000FFB45 /* ACLEditorController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ACLEditorController.m; sourceTree = "<group>"; };
 		0542100914B71CF3000FFB45 /* Register.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Register.xib; sourceTree = "<group>"; };
@@ -152,7 +127,7 @@
 		05C3AE6612E9D64C000AEC46 /* DarkGradient.tif */ = {isa = PBXFileReference; lastKnownFileType = image.tiff; name = DarkGradient.tif; path = Images/DarkGradient.tif; sourceTree = "<group>"; };
 		05C3AE7412E9D67F000AEC46 /* Application.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = Application.icns; path = ../Application.icns; sourceTree = "<group>"; };
 		05C3AE8F12E9E1E6000AEC46 /* DSCLHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DSCLHelper.m; sourceTree = "<group>"; };
-		05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NutShell.xcodeproj; path = /Users/macmade/Documents/Brain/Development/GitHub/NutShell/NutShell.xcodeproj; sourceTree = "<absolute>"; };
+		05F139C21DFAEE0300887C1F /* NutShell.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = NutShell.xcodeproj; path = Submodules/NutShell/NutShell.xcodeproj; sourceTree = "<group>"; };
 		05F3474312EACE8B008B2343 /* Defaults.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Defaults.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -161,34 +136,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05F139D01DFAEE2500887C1F /* NutShell.framework in Frameworks */,
 				0564E15612E8988F00035F08 /* Cocoa.framework in Frameworks */,
-				050F16B11300A63E0046DF3C /* NL.framework in Frameworks */,
-				0560DF7014B843DB0041D14E /* ESell.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		05420FE214B706FB000FFB45 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				05420FE714B706FB000FFB45 /* NutShell.framework */,
-				05420FE914B706FB000FFB45 /* NL.framework */,
-				0560E01314B870E50041D14E /* libNLStatic.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		05420FEB14B70DC9000FFB45 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				05420FF314B70DC9000FFB45 /* ESellerate.framework */,
-				05420FF514B70DC9000FFB45 /* ESell.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		05499D6812E9F7BF00D7AFEF /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,8 +183,7 @@
 		0564E14612E8988F00035F08 = {
 			isa = PBXGroup;
 			children = (
-				05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */,
-				05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */,
+				05F139C21DFAEE0300887C1F /* NutShell.xcodeproj */,
 				0564E15B12E8988F00035F08 /* PropEdit */,
 				0564E15412E8988F00035F08 /* Frameworks */,
 				0564E15212E8988F00035F08 /* Products */,
@@ -350,6 +304,16 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		05F139C31DFAEE0300887C1F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05F139C91DFAEE0300887C1F /* NutShell.framework */,
+				05F139CB1DFAEE0300887C1F /* NL.framework */,
+				05F139CD1DFAEE0300887C1F /* libNLStatic.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -357,7 +321,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0564E16F12E8989000035F08 /* Build configuration list for PBXNativeTarget "PropEdit" */;
 			buildPhases = (
-				0542100114B70DEA000FFB45 /* ShellScript */,
 				0564E14D12E8988F00035F08 /* Sources */,
 				0564E14E12E8988F00035F08 /* Frameworks */,
 				0564E14F12E8988F00035F08 /* Resources */,
@@ -366,8 +329,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				05420FF714B70DD6000FFB45 /* PBXTargetDependency */,
-				05420FF914B70DD6000FFB45 /* PBXTargetDependency */,
+				05F139CF1DFAEE2100887C1F /* PBXTargetDependency */,
 			);
 			name = PropEdit;
 			productName = PropEdit;
@@ -395,12 +357,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 05420FEB14B70DC9000FFB45 /* Products */;
-					ProjectRef = 05420FEA14B70DC9000FFB45 /* ESellerate.xcodeproj */;
-				},
-				{
-					ProductGroup = 05420FE214B706FB000FFB45 /* Products */;
-					ProjectRef = 05C88B2A12E9CEE5004E02C7 /* NutShell.xcodeproj */;
+					ProductGroup = 05F139C31DFAEE0300887C1F /* Products */;
+					ProjectRef = 05F139C21DFAEE0300887C1F /* NutShell.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -411,39 +369,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		05420FE714B706FB000FFB45 /* NutShell.framework */ = {
+		05F139C91DFAEE0300887C1F /* NutShell.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = NutShell.framework;
-			remoteRef = 05420FE614B706FB000FFB45 /* PBXContainerItemProxy */;
+			remoteRef = 05F139C81DFAEE0300887C1F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		05420FE914B706FB000FFB45 /* NL.framework */ = {
+		05F139CB1DFAEE0300887C1F /* NL.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = NL.framework;
-			remoteRef = 05420FE814B706FB000FFB45 /* PBXContainerItemProxy */;
+			remoteRef = 05F139CA1DFAEE0300887C1F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		05420FF314B70DC9000FFB45 /* ESellerate.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ESellerate.framework;
-			remoteRef = 05420FF214B70DC9000FFB45 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		05420FF514B70DC9000FFB45 /* ESell.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = ESell.framework;
-			remoteRef = 05420FF414B70DC9000FFB45 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		0560E01314B870E50041D14E /* libNLStatic.a */ = {
+		05F139CD1DFAEE0300887C1F /* libNLStatic.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libNLStatic.a;
-			remoteRef = 0560E01214B870E50041D14E /* PBXContainerItemProxy */;
+			remoteRef = 05F139CC1DFAEE0300887C1F /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -468,22 +412,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		0542100114B70DEA000FFB45 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "#!/bin/bash\nplist=\"PropEdit/PropEdit-Info.plist\"\nsvn update\nrev=$(svn info | grep '^Revision:' | sed -e 's/^Revision: //')\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $rev\" \"$plist\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		0564E14D12E8988F00035F08 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -507,15 +435,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		05420FF714B70DD6000FFB45 /* PBXTargetDependency */ = {
+		05F139CF1DFAEE2100887C1F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			name = "ESellerate (Private)";
-			targetProxy = 05420FF614B70DD6000FFB45 /* PBXContainerItemProxy */;
-		};
-		05420FF914B70DD6000FFB45 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "NutShell (Private)";
-			targetProxy = 05420FF814B70DD6000FFB45 /* PBXContainerItemProxy */;
+			name = "NutShell (Public)";
+			targetProxy = 05F139CE1DFAEE2100887C1F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -679,7 +602,6 @@
 		0564E17012E8989000035F08 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Jean-David Gadina";
 				COPY_PHASE_STRIP = NO;
 				DEPLOYMENT_LOCATION = YES;
 				DEPLOYMENT_POSTPROCESSING = YES;
@@ -703,7 +625,6 @@
 		0564E17112E8989000035F08 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "3rd Party Mac Developer Application: Jean-David Gadina";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEPLOYMENT_LOCATION = YES;

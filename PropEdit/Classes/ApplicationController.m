@@ -19,7 +19,6 @@
 #ifndef APPSTORE
 
 #import "RegisterController.h"
-#import <ESellerate/ESellerate.h>
 
 #endif
 
@@ -41,13 +40,6 @@
 {
     if( ( self = [ super init ] ) )
     {
-        #ifndef APPSTORE
-        
-        [ ESellerate setPublisherId: @"PUB9310734649" ];
-        [ ESellerate setSerialKey:   @"0RL2-ND96-7SXR-XNHM-6YH0" ];
-        
-        #endif
-        
         preferences = [ [ NLPreferences alloc ] initWithPropertyList: @"Defaults" owner: self ];
     }
     
@@ -75,19 +67,6 @@
 {
     [ [ ( NSWindowController * )main window ] center ];
     [ main showWindow: self ];
-    
-    #ifdef APPSTORE
-    
-    [ registerMenuItem setHidden: YES ];
-    
-    #else
-    
-    if( [ [ ESellerate sharedInstance ] isRegistered ] == YES )
-    {
-        [ registerMenuItem setHidden: YES ];
-    }
-    
-    #endif
 }
 
 - ( IBAction )openMainWindow: ( id )sender

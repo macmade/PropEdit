@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "74B2C7CF8DBCAC5DCF0D25C85921BD83587AAB4F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "74B2C7CF8DBCAC5DCF0D25C85921BD83587AAB4F" : 9223372036854775807,
+    "1F922DDCA54C78F54B4B48714CD1AAF4AAE9D3A6" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "856C460B-EA15-418C-A418-273A3DBEC809",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "74B2C7CF8DBCAC5DCF0D25C85921BD83587AAB4F" : "PropEdit\/",
+    "1F922DDCA54C78F54B4B48714CD1AAF4AAE9D3A6" : "PropEdit\/Submodules\/NutShell\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PropEdit",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PropEdit.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/macmade\/NutShell.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1F922DDCA54C78F54B4B48714CD1AAF4AAE9D3A6"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:macmade\/PropEdit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "74B2C7CF8DBCAC5DCF0D25C85921BD83587AAB4F"
+    }
+  ]
+}
